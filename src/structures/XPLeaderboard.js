@@ -13,7 +13,7 @@ class XPLeaderboard extends Base {
 
     /**
      * Xp leaderboard.
-     * @type {Collection<string, XPLeaderboardPlayer|LifetimeXPLeaderboardPlayer}
+     * @type {Collection<string, XPLeaderboardPlayer|LifetimeXPLeaderboardPlayer>}
      */
     this.entries = new Collection();
 
