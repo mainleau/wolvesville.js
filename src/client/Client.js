@@ -2,7 +2,6 @@ const BaseClient = require('./BaseClient');
 const PlayerManager = require('../managers/PlayerManager');
 const ClanManager = require('../managers/ClanManager');
 const FriendManager = require('../managers/FriendManager');
-const RoleManager = require('../managers/RoleManager');
 const LeaderboardManager = require('../managers/LeaderboardManager');
 const GameManager = require('../managers/GameManager');
 const ClientPlayer = require('../structures/ClientPlayer');
@@ -39,12 +38,6 @@ class Client extends BaseClient {
      * @type {ClanManager}
      */
     this.clans = new ClanManager(this);
-
-    /**
-     * The role manager of the client.
-     * @type {RoleManager}
-     */
-    this.roles = new RoleManager(this);
 
     /**
      * The leaderboard manager of the client.
