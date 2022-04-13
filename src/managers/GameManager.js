@@ -18,7 +18,7 @@ class GameManager extends BaseManager {
    */
   async fetchCustom(language) {
     if(!language || typeof language !== 'string') throw new Error('INVALID_LANGUAGE_FORMAT');
-    if(!['en', 'de', 'fr', 'tr', 'pt', 'th', 'nl', 'es', 'ru', 'vi', 'it', 'ms' ,'ro', 'cs'].includes(language)) throw new Error('INCORRECT_LANGUAGE');
+    if(!['en', 'de', 'fr', 'tr', 'pt', 'th', 'nl', 'es', 'ru', 'vi', 'it'].includes(language)) throw new Error('INCORRECT_LANGUAGE');
     const request = await fetch(`${this.client.options.http.api.game}/api/public/game/custom?language=${language}`, {
       method: 'GET',
       headers: getAuthenticationHeaders(this.client.token)
