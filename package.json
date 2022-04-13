@@ -1,6 +1,6 @@
 {
   "name": "wolvesville.js",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Javascript library for the Wolvesville API.",
   "main": "./src/index.js",
   "repository": {
