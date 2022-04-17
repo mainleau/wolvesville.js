@@ -1,3 +1,4 @@
+const RESTManager = require('../rest/RESTManager');
 const Options = require('../util/Options');
 const Util = require('../util/Util');
 
@@ -15,6 +16,23 @@ class BaseClient {
      * @type {ClientOptions}
      */
     this.options = Util.mergeDefault(Options.createDefault(), options);
+
+    /**
+     * The REST manager of the client
+     * @type {RESTManager}
+     * @private
+     */
+    this.rest = new RESTManager(this);
+  }
+
+  /**
+   * API shortcut
+   * @type {Object}
+   * @readonly
+   * @private
+   */
+  get api() {
+    return this.rest.api;
   }
 
 }

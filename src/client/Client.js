@@ -4,9 +4,8 @@ const ClanManager = require('../managers/ClanManager');
 const FriendManager = require('../managers/FriendManager');
 const LeaderboardManager = require('../managers/LeaderboardManager');
 const GameManager = require('../managers/GameManager');
+const ItemManager = require('../managers/ItemManager');
 const ClientPlayer = require('../structures/ClientPlayer');
-const { getAuthenticationHeaders, getBodyHeaders } = require('../util/Headers');
-const fetch = require('node-fetch');
 
 /**
  * Wolvesville client.
@@ -50,6 +49,13 @@ class Client extends BaseClient {
      * @type {GameManager}
      */
     this.games = new GameManager(this);
+
+    /**
+     * The item manager of the client.
+     * @type {ItemManager}
+     */
+    this.items = new ItemManager(this);
+
 
     /**
      * Ready timestamp.
@@ -106,15 +112,13 @@ class Client extends BaseClient {
     }
 
     if(!credentials || typeof credentials !== 'object') throw new Error('INVALID_CREDENTIALS_FORMAT');
-    const request = await fetch(`${this.options.http.api.auth}/players/signInWithEmailAndPassword`, {
-      method: 'POST',
-      headers: getBodyHeaders(),
-      body: JSON.stringify({
+    const response = await this.api.players().signInWithEmailAndPassword().post({
+      api: this.options.http.api.auth,
+      data: {
         email: credentials.email,
         password: credentials.password
-      })
+      }
     });
-    const response = await request.json();
 
     if(response.message) throw new Error('INVALID_CREDENTIALS');
     this.refreshToken = response.refreshToken;
@@ -131,14 +135,12 @@ class Client extends BaseClient {
   async tokenRefresh() {
     if(!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
 
-    const request = await fetch(`${this.options.http.api.auth}/players/createIdToken`, {
-      method: 'POST',
-      headers: getBodyHeaders(),
-      body: JSON.stringify({
+    const response = await this.api.players().createIdToken().post({
+      api: this.options.http.api.auth,
+      data: {
         refreshToken: this.refreshToken
-      })
+      }
     });
-    const response = await request.json();
 
     if(response.code) throw new Error('INVALID_REFRESH_TOKEN');
     this.token = response.idToken;
@@ -167,11 +169,7 @@ class Client extends BaseClient {
       if(existing) return existing;
     }
 
-    const request = await fetch(`${this.options.http.api.core}/players/me`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.token)
-    });
-    const response = await request.json();
+    const response = await this.api.players().me().get();
 
     const data = new ClientPlayer(this, response);
     return this.players._add(data);

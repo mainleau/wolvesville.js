@@ -1,3 +1,4 @@
+const fetch = require('node-fetch');
 const Player = require('./Player');
 const Role = require('./Role');
 const Inventory = require('./Inventory');
@@ -10,8 +11,10 @@ const RankedSeason = require('./RankedSeason');
 const Calendar = require('./Calendar');
 const SentGift = require('./SentGift');
 const ReceivedGift = require('./ReceivedGift');
+const LimitedOffer = require('./LimitedOffer');
+const LimitedCollection = require('./LimitedCollection');
+const LimitedItems = require('./LimitedItems');
 const { getAuthenticationHeaders } = require('../util/Headers');
-const fetch = require('node-fetch');
 
 /**
  * Represents a client player.
@@ -334,6 +337,23 @@ class ClientPlayer extends Player {
     const response = await request.json();
     return response;
   }
+
+ /**
+  * Fetch limited offers.
+  * @returns {Promise<LimitedOffer[]>}
+  */
+ async fetchLimitedOffers() {
+   const request = await fetch(`${this.client.options.http.api.core}/billing/rotatingLimitedOffers`, {
+     method: 'GET',
+     headers: getAuthenticationHeaders(this.client.token)
+   });
+   const response = await request.json();
+   return response.map(offer => {
+     return offer.type === 'AVATAR_ITEMS' ? new LimitedItems(this.client, offer)
+       : offer.type.endsWith('OUTFITS') ? new LimitedCollection(this.client, offer)
+       : new LimitedOffer(this.client, offer)
+   });
+ }
 
 }
 

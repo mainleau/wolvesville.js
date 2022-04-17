@@ -32,6 +32,7 @@ class Options {
   static createDefault() {
     return {
       tokenRefreshInterval: 3_300_000,
+      restRequestTimeout: 15_000,
       http: {
         api: {
           auth: 'https://api-auth.wolvesville.com',

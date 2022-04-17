@@ -1,7 +1,6 @@
 const BaseManager = require('./BaseManager');
 const ClanChatMessage = require('../structures/ClanChatMessage');
-const { getAuthenticationHeaders } = require('../util/Headers');
-const fetch = require('node-fetch');
+const { Error } = require('../errors');
 
 /**
  * Manages API methods for ClanChatMessages.
@@ -21,14 +20,11 @@ class ClanChatManager extends BaseManager {
 
     if(timestamp) {
       const date = new Date(timestamp);
-      if(isNaN(date) || timestamp !== date.toISOString()) throw new Error('INVALID_TIMESTAMP');
+      if(isNaN(timestamp) || timestamp !== date.getTime()) throw new Error('INVALID_TIMESTAMP');
+      timestamp = date.toISOString();
     }
 
-    const request = await fetch(`${this.client.options.http.api.core}/clans/chat/v2${timestamp ? `?oldest=${timestamp}` : ''}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.api.clans().chat().get({ query: { oldest: timestamp }, version: true });
     return response.map(message => new ClanChatMessage(this.client, message));
   }
 
