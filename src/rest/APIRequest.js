@@ -1,5 +1,5 @@
-const https = require('node:https');
-const { setTimeout } = require('node:timers');
+// const https = require('https');
+// const { setTimeout } = require('node:timers');
 const fetch = require('node-fetch');
 
 class APIRequest {
