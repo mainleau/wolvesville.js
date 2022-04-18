@@ -1,3 +1,6 @@
 # Packages
 node_modules/
 package-lock.json
+
+# Miscellaneous
+webpack/

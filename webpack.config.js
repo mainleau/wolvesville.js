@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const version = require('./package.json').version;
@@ -6,6 +7,7 @@ module.exports = {
   entry: './src/index.js',
   mode: 'production',
   output: {
+    path: path.resolve('./webpack'),
     filename: `wolvesville.${version}.min.js`,
     library: {
       type: 'umd',
