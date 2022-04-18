@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const version = require('./package.json').version;
 
@@ -11,6 +12,11 @@ module.exports = {
       name: 'Wolvesville'
     }
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    })
+  ],
   optimization: {
     minimizer: [
       new TerserJSPlugin({
