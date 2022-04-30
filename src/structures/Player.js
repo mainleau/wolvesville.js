@@ -27,22 +27,10 @@ class Player extends BasePlayer {
     this.username = data.username;
 
     /**
-     * Player level.
-     * @type {number}
-     */
-    this.level = data.level;
-
-    /**
      * Player clan tag.
      * @type {?string}
      */
     this.clanTag = data.clanTag || null;
-
-    /**
-     * Player status.
-     * @type {string}
-     */
-    this.status = data.playerStatus;
 
     /**
      * Player personal message.
@@ -51,39 +39,51 @@ class Player extends BasePlayer {
     this.personalMessage = data.personalMsg || null;
 
     /**
+     * Player level.
+     * @type {number}
+     */
+    this.level = data.level;
+
+    /**
+     * Player status.
+     * @type {string}
+     */
+    Object.defineProperty(this, 'status', { value: data.playerStatus });
+
+    /**
      * Number of roses the player received.
      * @type {number}
      */
-    this.receivedRoses = data.receivedRoses || 0;
+    Object.defineProperty(this, 'receivedRoses', { value: data.receivedRoses || 0 });
 
     /**
      * Number of roses the player sent.
      * @type {number}
      */
-    this.sentRoses = data.sentRoses || 0;
+    Object.defineProperty(this, 'sentRoses', { value: data.sentRoses || 0 });
 
     /**
      * Player creation timestamp.
      * @type {?string}
      */
-    this.creationTimestamp = new Date(data.creationTime).getTime() || null;
+    Object.defineProperty(this, 'creationTimestamp', { value: new Date(data.creationTime).getTime() || null });
 
     /**
      * Player last online timestamp.
      * @type {string}
      */
-    this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
+    Object.defineProperty(this, 'lastOnlineTimestamp', { value: new Date(data.lastOnline).getTime() });
 
     /**
      * Player equipped items.
      * @type {Object}
      */
-    this.equippedItems = {
-      profileIcon: {
+    Object.defineProperty(this, 'equippedItems', { value: {
+      icon: {
         id: data.equippedProfileIconId,
         color: data.equippedProfileIconColor,
       }
-    }
+    }});
 
     Object.defineProperty(this, '_roleStats', { value: data.playerStats.roleStats });
 
@@ -91,7 +91,7 @@ class Player extends BasePlayer {
      * Player stats.
      * @type {Object}
      */
-    this.stats = {
+    Object.defineProperty(this, 'stats', { value: {
       wonGameCount: Object.values(this._roleStats).reduce((t, n) => t + n.winCount, 0),
       lostGameCount: Object.values(this._roleStats).reduce((t, n) => t + n.loseCount, 0),
       finishedGameCount: data.playerStats.finishedGamesCount,
@@ -106,15 +106,15 @@ class Player extends BasePlayer {
         seasonFinalRankRecord: data.seasonBestRank !== -1 ? data.seasonBestRank : null,
         seasonPlayedCount: data.seasonPlayedCount
       }
-    }
+    }});
 
     /**
      * Player options.
      * @type {Object}
      */
-    this.options = {
+    Object.defineProperty(this, 'options', { value: {
       clanTagHidden: data.hideClanTag
-    }
+    }});
   }
 
   async fetchClan() {

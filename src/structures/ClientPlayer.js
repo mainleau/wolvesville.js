@@ -34,15 +34,17 @@ class ClientPlayer extends Player {
      * Xp required to level up.
      * @type {number}
      */
-    this.requiredXp = data.xpUntilNextLevel;
+    Object.defineProperty(this, 'requiredXp', { value: data.xpUntilNextLevel });
 
     /**
      * Player gender.
      * @type {number}
      */
-    this.gender = data.gender === 'MALE' ? 2
-      : data.gender === 'FEMALE' ? 1
-      : 0;
+    Object.defineProperty(this, 'gender', { value:
+      data.gender === 'MALE' ? 2
+        : data.gender === 'FEMALE' ? 1
+        : 0
+    });
 
     this.equippedItems.background = {
       id: data.equippedBackgroundId || null
@@ -63,30 +65,16 @@ class ClientPlayer extends Player {
     });
 
     /**
-     * Number of times player was banned.
-     * @type {number}
-     */
-    this.banCount = data.bannedCount;
-
-    /**
      * Player last ban.
      * @type {Object}
      */
-    this.lastBan = data.bannedUntilTime ? {
-      expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
-      reason: data.banReason,
-      message: data.banReasonMsg
-    } : null;
-
-    /**
-     * Ads details.
-     * @type {Object}
-     */
-    this.ads = {
-      lastWatchedTimestamp: new Date(data.lastVideoAdWatched).getTime(),
-      watchedCount: data.watchedVideoAdsCount,
-      watchedTodayCount: data.adRewardCount
-    }
+    Object.defineProperty(this, 'lastBan', { value:
+      data.bannedUntilTime ? {
+        expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
+        reason: data.banReason,
+        message: data.banReasonMsg
+      } : null
+    });
 
     /**
      * Are clan chat notifications disabled
@@ -123,7 +111,7 @@ class ClientPlayer extends Player {
        * Player deletion timestamp.
        * @type {number}
        */
-      this.deletionTimestamp = new Date(data.deletionTime).getTime();
+      Object.defineProperty(this, 'deletionTimestamp', { value: new Date(data.deletionTime).getTime() });
     }
   }
 

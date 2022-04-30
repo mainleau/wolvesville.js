@@ -176,6 +176,15 @@ class Client extends BaseClient {
     return this.players._add(data);
   }
 
+  /**
+   * Player that the client is logged in as
+   * @type {?ClientPlayer}
+   * @readonly
+   */
+  get player() {
+    return this.players.cache.find(player => player.own) || null;
+  }
+
 }
 
 module.exports = Client;
