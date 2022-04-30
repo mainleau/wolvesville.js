@@ -271,7 +271,7 @@ class ClientPlayer extends Player {
       headers: getAuthenticationHeaders(this.client.token)
     });
     const response = await request.json();
-    return new Calendar(this.client, response[0]);
+    return response.map(calendar => new Calendar(this.client, calendar));
   }
 
   /**
