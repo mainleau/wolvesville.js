@@ -20,7 +20,7 @@ class PlayerManager extends CacheManager {
    * @private
    */
   async #fetchMinimalByUsername(username) {
-    const response = await this.client.rest.get(Routes.MINIMAL_PLAYER_BY_USERNAME(), { query: username })
+    const response = await this.client.rest.get(Routes.MINIMAL_PLAYER_BY_USERNAME(), { query: { username }})
     if(!response.length) throw new Error('PLAYER_NOT_FOUND');
     return response[0];
   }
