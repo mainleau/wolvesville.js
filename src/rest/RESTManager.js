@@ -1,20 +1,23 @@
 const APIRequest = require('./APIRequest');
-const routeBuilder = require('./APIRouter');
 
 class RESTManager {
   constructor(client) {
     this.client = client;
   }
 
-  get api() {
-    return routeBuilder(this);
+  get(route, options = {}) {
+    return this.#request('GET', route, options);
   }
 
-  async request(method, url, options = {}) {
-    const request = new APIRequest(this, method, url, options);
+  post(route, options = {}) {
+    return this.#request('POST', route, options);
+  }
+
+  async #request(method, route, options) {
+    const request = new APIRequest(this, method, route, options);
 
     const response = await request.make();
-    if(!response.ok) throw new Error('REQUEST_FAILED');
+    if(!response.ok) return { code: response.status }
 
     if(response.headers.get('Content-Type')?.startsWith('application/json')) {
       return await response.json();

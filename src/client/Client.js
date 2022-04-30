@@ -5,6 +5,7 @@ const FriendManager = require('../managers/FriendManager');
 const LeaderboardManager = require('../managers/LeaderboardManager');
 const GameManager = require('../managers/GameManager');
 const ItemManager = require('../managers/ItemManager');
+const Routes = require('../util/Routes');
 const ClientPlayer = require('../structures/ClientPlayer');
 
 /**
@@ -112,7 +113,7 @@ class Client extends BaseClient {
     }
 
     if(!credentials || typeof credentials !== 'object') throw new Error('INVALID_CREDENTIALS_FORMAT');
-    const response = await this.api.players().signInWithEmailAndPassword().post({
+    const response = await this.rest.post(Routes.SIGN_IN(), {
       api: this.options.http.api.auth,
       data: {
         email: credentials.email,
@@ -120,7 +121,7 @@ class Client extends BaseClient {
       }
     });
 
-    if(response.message) throw new Error('INVALID_CREDENTIALS');
+    if(response.code === 401) throw new Error('INVALID_CREDENTIALS');
     this.refreshToken = response.refreshToken;
     this.lastTokenRefreshTimestamp = Date.now();
     this.token = response.idToken;
@@ -135,14 +136,14 @@ class Client extends BaseClient {
   async tokenRefresh() {
     if(!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
 
-    const response = await this.api.players().createIdToken().post({
+    const response = await this.rest.post(Routes.TOKEN_REFRESH(), {
       api: this.options.http.api.auth,
       data: {
         refreshToken: this.refreshToken
       }
     });
 
-    if(response.code) throw new Error('INVALID_REFRESH_TOKEN');
+    if(response.code === 401) throw new Error('INVALID_REFRESH_TOKEN');
     this.token = response.idToken;
     this.lastTokenRefreshTimestamp = Date.now();
   }
@@ -169,7 +170,7 @@ class Client extends BaseClient {
       if(existing) return existing;
     }
 
-    const response = await this.api.players().me().get();
+    const response = await this.rest.get(Routes.PLAYER());
 
     const data = new ClientPlayer(this, response);
     return this.players._add(data);

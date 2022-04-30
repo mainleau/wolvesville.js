@@ -1,5 +1,3 @@
-// const https = require('https');
-// const { setTimeout } = require('node:timers');
 const fetch = require('node-fetch');
 
 class APIRequest {
@@ -12,12 +10,14 @@ class APIRequest {
 
     let queryString = '';
     if(options.query) {
-      const query = Object.entries(options.query)
-        .filter(([, value]) => value !== null && typeof value !== 'undefined')
-        .flatMap(([key, value]) => (Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]));
+      const query = typeof options.query === 'string'
+        ? options.query
+        : Object.entries(options.query)
+          .filter(([, value]) => value !== null && typeof value !== 'undefined')
+          .flatMap(([key, value]) => (Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]));
       queryString = new URLSearchParams(query).toString();
     }
-    this.path = `${path}${options.version ? '/v2' : ''}${queryString && `?${queryString}`}`;
+    this.path = `${path}${queryString && `?${queryString}`}`;
   }
 
   make() {

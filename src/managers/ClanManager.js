@@ -1,10 +1,9 @@
 const CacheManager = require('./CacheManager');
+const Routes = require('../util/Routes');
 const ClanQuerier = require('../structures/ClanQuerier');
 const Clan = require('../structures/Clan');
 const ClientClan = require('../structures/ClientClan');
 const { isUUID } = require('../util/Util');
-const { getAuthenticationHeaders } = require('../util/Headers');
-const fetch = require('node-fetch');
 
 /**
  * Manages API methods for Clans.
@@ -29,12 +28,8 @@ class ClanManager extends CacheManager {
     }
 
     if(!id || typeof id !== 'string' || !isUUID(id)) throw new Error('INVALID_PLAYER_ID_FORMAT');
-    const request = await fetch(`${this.client.options.http.api.core}/clans/byPlayer?playerId=${id}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    if(request.status === 204) throw new Error('PLAYER_OR_CLAN_NOT_FOUND');
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.CLAN_BY_PLAYER_ID(), { query: { playerId: id }});
+    if(response.code === 204) throw new Error('PLAYER_OR_CLAN_NOT_FOUND');
 
     const data = new Clan(this.client, response);
     return this._add(data);
@@ -54,11 +49,7 @@ class ClanManager extends CacheManager {
     }
 
     if(!id || typeof id !== 'string' || !isUUID(id)) throw new Error('INVALID_CLAN_ID_FORMAT');
-    const request = await fetch(`${this.client.options.http.api.core}/clans/${id}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.CLAN(id));
     if(!response.clan) throw new Error('CLAN_NOT_FOUND');
 
     const data = new Clan(this.client, response);
@@ -77,12 +68,8 @@ class ClanManager extends CacheManager {
       if(existing) return existing;
     }
 
-    const request = await fetch(`${this.client.options.http.api.core}/clans/myClan`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    if(request.status === 204) throw new Error('NOT_IN_A_CLAN');
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.CLAN());
+    if(response.code === 204) throw new Error('NOT_IN_A_CLAN');
 
     const data = new ClientClan(this.client, response);
     return this._add(data);
@@ -162,11 +149,7 @@ class ClanManager extends CacheManager {
       params += `&sortBy=${sorting}`;
     }
 
-    const request = await fetch(`${this.client.options.http.api.core}/clans/v2/searchAdvanced${params}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.QUERY_CLAN(), { query: params });
     return new ClanQuerier(this.client, response);
   }
 

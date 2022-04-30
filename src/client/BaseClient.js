@@ -24,17 +24,6 @@ class BaseClient {
      */
     this.rest = new RESTManager(this);
   }
-
-  /**
-   * API shortcut
-   * @type {Object}
-   * @readonly
-   * @private
-   */
-  get api() {
-    return this.rest.api;
-  }
-
 }
 
 module.exports = BaseClient;

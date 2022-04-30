@@ -1,4 +1,5 @@
 const BaseManager = require('./BaseManager');
+const Routes = require('../util/Routes');
 const ClanChatMessage = require('../structures/ClanChatMessage');
 const { Error } = require('../errors');
 
@@ -24,7 +25,7 @@ class ClanChatManager extends BaseManager {
       timestamp = date.toISOString();
     }
 
-    const response = await this.client.api.clans().chat().get({ query: { oldest: timestamp }, version: true });
+    const response = await this.client.rest.get(Routes.CLAN_CHAT(), { query: { oldest: timestamp }});
     return response.map(message => new ClanChatMessage(this.client, message));
   }
 

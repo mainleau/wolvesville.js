@@ -27,6 +27,12 @@ class XPLeaderboardPlayer extends LeaderboardPlayer {
      * @type {number}
      */
     this.rank = data.rank;
+
+    /**
+     * Player leaderboard rank.
+     * @type {number}
+     */
+    this.oldRank = data.oldRank;
   }
 }
 

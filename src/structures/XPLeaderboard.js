@@ -1,7 +1,6 @@
+const { Collection } = require('@discordjs/collection');
 const Base = require('./Base');
 const XPLeaderboardPlayer = require('./XPLeaderboardPlayer');
-const LifetimeXPLeaderboardPlayer = require('./LifetimeXPLeaderboardPlayer');
-const { Collection } = require('@discordjs/collection');
 
 /**
  * Represents an xp leaderboard.
@@ -11,25 +10,19 @@ class XPLeaderboard extends Base {
   constructor(client, data) {
     super(client);
 
+    const leaderboard = data.ranks.map((player, index) => {
+      return new XPLeaderboardPlayer(this.client, Object.assign(player, {
+        rank: parseInt(index)
+      }));
+    });
+
     /**
      * Xp leaderboard.
      * @type {Collection<string, XPLeaderboardPlayer|LifetimeXPLeaderboardPlayer>}
      */
-    this.entries = new Collection();
+    this.entries = leaderboard.reduce((col, player) => col.set(player.id, player), new Collection());
 
-    for (const index in Object.keys(data.ranks)) {
-      const player = data.ranks[index];
-      this.entries.set(
-        index,
-        this.constructor === XPLeaderboard
-          ? new XPLeaderboardPlayer(client, Object.assign(player, {
-              rank: parseInt(index)
-            }))
-          : new LifetimeXPLeaderboardPlayer(client, Object.assign(player, {
-              rank: parseInt(index)
-            }))
-      )
-    }
+    this.updateTimestamp = new Date(data.nextUpdate).getTime();
   }
 }
 

@@ -1,9 +1,8 @@
 const CacheManager = require('./CacheManager');
+const Routes = require('../util/Routes');
 const Player = require('../structures/Player');
 const ClientPlayer = require('../structures/ClientPlayer');
 const { isUUID } = require('../util/Util');
-const { getAuthenticationHeaders } = require('../util/Headers');
-const fetch = require('node-fetch');
 
 /**
  * Manages API methods for Players.
@@ -21,11 +20,7 @@ class PlayerManager extends CacheManager {
    * @private
    */
   async #fetchMinimalByUsername(username) {
-    const request = await fetch(`${this.client.options.http.api.core}/players/search?username=${username}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.MINIMAL_PLAYER_BY_USERNAME(), { query: username })
     if(!response.length) throw new Error('PLAYER_NOT_FOUND');
     return response[0];
   }
@@ -63,12 +58,8 @@ class PlayerManager extends CacheManager {
     }
 
     if(!id || typeof id !== 'string' || !isUUID(id)) throw new Error('INVALID_PLAYER_ID_FORMAT');
-    const request = await fetch(`${this.client.options.http.api.core}/players/${id}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    if(request.status === 204) throw new Error('PLAYER_NOT_FOUND');
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.PLAYER(id));
+    if(response.code === 204) throw new Error('PLAYER_NOT_FOUND');
 
     const data = response.xpTotal ? new ClientPlayer(this.client, response) : new Player(this.client, response);
     return this._add(data);

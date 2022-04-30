@@ -5,8 +5,8 @@ const BasePlayer = require('./BasePlayer');
  * @extends {Base}
  */
 class LeaderboardPlayer extends BasePlayer {
-  constructor(client, data) {
-    super(client, data);
+  constructor(client) {
+    super(client);
   }
 }
 

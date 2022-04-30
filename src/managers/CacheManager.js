@@ -1,5 +1,5 @@
-const BaseManager = require('./BaseManager');
 const { Collection } = require('@discordjs/collection');
+const BaseManager = require('./BaseManager');
 
 /**
  * Manages the API methods of a data model with a mutable cache of instances.
