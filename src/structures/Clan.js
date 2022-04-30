@@ -29,32 +29,32 @@ class Clan extends BaseClan {
     }
   }
 
-    /**
-     * Clan coleaders.
-     * @type {Collection<string, ClanMember|ClientClanMember>}
-     * @readonly
-     */
-    get coleaders() {
-      return this.members.filter(member => member.rank === ClanRanks.COLEADER);
-    }
+  /**
+   * Clan coleaders.
+   * @type {Collection<string, ClanMember|ClientClanMember>}
+   * @readonly
+   */
+  get coleaders() {
+    return this.members.filter(member => member.rank === ClanRanks.COLEADER);
+  }
 
-    /**
-     * Clan leader.
-     * @type {ClanMember|ClientClanMember}
-     * @readonly
-     */
-    get leader() {
-      return this.members.find(member => member.rank === ClanRanks.LEADER);
-    }
+  /**
+   * Clan leader.
+   * @type {ClanMember|ClientClanMember}
+   * @readonly
+   */
+  get leader() {
+    return this.members.find(member => member.rank === ClanRanks.LEADER);
+  }
 
-    /**
-     * Wether the clan is the client clan.
-     * @type {boolean}
-     * @readonly
-     */
-    get own() {
-      return this.constructor !== Clan;
-    }
+  /**
+   * Wether the clan is the client clan.
+   * @type {boolean}
+   * @readonly
+   */
+  get own() {
+    return this.constructor !== Clan;
+  }
 
 }
 

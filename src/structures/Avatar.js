@@ -9,6 +9,12 @@ class Avatar extends Base {
     super(client);
 
     /**
+     * Avatar skin color.
+     * @type {string}
+     */
+    this.skinColor = parseInt(data.skinColor.slice(6)) - 1;
+
+    /**
      * Avatar eyes id.
      * @type {string}
      */
@@ -25,12 +31,6 @@ class Avatar extends Base {
      * @type {string}
      */
     this.gravestone = data.gravestoneId;
-
-    /**
-     * Avatar skin color.
-     * @type {string}
-     */
-    this.skinColor = data.skinColor;
 
     /**
      * Avatar hat id.

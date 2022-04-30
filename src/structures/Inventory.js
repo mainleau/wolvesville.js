@@ -1,4 +1,5 @@
 const Base = require('./Base');
+const Lootbox = require('./Lootbox');
 
 /**
  * Represents an inventory.
@@ -15,16 +16,16 @@ class Inventory extends Base {
     this.goldCount = data.silverCount;
 
     /**
-     * Gem count.
-     * @type {number}
-     */
-    this.gemCount = data.gemCount;
-
-    /**
      * Rose count.
      * @type {number}
      */
     this.roseCount = data.roseCount;
+
+    /**
+     * Gem count.
+     * @type {number}
+     */
+    this.gemCount = data.gemCount;
 
     /**
      * Loyalty token count.
@@ -39,10 +40,10 @@ class Inventory extends Base {
     this.avatarItems = data.avatarItemIds;
 
     /**
-     * Profile icons.
+     * Player icons.
      * @type {Array}
      */
-    this.profileIcons = data.ownedProfileIcons;
+    this.icons = data.ownedProfileIcons.map(icon => icon.profileIconId);
 
     /**
      * Backgrounds.
@@ -57,12 +58,6 @@ class Inventory extends Base {
     this.loadingScreens = data.ownedLoadingScreenIds;
 
     /**
-     * Lootboxes.
-     * @type {Array}
-     */
-    this.lootboxes = data.lootBoxes;
-
-    /**
      * Emojis.
      * @type {Array}
      */
@@ -73,6 +68,12 @@ class Inventory extends Base {
      * @type {Array}
      */
     this.talismans = data.ownedTalismans;
+
+    /**
+     * Lootboxes.
+     * @type {Array}
+     */
+    this.lootboxes = data.lootBoxes.map(lootbox => new Lootbox(client, lootbox));
   }
 }
 

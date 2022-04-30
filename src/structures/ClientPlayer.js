@@ -1,8 +1,11 @@
 const fetch = require('node-fetch');
 const Player = require('./Player');
+const Routes = require('../util/Routes');
 const Role = require('./Role');
+const Announcement = require('./Announcement');
 const Inventory = require('./Inventory');
 const EquippedItems = require('./EquippedItems');
+const ClanRequest = require('./ClanRequest');
 const DailyRewards = require('./DailyRewards');
 const ClientClan = require('./ClientClan');
 const Challenge = require('./Challenge');
@@ -118,7 +121,7 @@ class ClientPlayer extends Player {
 
   /**
    * Level tiers.
-   * @returns {Array<number>}
+   * @returns {number[]}
    * @readonly
    */
   static get levelTiers() {
@@ -129,55 +132,39 @@ class ClientPlayer extends Player {
   }
 
   /**
-   * Developer announcements.
-   * @returns {Array}
+   * Fetch developer announcements.
+   * @returns {Announcement[]}
    */
   async fetchAnnouncements() {
-    const request = await fetch(`${this.client.options.http.api.core}/announcements`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
-    return response;
+    const response = await this.client.rest.get(Routes.ANNOUNCEMENTS());
+    return response.map(announcement => new Announcement(this.client, announcement));
   }
 
   /**
-   * Equipped items.
+   * Fetch equipped items.
    * @returns {EquippedItems}
    */
   async fetchEquippedItems() {
-    const request = await fetch(`${this.client.options.http.api.core}/equippedItems`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
     return new EquippedItems(this.client, response);
   }
 
   /**
-   * Inventory.
+   * Fetch inventory.
    * @returns {Inventory}
    */
   async fetchInventory() {
-    const request = await fetch(`${this.client.options.http.api.core}/inventory`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.INVENTORY());
     return new Inventory(this.client, response);
   }
 
   /**
-   * Clan invitations.
-   * @returns {Array}
+   * Fetcn clan requests.
+   * @returns {ClanRequest[]}
    */
-  async fetchClanInvitations() {
-    const request = await fetch(`${this.client.options.http.api.core}/clans/openRequests`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
-    return response;
+  async fetchClanRequests() {
+    const response = await this.client.rest.get(Routes.CLAN_REQUESTS());
+    return response.map(clan => new ClanRequest(this.client, clan));
   }
 
   /**
@@ -185,11 +172,7 @@ class ClientPlayer extends Player {
    * @returns {Array}
    */
   async fetchFriendInvitationRewards() {
-    const request = await fetch(`${this.client.options.http.api.core}/players/friendInvitationRewards`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.FRIEND_INVITATION_REWARDS());
     return response;
   }
 
@@ -198,24 +181,16 @@ class ClientPlayer extends Player {
    * @returns {DailyRewards}
    */
   async fetchDailyRewards() {
-    const request = await fetch(`${this.client.options.http.api.core}/dailyRewards`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.DAILY_REWARDS());
     return new DailyRewards(this.client, response);
   }
 
   /**
-   * Golden spin rewards.
-   * @returns {Array<Object>}
+   * Golden wheel rewards.
+   * @returns {Promise<Object[]>}
    */
-  async fetchGoldenSpinRewards() {
-    const request = await fetch(`${this.client.options.http.api.core}/rewards/goldenWheelItems`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+  async fetchGoldenWheelRewards() {
+    const response = await this.client.rest.get(Routes.GOLDEN_WHEEL_REWARDS());
     return response;
   }
 
@@ -224,11 +199,7 @@ class ClientPlayer extends Player {
    * @returns {Object<Array>}
    */
   async fetchChallenges() {
-    const request = await fetch(`${this.client.options.http.api.core}/challenges/v2`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.CHALLENGES());
     return {
       daily: response.dailyChallengeProgresses.map(challenge => new Challenge(this.client, challenge)),
       weekly: response.weeklyChallengeProgresses.map(challenge => new Challenge(this.client, challenge))
@@ -240,11 +211,7 @@ class ClientPlayer extends Player {
    * @returns {BattlePass}
    */
   async fetchBattlePass() {
-    const request = await fetch(`${this.client.options.http.api.core}/battlePass/seasonAndBattlePass`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.BATTLE_PASS_SEASON());
     return new BattlePass(this.client, response);
   }
 
@@ -253,25 +220,17 @@ class ClientPlayer extends Player {
    * @returns {RankedSeason}
    */
   async fetchRankedSeason() {
-    const request = await fetch(`${this.client.options.http.api.core}/ranked/seasonInfoCompact`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.RANKED_SEASON());
     return new RankedSeason(this.client, response);
   }
 
 
   /**
-   * Fetch calendar.
+   * Fetch calendars.
    * @returns {Calendar}
    */
-  async fetchCalendar() {
-    const request = await fetch(`${this.client.options.http.api.core}/calendars`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+  async fetchCalendars() {
+    const response = await this.client.rest.get(Routes.CALENDARS());
     return response.map(calendar => new Calendar(this.client, calendar));
   }
 
@@ -280,11 +239,7 @@ class ClientPlayer extends Player {
    * @returns {SentGift[]}
    */
   async fetchSentGifts() {
-    const request = await fetch(`${this.client.options.http.api.core}/billing/gifts/sent`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.SENT_GIFTS());
     return response.map(gift => new SentGift(this.client, gift));
   }
 
@@ -293,11 +248,7 @@ class ClientPlayer extends Player {
    * @returns {ReceivedGift[]}
    */
   async fetchReceivedGifts() {
-    const request = await fetch(`${this.client.options.http.api.core}/billing/gifts/received`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.RECEIVED_GIFTS());
     return response.map(gift => new ReceivedGift(this.client, gift));
   }
 
@@ -306,11 +257,7 @@ class ClientPlayer extends Player {
    * @returns {Object}
    */
   async fetchFriendRequests() {
-    const request = await fetch(`${this.client.options.http.api.core}/friendRequests/pending`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.FRIEND_REQUESTS());
     return response;
   }
 
@@ -319,11 +266,7 @@ class ClientPlayer extends Player {
    * @returns {Object}
    */
   async fetchCustomGamesOwnedRoles() {
-    const request = await fetch(`${this.client.options.http.api.core}/customGames/ownRoles`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
-    });
-    const response = await request.json();
+    const response = await this.client.rest.get(Routes.CUSTOM_GAME_OWNED_ROLES());
     return response;
   }
 
@@ -332,11 +275,7 @@ class ClientPlayer extends Player {
   * @returns {Promise<LimitedOffer[]>}
   */
  async fetchLimitedOffers() {
-   const request = await fetch(`${this.client.options.http.api.core}/billing/rotatingLimitedOffers`, {
-     method: 'GET',
-     headers: getAuthenticationHeaders(this.client.token)
-   });
-   const response = await request.json();
+  const response = await this.client.rest.get(Routes.LIMITED_OFFERS());
    return response.map(offer => {
      return offer.type === 'AVATAR_ITEMS' ? new LimitedItems(this.client, offer)
        : offer.type.endsWith('OUTFITS') ? new LimitedCollection(this.client, offer)

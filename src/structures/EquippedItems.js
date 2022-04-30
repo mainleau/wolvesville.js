@@ -16,10 +16,10 @@ class EquippedItems extends Base {
     this.avatar = new Avatar(client, data);
 
     /**
-     * Player profile icon.
+     * Player icon.
      * @type {Object}
      */
-    this.profileIcon = {
+    this.icon = {
       id: data.profileIconId,
       color: data.profileIconColor
     }

@@ -57,7 +57,6 @@ class Client extends BaseClient {
      */
     this.items = new ItemManager(this);
 
-
     /**
      * Ready timestamp.
      * @type {?number}

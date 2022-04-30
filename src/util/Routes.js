@@ -4,11 +4,24 @@ module.exports = {
 
   AVATAR_ITEMS: () => '/avatarItems',
 
-  PLAYER: (id) => `/players/${id}`,
-  PARTIAL_PLAYER_BY_USERNAME: (id) => '/players/search',
-
+  PARTIAL_PLAYER_BY_USERNAME: () => '/players/search',
   PLAYER: (id) => `/players/${id ? id : 'me'}`,
   INVENTORY: () => '/inventory',
+  EQUIPPED_ITEMS: () => '/equippedItems',
+  ANNOUNCEMENTS: () => '/announcements',
+  FRIEND_INVITATION_REWARDS: () => '/players/friendInvitationRewards',
+  DAILY_REWARDS: () => '/dailyRewards',
+  GOLDEN_WHEEL_REWARDS: () => '/rewards/goldenWheelItems',
+  CHALLENGES: () => '/challenges/v2',
+  BATTLE_PASS_SEASON: () => '/battlePass/seasonAndBattlePass',
+  RANKED_SEASON: () => '/ranked/seasonInfoCompact',
+  CALENDARS: () => '/calendars',
+  SENT_GIFTS: () => '/billing/gifts/sent',
+  RECEIVED_GIFTS: () => '/billing/gifts/received',
+  CLAN_REQUESTS: () => '/clans/openRequests',
+  FRIEND_REQUESTS: () => '/friendRequests/pending',
+  CUSTOM_GAME_OWNED_ROLES: () => '/customGames/ownRoles',
+  LIMITED_OFFERS: () => '/billing/rotatingLimitedOffers',
 
   FRIENDS: () => '/friends',
 
