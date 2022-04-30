@@ -14,6 +14,7 @@ const ReceivedGift = require('./ReceivedGift');
 const LimitedOffer = require('./LimitedOffer');
 const LimitedCollection = require('./LimitedCollection');
 const LimitedItems = require('./LimitedItems');
+const { Genders } = require('../util/Constants');
 const { getAuthenticationHeaders } = require('../util/Headers');
 
 /**
@@ -41,9 +42,9 @@ class ClientPlayer extends Player {
      * @type {number}
      */
     Object.defineProperty(this, 'gender', { value:
-      data.gender === 'MALE' ? 2
-        : data.gender === 'FEMALE' ? 1
-        : 0
+      data.gender === 'MALE' ? Genders.MALE
+        : data.gender === 'FEMALE' ? Genders.FEMALE
+        : Genders.OTHER
     });
 
     this.equippedItems.background = {
