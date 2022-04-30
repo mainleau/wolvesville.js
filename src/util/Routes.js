@@ -5,7 +5,7 @@ module.exports = {
   AVATAR_ITEMS: () => '/avatarItems',
 
   PLAYER: (id) => `/players/${id}`,
-  MINIMAL_PLAYER_BY_USERNAME: (id) => '/players/search',
+  PARTIAL_PLAYER_BY_USERNAME: (id) => '/players/search',
 
   PLAYER: (id) => `/players/${id ? id : 'me'}`,
   INVENTORY: () => '/inventory',

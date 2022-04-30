@@ -14,13 +14,13 @@ class PlayerManager extends CacheManager {
   }
 
   /**
-   * Fetch few information from a player by its username.
+   * Fetch partial player by its username.
    * @param {string} username Player username
    * @returns {Promise<Object>}
    * @private
    */
-  async #fetchMinimalByUsername(username) {
-    const response = await this.client.rest.get(Routes.MINIMAL_PLAYER_BY_USERNAME(), { query: { username }})
+  async #fetchPartialByUsername(username) {
+    const response = await this.client.rest.get(Routes.PARTIAL_PLAYER_BY_USERNAME(), { query: { username }})
     if(!response.length) throw new Error('PLAYER_NOT_FOUND');
     return response[0];
   }
@@ -40,7 +40,7 @@ class PlayerManager extends CacheManager {
 
     if(!username || typeof username !== 'string') throw new Error('INVALID_PLAYER_USERNAME_FORMAT');
     if(username.length < 3) throw new Error('PLAYER_USERNAME_TOO_SHORT');
-    const response = await this.#fetchMinimalByUsername(username);
+    const response = await this.#fetchPartialByUsername(username);
     return await this.fetchById(response.id);
   }
 
