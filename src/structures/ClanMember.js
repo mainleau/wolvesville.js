@@ -1,4 +1,5 @@
 const BasePlayer = require('./BasePlayer');
+const { ClanRanks } = require('../util/Constants');
 
 /**
  * Represents a clan member.
@@ -63,7 +64,9 @@ class ClanMember extends BasePlayer {
      * Member rank.
      * @type {string}
      */
-    this.rank = this.id === data.clan.leaderId ? 2 : data.coLeader ? 1 : 0;
+    this.rank = this.id === data.clan.leaderId ? ClanRanks.LEADER
+      : data.coLeader ? ClanRanks.COLEADER
+      : ClanRanks.MEMBER;
   }
 }
 

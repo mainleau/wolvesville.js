@@ -1,7 +1,8 @@
+const { Collection } = require('@discordjs/collection');
 const BaseClan = require('./BaseClan');
+const { ClanRanks } = require('../util/Constants');
 const ClanMember = require('./ClanMember');
 const ClientClanMember = require('./ClientClanMember');
-const { Collection } = require('@discordjs/collection');
 
 /**
  * Represents a clan.
@@ -34,7 +35,7 @@ class Clan extends BaseClan {
      * @readonly
      */
     get coleaders() {
-      return this.members.filter(member => member.rank === 1);
+      return this.members.filter(member => member.rank === ClanRanks.COLEADER);
     }
 
     /**
@@ -43,7 +44,7 @@ class Clan extends BaseClan {
      * @readonly
      */
     get leader() {
-      return this.members.find(member => member.rank === 2);
+      return this.members.find(member => member.rank === ClanRanks.LEADER);
     }
 
     /**
