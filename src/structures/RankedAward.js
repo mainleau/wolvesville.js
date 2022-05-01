@@ -16,9 +16,15 @@ class RankedAward extends Base {
 
     /**
      * Award type.
-     * @type {number}
+     * @type {string}
      */
-    this.type = RankedTiers[data.itemType] || 0;
+    this.type = data.itemType === 'COPPER' ? RankedTiers.PLATINUM
+      : data.itemType === 'COPPER' ? RankedTiers.GOLD
+      : data.itemType === 'COPPER' ? RankedTiers.SILVER
+      : data.itemType === 'COPPER' ? RankedTiers.BRONZE
+      : data.itemType === 'COPPER' ? RankedTiers.COPPER
+      : RankedTiers.None;
+
   }
 }
 

@@ -17,9 +17,14 @@ class Lootbox extends Base {
 
     /**
      * Lootbox type.
-     * @type {number}
+     * @type {string}
      */
-    this.type = LootboxTypes[data.event] || 0;
+    this.type = data.event === 'EASTER' ? LootboxTypes.EASTER
+      : data.event === 'HALLOWEEN' ? LootboxTypes.HALLOWEEN
+      : data.event === 'XMAS' ? LootboxTypes.CHRISTMAS
+      : data.event === 'ROLE_CARDS' ? LootboxTypes.ROLE_CARDS
+      : data.event === 'LEVEL_UP_CARD' ? LootboxTypes.LEVEL_UP_CARD
+      : LootboxTypes.DEFAULT;
   }
 }
 

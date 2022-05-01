@@ -1,43 +1,71 @@
 exports.Genders = {
-  MALE: 0,
-  FEMALE: 1,
-  OTHER: 2
+  MALE: 'MALE',
+  FEMALE: 'FEMALE',
+  OTHER: 'OTHER'
 }
 
 exports.ClanRanks = {
-  MEMBER: 0,
-  COLEADER: 1,
-  LEADER: 2
+  MEMBER: 'MEMBER',
+  COLEADER: 'COLEADER',
+  LEADER: 'LEADER'
 }
 
 exports.LootboxTypes = {
-  DEFAULT: 0,
-  EASTER: 1,
-  HALLOWEEN: 2,
-  XMAS: 3,
-  ROLE_CARDS: 4,
-  LEVEL_UP_CARD: 5
+  DEFAULT: 'DEFAULT',
+  EASTER: 'EASTER',
+  HALLOWEEN: 'HALLOWEEN',
+  CHRISTMAS: 'CHRISTMAS',
+  ROLE_CARDS: 'ROLE_CARDS',
+  LEVEL_UP_CARD: 'LEVEL_UP_CARD'
 }
 
 exports.RewardTypes = {
-  GOLD: 0,
-  ROSE: 1,
-  ROSE_PACKAGE: 2,
-  GEM: 3,
-  XP: 4,
-  CARD: 5,
-  AVATAR_ITEM: 6,
-  LOOTBOX: 7,
-  PROFILE_ICON: 8,
-  EMOJI: 9,
-  LOADING_SCREEN: 10
+  GOLD: 'GOLD',
+  ROSE: 'ROSE',
+  ROSE_PACKAGE: 'ROSE_PACKAGE',
+  GEM: 'GEM',
+  XP: 'XP',
+  CARD: 'CARD',
+  AVATAR_ITEM: 'AVATAR_ITEM',
+  LOOTBOX: 'LOOTBOX',
+  PROFILE_ICON: 'PROFILE_ICON',
+  EMOJI: 'EMOJI',
+  LOADING_SCREEN: 'LOADING_SCREEN'
 }
 
 exports.RankedTiers = {
-  NONE: 0,
-  COPPER: 1,
-  BRONZE: 2,
-  SILVER: 3,
-  GOLD: 4,
-  PLATINUM: 5
+  NONE: 'NONE',
+  COPPER: 'COPPER',
+  BRONZE: 'BRONZE',
+  SILVER: 'SILVER',
+  GOLD: 'GOLD',
+  PLATINUM: 'PLATINUM'
+}
+
+exports.Status = {
+  DEFAULT: 'DEFAULT',
+  PLAY: 'PLAY',
+  DND: 'DND',
+  OFFLINE: 'OFFLINE'
+}
+
+exports.ItemTypes = {
+  HAT: 'HAT',
+  HAIR: 'HAIR',
+  EYES: 'EYES',
+  GLASSES: 'GLASSES',
+  MOUTH: 'MOUTH',
+  MASK: 'MASK',
+  CLOTHES: 'CLOTHES',
+  FOREGROUND: 'FOREGROUND',
+  BACKGROUND: 'BACKGROUND',
+  BADGE: 'BADGE',
+  GRAVESTONE: 'GRAVESTONE'
+}
+
+exports.ItemRarities = {
+  COMMON: 'COMMON',
+  RARE: 'RARE',
+  EPIC: 'EPIC',
+  LEGENDARY: 'LEGENDARY'
 }

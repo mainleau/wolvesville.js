@@ -10,75 +10,75 @@ class Avatar extends Base {
 
     /**
      * Avatar skin color.
-     * @type {string}
+     * @type {number}
      */
     this.skinColor = parseInt(data.skinColor.slice(6)) - 1;
 
     /**
-     * Avatar eyes id.
-     * @type {string}
+     * Avatar eyes.
+     * @type {AvatarItem}
      */
-    this.eyes = data.avatarEyesId;
+    this.eyes = this.client.items.cache.get(data.avatarEyesId);
 
     /**
-     * Avatar clothes id.
-     * @type {string}
+     * Avatar clothes.
+     * @type {AvatarItem}
      */
-    this.clothes = data.avatarClothesBodyId;
+    this.clothes = this.client.items.cache.get(data.avatarClothesBodyId);
 
     /**
-     * Avatar gravestone id.
-     * @type {string}
+     * Avatar gravestone.
+     * @type {AvatarItem}
      */
-    this.gravestone = data.gravestoneId;
+    this.gravestone = this.client.items.cache.get(data.gravestoneId);
 
     /**
-     * Avatar hat id.
-     * @type {?string}
+     * Avatar hat.
+     * @type {?AvatarItem}
      */
-    this.hat = data.avatarHatId ? data.avatarHatId : null;
+    this.hat = this.client.items.cache.get(data.avatarHatId) || null;
 
     /**
-     * Avatar hair id.
-     * @type {?string}
+     * Avatar hair.
+     * @type {?AvatarItem}
      */
-    this.hair = data.avatarHairId ? data.avatarHairId : null;
+    this.hair = this.client.items.cache.get(data.avatarHairId) || null;
 
     /**
-     * Avatar glasses id.
-     * @type {?string}
+     * Avatar glasses.
+     * @type {?AvatarItem}
      */
-    this.glasses = data.avatarGlassesId ?  data.avatarGlassesId : null;
+    this.glasses = this.client.items.cache.get(data.avatarGlassesId) || null;
 
     /**
-     * Avatar mouth id.
-     * @type {?string}
+     * Avatar mouth.
+     * @type {?AvatarItem}
      */
-    this.mouth = data.avatarMouthId ? data.avatarMouthId : null;
+    this.mouth = this.client.items.cache.get(data.avatarMouthId) || null;
 
     /**
-     * Avatar mask id.
-     * @type {?string}
+     * Avatar mask.
+     * @type {?AvatarItem}
      */
-    this.mask = data.avatarMaskId ? data.avatarMaskId : null;
+    this.mask = this.client.items.cache.get(data.avatarMaskId) || null;
 
     /**
-     * Avatar badge id.
-     * @type {?string}
+     * Avatar badge.
+     * @type {?AvatarItem}
      */
-    this.badge = data.avatarBadgeId ? data.avatarBadgeId : null;
+    this.badge = this.client.items.cache.get(data.avatarBadgeId) || null;
 
     /**
-     * Avatar foreground id.
-     * @type {?string}
+     * Avatar foreground.
+     * @type {?AvatarItem}
      */
-    this.foreground = data.avatarFrontId ? data.avatarFrontId : null;
+    this.foreground = this.client.items.cache.get(data.avatarFrontId) || null;
 
     /**
-     * Avatar background id.
-     * @type {?string}
+     * Avatar background.
+     * @type {?AvatarItem}
      */
-    this.background = data.avatarBackId ? data.avatarBackId : null;
+    this.background = this.client.items.cache.get(data.avatarBackId) || null;
   }
 }
 

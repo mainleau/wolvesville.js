@@ -46,7 +46,7 @@ class ClientPlayer extends Player {
 
     /**
      * Player gender.
-     * @type {number}
+     * @type {string}
      */
     Object.defineProperty(this, 'gender', { value:
       data.gender === 'MALE' ? Genders.MALE
@@ -149,6 +149,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<EquippedItems>}
    */
   async fetchEquippedItems() {
+    if(!this.client.items.cache.size) await this.client.items.fetch();
+
     const data = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
     return new EquippedItems(this.client, data);
   }
