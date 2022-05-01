@@ -1,4 +1,5 @@
 const Base = require('./Base');
+const { RewardTypes } = require('../util/Constants');
 
 /**
  * Represents a battle pass reward.
@@ -24,22 +25,28 @@ class BattlePassReward extends Base {
      * Reward type.
      * @type {string}
      */
-    this.type = data.type;
+    this.type = data.type === 'AVATAR_ITEM' ? RewardTypes.AVATAR_ITEM
+      : data.type === 'PROFILE_ICON' ? RewardTypes.PROFILE_ICON
+      : data.type === 'ROSE_PACKAGE' ? RewardTypes.ROSE_PACKAGE
+      : data.type === 'GOLD' ? RewardTypes.GOLD
+      : data.type === 'GEM' ? RewardTypes.GEM
+      : data.type === 'EMOJI' ? RewardTypes.EMOJI
+      : data.type === 'LOADING_SCREEN' ? RewardTypes.LOADING_SCREEN
+      : RewardTypes.LOOTBOX;
+
 
     /**
      * Reward amount.
      * @type {number}
      */
-    if(data.amount > 1) {
-      this.amount = data.amount;
-    }
+    this.amount = data.amount;
 
     if(data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
       /**
        * Reward item id.
-       * @type {string}
+       * @type {Object}
        */
-      this.itemId = data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId;
+      this.item = { id: data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId }
     }
   }
 }

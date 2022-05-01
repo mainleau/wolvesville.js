@@ -1,24 +1,28 @@
 const fetch = require('node-fetch');
+const { Collection } = require('@discordjs/Collection');
 const Player = require('./Player');
 const Routes = require('../util/Routes');
 const Role = require('./Role');
 const Announcement = require('./Announcement');
 const Inventory = require('./Inventory');
 const EquippedItems = require('./EquippedItems');
+const FriendReferralReward = require('./FriendReferralReward');
 const ClanRequest = require('./ClanRequest');
 const DailyRewards = require('./DailyRewards');
 const ClientClan = require('./ClientClan');
 const Challenge = require('./Challenge');
-const BattlePass = require('./BattlePass');
+const BattlePassSeason = require('./BattlePassSeason');
+const GoldenWheelReward = require('./GoldenWheelReward');
 const RankedSeason = require('./RankedSeason');
 const Calendar = require('./Calendar');
 const SentGift = require('./SentGift');
 const ReceivedGift = require('./ReceivedGift');
 const LimitedOffer = require('./LimitedOffer');
+const SentFriendRequest = require('./SentFriendRequest');
+const ReceivedFriendRequest = require('./ReceivedFriendRequest');
 const LimitedCollection = require('./LimitedCollection');
 const LimitedItems = require('./LimitedItems');
 const { Genders } = require('../util/Constants');
-const { getAuthenticationHeaders } = require('../util/Headers');
 
 /**
  * Represents a client player.
@@ -133,34 +137,34 @@ class ClientPlayer extends Player {
 
   /**
    * Fetch developer announcements.
-   * @returns {Announcement[]}
+   * @returns {Promise<Announcement[]>}
    */
   async fetchAnnouncements() {
-    const response = await this.client.rest.get(Routes.ANNOUNCEMENTS());
-    return response.map(announcement => new Announcement(this.client, announcement));
+    const data = await this.client.rest.get(Routes.ANNOUNCEMENTS());
+    return data.map(announcement => new Announcement(this.client, announcement));
   }
 
   /**
    * Fetch equipped items.
-   * @returns {EquippedItems}
+   * @returns {Promise<EquippedItems>}
    */
   async fetchEquippedItems() {
-    const response = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
-    return new EquippedItems(this.client, response);
+    const data = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
+    return new EquippedItems(this.client, data);
   }
 
   /**
    * Fetch inventory.
-   * @returns {Inventory}
+   * @returns {Promise<Inventory>}
    */
   async fetchInventory() {
-    const response = await this.client.rest.get(Routes.INVENTORY());
-    return new Inventory(this.client, response);
+    const data = await this.client.rest.get(Routes.INVENTORY());
+    return new Inventory(this.client, data);
   }
 
   /**
    * Fetcn clan requests.
-   * @returns {ClanRequest[]}
+   * @returns {Promise<ClanRequest[]>}
    */
   async fetchClanRequests() {
     const response = await this.client.rest.get(Routes.CLAN_REQUESTS());
@@ -168,66 +172,69 @@ class ClientPlayer extends Player {
   }
 
   /**
-   * Friend invitation rewards.
-   * @returns {Array}
+   * Fetch friend referral rewards.
+   * @returns {Promise<FriendReferralReward[]>}
    */
-  async fetchFriendInvitationRewards() {
-    const response = await this.client.rest.get(Routes.FRIEND_INVITATION_REWARDS());
-    return response;
+  async fetchFriendReferralRewards() {
+    const data = await this.client.rest.get(Routes.FRIEND_REFERRAL_REWARDS());
+    return data.friendInvitationRewards.map((reward, index) => {
+      return new FriendReferralReward(this.client, Object.assign(reward, {
+        claimed: data.finished > index
+      }));
+    });
   }
 
   /**
-   * Daily rewards.
-   * @returns {DailyRewards}
+   * Fetch daily rewards.
+   * @returns {Promise<DailyRewards>}
    */
   async fetchDailyRewards() {
-    const response = await this.client.rest.get(Routes.DAILY_REWARDS());
-    return new DailyRewards(this.client, response);
+    const data = await this.client.rest.get(Routes.DAILY_REWARDS());
+    return new DailyRewards(this.client, data);
   }
 
   /**
-   * Golden wheel rewards.
+   * Fetch golden wheel rewards.
    * @returns {Promise<Object[]>}
    */
   async fetchGoldenWheelRewards() {
-    const response = await this.client.rest.get(Routes.GOLDEN_WHEEL_REWARDS());
-    return response;
+    const data = await this.client.rest.get(Routes.GOLDEN_WHEEL_REWARDS());
+    return data.map(reward => new GoldenWheelReward(this.client, reward));
   }
 
   /**
-   * Challenges.
-   * @returns {Object<Array>}
+   * Fetch challenges.
+   * @returns {Promise<Object>}
    */
   async fetchChallenges() {
-    const response = await this.client.rest.get(Routes.CHALLENGES());
+    const data = await this.client.rest.get(Routes.CHALLENGES());
     return {
-      daily: response.dailyChallengeProgresses.map(challenge => new Challenge(this.client, challenge)),
-      weekly: response.weeklyChallengeProgresses.map(challenge => new Challenge(this.client, challenge))
+      daily: data.dailyChallengeProgresses.map(challenge => new Challenge(this.client, challenge)),
+      weekly: data.weeklyChallengeProgresses.map(challenge => new Challenge(this.client, challenge))
     }
   }
 
   /**
-   * Battle pass.
-   * @returns {BattlePass}
+   * Fetch battle pass season.
+   * @returns {Promise<BattlePassSeason>}
    */
-  async fetchBattlePass() {
-    const response = await this.client.rest.get(Routes.BATTLE_PASS_SEASON());
-    return new BattlePass(this.client, response);
+  async fetchBattlePassSeason() {
+    const data = await this.client.rest.get(Routes.BATTLE_PASS_SEASON());
+    return new BattlePassSeason(this.client, data);
   }
 
   /**
    * Fetch ranked season.
-   * @returns {RankedSeason}
+   * @returns {Promise<RankedSeason>}
    */
   async fetchRankedSeason() {
     const response = await this.client.rest.get(Routes.RANKED_SEASON());
     return new RankedSeason(this.client, response);
   }
 
-
   /**
    * Fetch calendars.
-   * @returns {Calendar}
+   * @returns {Promise<Calendar[]>}
    */
   async fetchCalendars() {
     const response = await this.client.rest.get(Routes.CALENDARS());
@@ -235,8 +242,8 @@ class ClientPlayer extends Player {
   }
 
   /**
-   * Sent gifts.
-   * @returns {SentGift[]}
+   * Fetch sent gifts.
+   * @returns {Promise<SentGift[]>}
    */
   async fetchSentGifts() {
     const response = await this.client.rest.get(Routes.SENT_GIFTS());
@@ -244,8 +251,8 @@ class ClientPlayer extends Player {
   }
 
   /**
-   * Received gifts.
-   * @returns {ReceivedGift[]}
+   * Fetch received gifts.
+   * @returns {Promise<ReceivedGift[]>}
    */
   async fetchReceivedGifts() {
     const response = await this.client.rest.get(Routes.RECEIVED_GIFTS());
@@ -254,20 +261,26 @@ class ClientPlayer extends Player {
 
   /**
    * Fetch friend requests.
-   * @returns {Object}
+   * @returns {Promise<Collection<string, (SentFriendRequest|ReceivedFriendRequest)[]>>}
    */
   async fetchFriendRequests() {
     const response = await this.client.rest.get(Routes.FRIEND_REQUESTS());
-    return response;
+
+    const data = response.map(request => {
+      return request.originator.id === this.id
+        ? new SentFriendRequest(this.client, request)
+        : new ReceivedFriendRequest(this.client, request);
+    });
+    return data.reduce((col, request) => col.set(request.id, request), new Collection());
   }
 
   /**
    * Fetch custom games owned roles.
-   * @returns {Object}
+   * @returns {Role[]}
    */
   async fetchCustomGamesOwnedRoles() {
     const response = await this.client.rest.get(Routes.CUSTOM_GAME_OWNED_ROLES());
-    return response;
+    return response.map(id => new Role(this.client, { id }));
   }
 
  /**
@@ -275,11 +288,13 @@ class ClientPlayer extends Player {
   * @returns {Promise<LimitedOffer[]>}
   */
  async fetchLimitedOffers() {
+  if(!this.client.items.cache.size) await this.client.items.fetch();
+
   const response = await this.client.rest.get(Routes.LIMITED_OFFERS());
    return response.map(offer => {
      return offer.type === 'AVATAR_ITEMS' ? new LimitedItems(this.client, offer)
        : offer.type.endsWith('OUTFITS') ? new LimitedCollection(this.client, offer)
-       : new LimitedOffer(this.client, offer)
+       : new LimitedOffer(this.client, offer);
    });
  }
 

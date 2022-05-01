@@ -18,3 +18,26 @@ exports.LootboxTypes = {
   ROLE_CARDS: 4,
   LEVEL_UP_CARD: 5
 }
+
+exports.RewardTypes = {
+  GOLD: 0,
+  ROSE: 1,
+  ROSE_PACKAGE: 2,
+  GEM: 3,
+  XP: 4,
+  CARD: 5,
+  AVATAR_ITEM: 6,
+  LOOTBOX: 7,
+  PROFILE_ICON: 8,
+  EMOJI: 9,
+  LOADING_SCREEN: 10
+}
+
+exports.RankedTiers = {
+  NONE: 0,
+  COPPER: 1,
+  BRONZE: 2,
+  SILVER: 3,
+  GOLD: 4,
+  PLATINUM: 5
+}

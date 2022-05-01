@@ -1,6 +1,5 @@
 const Base = require('./Base');
 const DailyReward = require('./DailyReward');
-const { Collection } = require('@discordjs/collection');
 
 /**
  * Represents daily rewards.
@@ -17,10 +16,13 @@ class DailyRewards extends Base {
     this.offset = data.offset;
 
     /**
-     * Are daily rewards active.
-     * @type {boolean}
+     * Daily rewards.
+     * @type {Collection<DailyReward>}
      */
-    this.active = !data.recentGameWinRequired;
+    this.rewards = data.rewards.map((reward, index) => {
+      reward.day = this.offset + index;
+      return new DailyReward(client, reward);
+    });
 
     /**
      * Daily rewards claim timestamp.
@@ -29,15 +31,10 @@ class DailyRewards extends Base {
     this.claimTimestamp = new Date(data.rewards.find(reward => reward.canBeClaimedDate).canBeClaimedDate).getTime();
 
     /**
-     * Daily rewards.
-     * @type {Collection<DailyReward>}
+     * Are daily rewards active.
+     * @type {boolean}
      */
-    this.rewards = new Collection();
-
-    for (const reward of data.rewards) {
-      reward.day = this.offset + data.rewards.indexOf(reward);
-      this.rewards.set(reward.day.toString(), new DailyReward(client, reward));
-    }
+    this.active = !data.recentGameWinRequired;
   }
 
   /**
@@ -50,7 +47,7 @@ class DailyRewards extends Base {
   }
 
   /**
-   * Is next daily reward claimable.
+   * Wether next daily reward claimable.
    * @returns {boolean}
    * @readonly
    */

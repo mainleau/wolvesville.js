@@ -20,7 +20,8 @@ class FriendManager extends CacheManager {
   async fetch(options = {}) {
 
     if(!options.force) {
-      return this.cache;
+      const existing = this.cache;
+      if(existing.size) return existing;
     }
 
     const response = await this.client.rest.get(Routes.FRIENDS());

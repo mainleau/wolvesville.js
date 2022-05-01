@@ -1,4 +1,5 @@
 const Base = require('./Base');
+const { RankedTiers } = require('../util/Constants');
 
 /**
  * Represents a ranked award.
@@ -15,9 +16,9 @@ class RankedAward extends Base {
 
     /**
      * Award type.
-     * @type {?string}
+     * @type {number}
      */
-    this.type = data.itemType || null;
+    this.type = RankedTiers[data.itemType] || 0;
   }
 }
 

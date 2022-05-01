@@ -2,30 +2,12 @@ const Base = require('./Base');
 const BattlePassReward = require('./BattlePassReward.js');
 
 /**
- * Represents a battle pass.
+ * Represents a battle pass season.
  * @extends {Base}
  */
-class BattlePass extends Base {
+class BattlePassSeason extends Base {
   constructor(client, data) {
     super(client);
-
-    /**
-     * Battle pass price in gold.
-     * @type {number}
-     */
-    this.buyPrice = data.battlePassSeason.goldPrice;
-
-    /**
-     * Battle pass price to skip tier.
-     * @type {number}
-     */
-    this.skipPrice = data.battlePassSeason.goldPricePerReward;
-
-    /**
-     * Battle pass xp required to complete a tier.
-     * @type {number}
-     */
-    this.xpRequiredPerTier = data.battlePassSeason.xpPerReward;
 
     /**
      * Battle pass season.
@@ -40,7 +22,7 @@ class BattlePass extends Base {
     this.xp = data.battlePass.xp;
 
     /**
-     * Is battle pass claimed.
+     * Wether battle pass claimed.
      * @type {boolean}
      */
     this.claimed = data.battlePass.claimed;
@@ -49,8 +31,7 @@ class BattlePass extends Base {
      * Battle pass rewards.
      * @type {BattlePassReward[]}
      */
-     this.rewards = data.battlePassSeason.rewards.map((_, tier) => {
-       const reward = data.battlePassSeason.rewards[tier];
+     this.rewards = data.battlePassSeason.rewards.map((reward, tier) => {
        return new BattlePassReward(client, Object.assign(reward, {
          tier: data.battlePassSeason.rewards.indexOf(reward),
          claimed: data.battlePassSeason.rewards.indexOf(reward) <= this.tier ? true : false
@@ -58,19 +39,37 @@ class BattlePass extends Base {
      });
 
      /**
-      * Battle pass duration.
+      * Battle pass xp required to complete a tier.
+      * @type {number}
+      */
+     this.tierXpRequired = data.battlePassSeason.xpPerReward;
+
+     /**
+      * Battle pass price in gold.
+      * @type {number}
+      */
+     this.price = data.battlePassSeason.goldPrice;
+
+     /**
+      * Battle pass price to skip tier.
+      * @type {number}
+      */
+     this.skipPrice = data.battlePassSeason.goldPricePerReward;
+
+     /**
+      * Season duration.
       * @type {number}
       */
     this.duration = data.battlePassSeason.durationInDays;
 
     /**
-     * Battle pass start timestamp.
+     * Season start timestamp.
      * @type {number}
      */
     this.startTimestamp = new Date(data.battlePassSeason.startTime).getTime();
 
     /**
-     * Battle pass end timestamp.
+     * Season end timestamp.
      * @type {number}
      */
     this.endTimestamp = new Date(this.startTimestamp + this.duration * 24 * 60 * 60 * 1000).getTime();
@@ -95,7 +94,7 @@ class BattlePass extends Base {
   }
 
   /**
-   * Is battle pass completed.
+   * Weather battle pass completed.
    * @returns {boolean}
    * @readonly
    */
@@ -105,4 +104,4 @@ class BattlePass extends Base {
 
 }
 
-module.exports = BattlePass;
+module.exports = BattlePassSeason;

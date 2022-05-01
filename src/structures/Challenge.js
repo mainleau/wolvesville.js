@@ -1,4 +1,5 @@
 const Base = require('./Base');
+const ChallengeReward = require('./ChallengeReward');
 
 /**
  * Represents a challenge.
@@ -15,29 +16,26 @@ class Challenge extends Base {
     this.description = data.description;
 
     /**
-     * Challenge target.
-     * @type {string}
-     */
-    this.target = data.challengeTarget;
-
-    /**
      * Challenge progress.
      * @type {number}
      */
     this.progress = data.challengeProgress;
 
     /**
-     * Challenge reward.
-     * @type {Object}
+     * Challenge target.
+     * @type {string}
      */
-    this.reward = {
-      type: data.rewardInXp ? 0 : 1,
-      amount: data.rewardInGems || data.rewardInXp
-    }
+    this.target = data.challengeTarget;
+
+    /**
+     * Challenge reward.
+     * @type {ChallengeReward}
+     */
+    this.reward = new ChallengeReward(client, data);
   }
 
   /**
-   * Is challenge completed.
+   * Wether challenge completed.
    * @returns {boolean}
    * @readonly
    */

@@ -8,4 +8,16 @@ new Client().login()
     player.fetchEquippedItems().then(console.log);
     player.fetchInventory().then(console.log);
     player.fetchClanRequests().then(console.log);
+    player.fetchFriendReferralRewards().then(console.log);
+    player.fetchDailyRewards().then(x => console.log(x));
+    player.fetchGoldenWheelRewards().then(console.log);
+    player.fetchChallenges().then(console.log);
+    player.fetchBattlePassSeason().then(console.log);
+    player.fetchRankedSeason().then(console.log);
+    player.fetchCalendars().then(console.log);
+    player.fetchSentGifts().then(console.log);
+    player.fetchReceivedGifts().then(console.log);
+    player.fetchFriendRequests().then(console.log);
+    player.fetchCustomGamesOwnedRoles().then(console.log);
+    player.fetchLimitedOffers().then(console.log);
   });
