@@ -45,12 +45,15 @@ class AvatarItem extends Base {
     }
   }
 
-  get smallImageURL() {
-    return `${this.client.options.http.cdn}/avatarItems/${this.name}.avatar-small.png`;
-  }
+  imageURL({ large = false, zoom } = {}) {
+    if(typeof large !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
+    if(zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
-  get largeImageURL() {
-    return `${this.client.options.http.cdn}/avatarItems/${this.name}.avatar-large.png`
+    var url = `${this.client.options.http.cdn}/avatarItems/${this.name}`;
+    url += `.avatar-${large ? 'large' : 'small'}`;
+    if(zoom) url += `@${zoom}x`;
+
+    return `${url}.png`;
   }
 
 }
