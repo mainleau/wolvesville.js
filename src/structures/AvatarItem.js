@@ -9,39 +9,39 @@ class AvatarItem extends Base {
   constructor(client, data) {
     super(client);
 
-    this.id = data.id;
+    this.id = data[0];
 
-    this.name = data.storeImage.fileName.split('.').slice(0, -2).join('.');
+    this.name = data[11];
 
-    this.type = data.type === 'HAT' ? ItemTypes.HAT
-      : data.type === 'HAIR' ? ItemTypes.HAIR
-      : data.type === 'EYES' ? ItemTypes.EYES
-      : data.type === 'GLASSES' ? ItemTypes.GLASSES
-      : data.type === 'MOUTH' ? ItemTypes.MOUTH
-      : data.type === 'MASK' ? ItemTypes.MASK
-      : data.type === 'CLOTHES_BODY' ? ItemTypes.CLOTHES
-      : data.type === 'FRONT' ? ItemTypes.FOREGROUND
-      : data.type === 'BACK' ? ItemTypes.BACKGROUND
-      : data.type === 'BADGE' ? ItemTypes.BADGE
+    this.type = data[8] === 2 ? ItemTypes.HAT
+      : data[8] === 1 ? ItemTypes.HAIR
+      : data[8] === 7 ? ItemTypes.EYES
+      : data[8] === 3 ? ItemTypes.GLASSES
+      : data[8] === 10 ? ItemTypes.MOUTH
+      : data[8] === 9 ? ItemTypes.MASK
+      : data[8] === 0 ? ItemTypes.CLOTHES
+      : data[8] === 5 ? ItemTypes.FOREGROUND
+      : data[8] === 6 ? ItemTypes.BACKGROUND
+      : data[8] === 8 ? ItemTypes.BADGE
       : ItemTypes.GRAVESTONE;
 
-    this.rarity = data.rarity === 'COMMON' ? ItemRarities.COMMON
-      : data.rarity === 'RARE' ? ItemRarities.RARE
-      : data.rarity === 'EPIC' ? ItemRarities.RARE
+    this.rarity = data[1] === 0 ? ItemRarities.COMMON
+      : data[1] === 1 ? ItemRarities.RARE
+      : data[1] === 2 ? ItemRarities.EPIC
       : ItemRarities.LEGENDARY;
 
-    if(data.costInSilver !== -1 || data.costInRoses !== -1 || data.costInGems !== -1) {
+    if(data[2] !== -1 || data[3] !== -1 || data[4] !== -1) {
       Object.defineProperty(this, 'cost', { value:
-        data.costInSilver !== -1 ? data.costInSilver
-          : data.costInRoses !== -1 ? data.costInRoses
-          : data.costInGems
+        data[2] !== -1 ? data[2]
+          : data[3] !== -1 ? data[3]
+          : data[4]
       });
     }
 
-    Object.defineProperty(this, 'purchasable', { value: !!(data.isPurchasable & data.showInInventory) });
+    Object.defineProperty(this, 'purchasable', { value: !!(data[5] & data[6]) });
 
-    if(data.minLevel !== -1) {
-      Object.defineProperty(this, 'requiredLevel', { value: data.minLevel });
+    if(data[10] !== -1) {
+      Object.defineProperty(this, 'requiredLevel', { value: data[10] });
     }
   }
 

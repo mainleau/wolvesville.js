@@ -2,7 +2,7 @@ module.exports = {
   SIGN_IN: () => '/players/signInWithEmailAndPassword',
   TOKEN_REFRESH: () => '/players/createIdToken',
 
-  AVATAR_ITEMS: () => '/avatarItems',
+  ITEMS: () => '/purchasableItems/minimized',
 
   PARTIAL_PLAYER_BY_USERNAME: () => '/players/search',
   PLAYER: (id) => `/players/${id ? id : 'me'}`,

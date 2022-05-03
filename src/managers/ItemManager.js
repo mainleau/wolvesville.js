@@ -1,33 +1,37 @@
 const { Collection } = require('@discordjs/collection');
-const CacheManager = require('./CacheManager');
-const Routes = require('../util/Routes');
+const BaseManager = require('./BaseManager');
+const AvatarItemManager = require('./AvatarItemManager');
+const ProfileIconManager = require('./ProfileIconManager');
 const AvatarItem = require('../structures/AvatarItem');
+const ProfileIcon = require('../structures/ProfileIcon');
+const Routes = require('../util/Routes');
 
 /**
  * Manages API methods for items.
  * @extends {BaseManager}
  */
-class ItemManager extends CacheManager {
+class ItemManager extends BaseManager {
   constructor(client) {
     super(client);
+
+    this.avatarItems = new AvatarItemManager(this);
+    this.profileIcons = new ProfileIconManager(this);
   }
 
   /**
    * Fetch items.
-   * @param {Object} [options={}] Options
-   * @returns {Promise<Collection<string, AvatarItem>>}
+   * @returns {Promise<Object>}
    */
-  async fetch(options = {}) {
+  async fetch() {
+    const response = await this.client.rest.get(Routes.ITEMS());
 
-    if(!options.force) {
-      const existing = this.cache;
-      if(existing.size) return existing;
-    }
+    const avatarItems = response.avatarItems.map(item => new AvatarItem(this.client, item));
+    avatarItems.reduce((col, item) => col.set(item.id, this.avatarItems._add(item)), new Collection());
 
-    const response = await this.client.rest.get(Routes.AVATAR_ITEMS());
+    const profileIcons = response.profileIcons.map(item => new ProfileIcon(this.client, item));
+    profileIcons.reduce((col, icon) => col.set(icon.id, this.profileIcons._add(icon)), new Collection());
 
-    const data = response.map(item => new AvatarItem(this.client, item));
-    return data.reduce((col, item) => col.set(item.id, this._add(item)), new Collection());
+    return { avatarItems, profileIcons };
   }
 
 }

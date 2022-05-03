@@ -29,6 +29,10 @@ class APIRequest {
 
     let body;
 
+    if((this.options.api || this.client.options.http.api.core) === this.client.options.http.api.core) {
+      headers.ids = 1;
+    }
+
     if(this.options.data != null) {
       body = JSON.stringify(this.options.data);
       headers['Content-Type'] = 'application/json';

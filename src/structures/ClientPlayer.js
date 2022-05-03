@@ -149,7 +149,7 @@ class ClientPlayer extends Player {
    * @returns {Promise<EquippedItems>}
    */
   async fetchEquippedItems() {
-    if(!this.client.items.cache.size) await this.client.items.fetch();
+    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
     const data = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
     return new EquippedItems(this.client, data);
@@ -290,7 +290,7 @@ class ClientPlayer extends Player {
   * @returns {Promise<LimitedOffer[]>}
   */
  async fetchLimitedOffers() {
-  if(!this.client.items.cache.size) await this.client.items.fetch();
+  if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
   const response = await this.client.rest.get(Routes.LIMITED_OFFERS());
    return response.map(offer => {

@@ -18,67 +18,67 @@ class Avatar extends Base {
      * Avatar eyes.
      * @type {AvatarItem}
      */
-    this.eyes = this.client.items.cache.get(data.avatarEyesId);
+    this.eyes = this.client.items.avatarItems.cache.get(data.avatarEyesId);
 
     /**
      * Avatar clothes.
      * @type {AvatarItem}
      */
-    this.clothes = this.client.items.cache.get(data.avatarClothesBodyId);
+    this.clothes = this.client.items.avatarItems.cache.get(data.avatarClothesBodyId);
 
     /**
      * Avatar gravestone.
      * @type {AvatarItem}
      */
-    this.gravestone = this.client.items.cache.get(data.gravestoneId);
+    this.gravestone = this.client.items.avatarItems.cache.get(data.gravestoneId);
 
     /**
      * Avatar hat.
      * @type {?AvatarItem}
      */
-    this.hat = this.client.items.cache.get(data.avatarHatId) || null;
+    this.hat = this.client.items.avatarItems.cache.get(data.avatarHatId) || null;
 
     /**
      * Avatar hair.
      * @type {?AvatarItem}
      */
-    this.hair = this.client.items.cache.get(data.avatarHairId) || null;
+    this.hair = this.client.items.avatarItems.cache.get(data.avatarHairId) || null;
 
     /**
      * Avatar glasses.
      * @type {?AvatarItem}
      */
-    this.glasses = this.client.items.cache.get(data.avatarGlassesId) || null;
+    this.glasses = this.client.items.avatarItems.cache.get(data.avatarGlassesId) || null;
 
     /**
      * Avatar mouth.
      * @type {?AvatarItem}
      */
-    this.mouth = this.client.items.cache.get(data.avatarMouthId) || null;
+    this.mouth = this.client.items.avatarItems.cache.get(data.avatarMouthId) || null;
 
     /**
      * Avatar mask.
      * @type {?AvatarItem}
      */
-    this.mask = this.client.items.cache.get(data.avatarMaskId) || null;
+    this.mask = this.client.items.avatarItems.cache.get(data.avatarMaskId) || null;
 
     /**
      * Avatar badge.
      * @type {?AvatarItem}
      */
-    this.badge = this.client.items.cache.get(data.avatarBadgeId) || null;
+    this.badge = this.client.items.avatarItems.cache.get(data.avatarBadgeId) || null;
 
     /**
      * Avatar foreground.
      * @type {?AvatarItem}
      */
-    this.foreground = this.client.items.cache.get(data.avatarFrontId) || null;
+    this.foreground = this.client.items.avatarItems.cache.get(data.avatarFrontId) || null;
 
     /**
      * Avatar background.
      * @type {?AvatarItem}
      */
-    this.background = this.client.items.cache.get(data.avatarBackId) || null;
+    this.background = this.client.items.avatarItems.cache.get(data.avatarBackId) || null;
   }
 }
 
