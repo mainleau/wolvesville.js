@@ -25,7 +25,7 @@ class ProfileIcon extends Base {
     }
 
     Object.defineProperty(this, 'purchasable', {
-      value: !!(data.isPurchasable & data.showInInventory)
+      value: data.isPurchasable & data.showInInventory
     });
 
     if(data.event) {
