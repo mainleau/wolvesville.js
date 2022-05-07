@@ -16,7 +16,7 @@ class Outfit extends Base {
 
   /**
    * Outfit image url.
-   * @returns {string}
+   * @type {string}
    * @readonly
    */
   get imageURL() {

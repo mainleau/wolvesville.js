@@ -2,7 +2,7 @@ const Base = require('./Base');
 const { ItemRarities } = require('../util/Constants');
 
 /**
- * Represents an profile icon.
+ * Represents a profile icon.
  * @extends {Base}
  */
 class ProfileIcon extends Base {

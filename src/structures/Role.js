@@ -7,8 +7,10 @@ const Base = require('./Base');
 class Role extends Base {
   constructor(client, data) {
     super(client);
+
     /**
      * Role id.
+     * @type {string}
      */
     this.id = data.id;
   }

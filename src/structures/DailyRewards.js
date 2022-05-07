@@ -39,7 +39,7 @@ class DailyRewards extends Base {
 
   /**
    * Next daily reward.
-   * @returns {DailyReward}
+   * @type {DailyReward}
    * @readonly
    */
   get next() {
@@ -48,7 +48,7 @@ class DailyRewards extends Base {
 
   /**
    * Wether next daily reward claimable.
-   * @returns {boolean}
+   * @type {boolean}
    * @readonly
    */
   get available() {

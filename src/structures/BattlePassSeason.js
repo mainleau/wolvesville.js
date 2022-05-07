@@ -33,7 +33,7 @@ class BattlePassSeason extends Base {
      */
      this.rewards = data.battlePassSeason.rewards.map((reward, tier) => {
        return new BattlePassReward(client, Object.assign(reward, {
-         tier: data.battlePassSeason.rewards.indexOf(reward),
+         tier,
          claimed: data.battlePassSeason.rewards.indexOf(reward) <= this.tier ? true : false
        }));
      });
@@ -77,29 +77,29 @@ class BattlePassSeason extends Base {
 
   /**
    * Battle pass tier.
-   * @returns {number}
+   * @type {number}
    * @readonly
    */
   get tier() {
-    return this.xp / this.xpRequiredPerTier | 0;
+    return this.xp / this.tierXpRequired | 0;
   }
 
   /**
    * Battle pass tier xp.
-   * @returns {number}
+   * @type {number}
    * @readonly
    */
   get progress() {
-    return this.xp % this.xpRequiredPerTier;
+    return this.xp % this.tierXpRequired;
   }
 
   /**
    * Weather battle pass completed.
-   * @returns {boolean}
+   * @type {boolean}
    * @readonly
    */
   get completed() {
-    return this.xp === this.xpRequiredPerTier * 100;
+    return this.xp === this.tierXpRequired * 100;
   }
 
 }

@@ -10,6 +10,7 @@ const ClientPlayer = require('../structures/ClientPlayer');
 
 /**
  * Wolvesville client.
+ * @extends {BaseClient}
  */
 class Client extends BaseClient {
   /**
@@ -84,7 +85,7 @@ class Client extends BaseClient {
 
   /**
    * Is client token expired.
-   * @returns {boolean}
+   * @type {boolean}
    * @readonly
    */
   static get expired() {

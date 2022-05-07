@@ -26,7 +26,7 @@ class ClanQuerier extends Base {
 
   /**
    * Clan xp needed to be in top 10.
-   * @return {number}
+   * @type {number}
    * @readonly
    */
    get top10Requirement() {
@@ -35,7 +35,7 @@ class ClanQuerier extends Base {
 
    /**
     * Clan xp needed to be in top 100.
-    * @return {number}
+    * @type {number}
     * @readonly
     */
    get top100Requirement() {

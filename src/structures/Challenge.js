@@ -36,7 +36,7 @@ class Challenge extends Base {
 
   /**
    * Wether challenge completed.
-   * @returns {boolean}
+   * @type {boolean}
    * @readonly
    */
   get completed() {

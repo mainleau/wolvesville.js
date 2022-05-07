@@ -5,3 +5,4 @@ package-lock.json
 # Miscellaneous
 webpack/
 test/.env
+docs/docs.json

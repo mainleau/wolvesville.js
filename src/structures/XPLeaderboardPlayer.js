@@ -1,5 +1,9 @@
 const LeaderboardPlayer = require('./LeaderboardPlayer');
 
+/**
+ * Represents an xp leaderboard player.
+ * @extends {LeaderboardPlayer}
+ */
 class XPLeaderboardPlayer extends LeaderboardPlayer {
   constructor(client, data) {
     super(client);

@@ -36,7 +36,7 @@ class ClanQuest extends Base {
 
   /**
    * Quest image url.
-   * @returns {string}
+   * @type {string}
    * @readonly
    */
   get imageURL() {

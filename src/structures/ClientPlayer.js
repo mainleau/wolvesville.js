@@ -61,10 +61,6 @@ class ClientPlayer extends Player {
       id: data.equippedLoadingScreenId || null
     }
 
-    /**
-     * Role stats.
-     * @type {Role[]}
-     */
     this.stats.roles = Object.keys(this._roleStats).map(roleId => {
       const role = new Role(client, { id: roleId });
       role.loseCount = this._roleStats[roleId].loseCount;
@@ -84,35 +80,10 @@ class ClientPlayer extends Player {
       } : null
     });
 
-    /**
-     * Are clan chat notifications disabled
-     * @type {boolean}
-     */
     this.options.clanChatNotificationsDisabled = data.notificationsDisabledClanChat;
-
-    /**
-     * Are clan action notifications disabled
-     * @type {boolean}
-     */
     this.options.clanActionNotificationsDisabled = data.notificationsDisabledClanActions;
-
-    /**
-     * Is receiving clan invites disabled.
-     * @type {boolean}
-     */
     this.options.clanInvitationsDisabled = data.noClanInvite;
 
-    /**
-     * Are badges hidden to other players.
-     * @type {boolean}
-     */
-    this.options.badgesHidden = data.hideBadges;
-
-    /**
-     * Are role cards hidden to other players.
-     * @type {boolean}
-     */
-    this.options.roleCardsHidden = data.roleCardsArePublic;
 
     if(data.deletionTime) {
       /**
@@ -125,7 +96,7 @@ class ClientPlayer extends Player {
 
   /**
    * Level tiers.
-   * @returns {number[]}
+   * @type {number[]}
    * @readonly
    */
   static get levelTiers() {
@@ -263,7 +234,7 @@ class ClientPlayer extends Player {
 
   /**
    * Fetch friend requests.
-   * @returns {Promise<Collection<string, (SentFriendRequest|ReceivedFriendRequest)[]>>}
+   * @returns {Promise<Collection<string, SentFriendRequest[]|ReceivedFriendRequest[]>>}
    */
   async fetchFriendRequests() {
     const response = await this.client.rest.get(Routes.FRIEND_REQUESTS());
