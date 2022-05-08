@@ -37,37 +37,37 @@ class Inventory extends Base {
      * Avatar items.
      * @type {Array}
      */
-    this.avatarItems = data.avatarItemIds;
+    this.avatarItems = data.avatarItemIds.map(id => client.items.avatarItems.cache.get(id));
 
     /**
-     * Player icons.
+     * Profile icons.
      * @type {Array}
      */
-    this.icons = data.ownedProfileIcons.map(icon => icon.profileIconId);
+    this.profileIcons = data.ownedProfileIcons.map(profileIcon => client.items.profileIcons.cache.get(profileIcon.profileIconId));
 
     /**
      * Backgrounds.
      * @type {Array}
      */
-    this.backgrounds = data.ownedBackgroundIds;
+    this.backgrounds = data.ownedBackgroundIds.map(id => client.items.backgrounds.cache.get(id));
 
     /**
      * Loading screens.
      * @type {Array}
      */
-    this.loadingScreens = data.ownedLoadingScreenIds;
+    this.loadingScreens = data.ownedLoadingScreenIds.map(id => client.items.loadingScreens.cache.get(id));
 
     /**
      * Emojis.
      * @type {Array}
      */
-    this.emojis = data.ownedEmojis;
+    this.emojis = data.ownedEmojis.map(emoji => client.items.emojis.cache.get(emoji.emojiId));
 
     /**
      * Taslismans.
      * @type {Array}
      */
-    this.talismans = data.ownedTalismans;
+    this.talismans = data.ownedTalismans.map(talisman => client.items.talismans.cache.get(talisman.talismanId));
 
     /**
      * Lootboxes.

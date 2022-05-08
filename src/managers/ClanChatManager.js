@@ -1,6 +1,6 @@
 const BaseManager = require('./BaseManager');
-const Routes = require('../util/Routes');
 const ClanChatMessage = require('../structures/ClanChatMessage');
+const Routes = require('../util/Routes');
 const { Error } = require('../errors');
 
 /**
