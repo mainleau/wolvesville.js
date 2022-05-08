@@ -24,7 +24,7 @@ class Announcement extends Base {
 
     /**
      * Announcement attachments.
-     * @type {?Object[]}
+     * @type {Attachment[]}
      */
     this.attachments = data.attachments.map(attachment => new Attachment(client, attachment));
 
