@@ -69,3 +69,8 @@ exports.ItemRarities = {
   EPIC: 'EPIC',
   LEGENDARY: 'LEGENDARY'
 }
+
+exports.QuestTypes = {
+  GOLD: 0,
+  GEM: 1
+}

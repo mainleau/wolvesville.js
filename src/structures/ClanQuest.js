@@ -1,5 +1,6 @@
 const Base = require('./Base');
 const ClanQuestReward = require('./ClanQuestReward');
+const { QuestTypes } = require('../util/Constants');
 
 /**
  * Represents a clan quest.
@@ -25,11 +26,11 @@ class ClanQuest extends Base {
      * Quest type.
      * @type {number}
      */
-    this.type = data.isPurchasableWithGems ? 1 : 0;
+    this.type = data.isPurchasableWithGems ? QuestTypes.GEM : QuestTypes.GOLD;
 
     /**
      * Quest rewards.
-     * @type {Array<ClanQuestReward>}
+     * @type {ClanQuestReward[]}
      */
     this.rewards = data.rewards.map(reward => new ClanQuestReward(client, reward));
   }
