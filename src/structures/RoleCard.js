@@ -1,5 +1,6 @@
 const Base = require('./Base');
 const RoleCardPerk = require('./RoleCardPerk');
+const { ItemRarities } = require('../util/Constants');
 
 /**
  * Represents a role card.
@@ -20,19 +21,20 @@ class RoleCard extends Base {
      */
     this.role = data.roleId1;
 
-    if(data.roleId2) {
-      /**
-       * Card advanced role id.
-       * @type {string}
-       */
-      this.advancedRole = data.roleId2;
-    }
+    /**
+     * Card advanced role id.
+     * @type {?string}
+     */
+    this.advancedRole = data.roleId2 || null;
 
     /**
      * Card rarity.
      * @type {string}
      */
-    this.rarity = data.rarity;
+    this.rarity = this.rarity = data.rarity === 'COMMON' ? ItemRarities.COMMON
+      : data.rarity === 'RARE' ? ItemRarities.RARE
+      : data.rarity === 'EPIC' ? ItemRarities.EPIC
+      : ItemRarities.LEGENDARY;
 
     /**
      * Card perks.
