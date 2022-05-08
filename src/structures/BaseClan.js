@@ -9,49 +9,49 @@ class BaseClan extends Base {
     super(client);
 
     /**
-     * Clan id.
+     * Clan id
      * @type {string}
      */
     this.id = data.clan.id;
 
     /**
-     * Clan name.
+     * Clan name
      * @type {string}
      */
     this.name = data.clan.name;
 
     /**
-     * Clan tag.
+     * Clan tag
      * @type {?string}
      */
     this.tag = data.clan.tag || null;
 
     /**
-     * Clan created timestamp.
+     * Clan created timestamp
      * @type {number}
      */
     this.createdTimestamp = new Date(data.clan.creationTime).getTime();
 
     /**
-     * Clan description.
+     * Clan description
      * @type {string}
      */
     this.description = data.clan.description;
 
     /**
-     * Clan xp.
+     * Clan xp
      * @type {number}
      */
     this.xp = data.clan.xp;
 
     /**
-     * Clan language.
+     * Clan language
      * @type {string}
      */
     this.language = data.clan.language.toLowerCase();
 
     /**
-     * Clan icon.
+     * Clan icon
      * @type {string}
      */
     this.icon = {
@@ -60,25 +60,25 @@ class BaseClan extends Base {
     }
 
     /**
-     * Clan join type.
+     * Clan join type
      * @type {string}
      */
     this.joinType = data.clan.joinType;
 
     /**
-     * Clan member count.
+     * Clan member count
      * @type {number}
      */
     this.memberCount = data.clan.memberCount;
 
     /**
-     * Clan required level to join.
+     * Clan required level to join
      * @type {number}
      */
     this.requiredLevel = data.clan.minLevel;
 
     /**
-     * Clan started quest count.
+     * Clan started quest count
      * @type {number}
      */
     this.startedQuestCount = data.clan.questHistoryCount;

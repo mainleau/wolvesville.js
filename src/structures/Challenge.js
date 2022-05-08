@@ -10,32 +10,32 @@ class Challenge extends Base {
     super(client);
 
     /**
-     * Challenge description.
+     * Challenge description
      * @type {string}
      */
     this.description = data.description;
 
     /**
-     * Challenge progress.
+     * Challenge progress
      * @type {number}
      */
     this.progress = data.challengeProgress;
 
     /**
-     * Challenge target.
+     * Challenge target
      * @type {string}
      */
     this.target = data.challengeTarget;
 
     /**
-     * Challenge reward.
+     * Challenge reward
      * @type {ChallengeReward}
      */
     this.reward = new ChallengeReward(client, data);
   }
 
   /**
-   * Wether challenge completed.
+   * Wether challenge completed
    * @type {boolean}
    * @readonly
    */

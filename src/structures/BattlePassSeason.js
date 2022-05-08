@@ -10,25 +10,25 @@ class BattlePassSeason extends Base {
     super(client);
 
     /**
-     * Battle pass season.
+     * Battle pass season
      * @type {number}
      */
     this.season = data.battlePassSeason.number + 1;
 
     /**
-     * Xp done in battle pass.
+     * Xp done in battle pass
      * @type {number}
      */
     this.xp = data.battlePass.xp;
 
     /**
-     * Wether battle pass claimed.
+     * Wether battle pass claimed
      * @type {boolean}
      */
     this.claimed = data.battlePass.claimed;
 
     /**
-     * Battle pass rewards.
+     * Battle pass rewards
      * @type {BattlePassReward[]}
      */
      this.rewards = data.battlePassSeason.rewards.map((reward, tier) => {
@@ -39,44 +39,44 @@ class BattlePassSeason extends Base {
      });
 
      /**
-      * Battle pass xp required to complete a tier.
+      * Battle pass xp required to complete a tier
       * @type {number}
       */
      this.tierXpRequired = data.battlePassSeason.xpPerReward;
 
      /**
-      * Battle pass price in gold.
+      * Battle pass price in gold
       * @type {number}
       */
      this.price = data.battlePassSeason.goldPrice;
 
      /**
-      * Battle pass price to skip tier.
+      * Battle pass price to skip tier
       * @type {number}
       */
      this.skipPrice = data.battlePassSeason.goldPricePerReward;
 
      /**
-      * Season duration.
+      * Season duration
       * @type {number}
       */
     this.duration = data.battlePassSeason.durationInDays;
 
     /**
-     * Season start timestamp.
+     * Season start timestamp
      * @type {number}
      */
     this.startTimestamp = new Date(data.battlePassSeason.startTime).getTime();
 
     /**
-     * Season end timestamp.
+     * Season end timestamp
      * @type {number}
      */
     this.endTimestamp = new Date(this.startTimestamp + this.duration * 24 * 60 * 60 * 1000).getTime();
   }
 
   /**
-   * Battle pass tier.
+   * Battle pass tier
    * @type {number}
    * @readonly
    */
@@ -85,7 +85,7 @@ class BattlePassSeason extends Base {
   }
 
   /**
-   * Battle pass tier xp.
+   * Battle pass tier xp
    * @type {number}
    * @readonly
    */
@@ -94,7 +94,7 @@ class BattlePassSeason extends Base {
   }
 
   /**
-   * Weather battle pass completed.
+   * Weather battle pass completed
    * @type {boolean}
    * @readonly
    */

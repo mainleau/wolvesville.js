@@ -1,6 +1,6 @@
+const { Collection } = require('@discordjs/collection');
 const Base = require('./Base');
 const QueriedClan = require('./QueriedClan');
-const { Collection } = require('@discordjs/collection');
 
 /**
  * Represents a clan querier.

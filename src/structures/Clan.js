@@ -1,8 +1,8 @@
 const { Collection } = require('@discordjs/collection');
 const BaseClan = require('./BaseClan');
-const { ClanRanks } = require('../util/Constants');
 const ClanMember = require('./ClanMember');
 const ClientClanMember = require('./ClientClanMember');
+const { ClanRanks } = require('../util/Constants');
 
 /**
  * Represents a clan.
@@ -13,7 +13,7 @@ class Clan extends BaseClan {
     super(client, data);
 
     /**
-     * Clan members.
+     * Clan members
      * @type {Collection<string, ClanMember|ClientClanMember>}
      */
     this.members = new Collection();
@@ -30,7 +30,7 @@ class Clan extends BaseClan {
   }
 
   /**
-   * Clan coleaders.
+   * Clan coleaders
    * @type {Collection<string, ClanMember|ClientClanMember>}
    * @readonly
    */
@@ -39,7 +39,7 @@ class Clan extends BaseClan {
   }
 
   /**
-   * Clan leader.
+   * Clan leader
    * @type {ClanMember|ClientClanMember}
    * @readonly
    */
@@ -48,7 +48,7 @@ class Clan extends BaseClan {
   }
 
   /**
-   * Wether the clan is the client clan.
+   * Wether the clan is the client clan
    * @type {boolean}
    * @readonly
    */

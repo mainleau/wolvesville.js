@@ -10,7 +10,7 @@ class ClanChatMessage extends Base {
     super(client);
 
     /**
-     * Message author.
+     * Message author
      * @type {ClanChatMessageAuthor}
      */
     this.author = new ClanChatMessageAuthor(client, {
@@ -18,19 +18,19 @@ class ClanChatMessage extends Base {
     });
 
     /**
-     * Message content.
+     * Message content
      * @type {string}
      */
     this.content = data.msg;
 
     /**
-     * Message created timestamp.
+     * Message created timestamp
      * @type {number}
      */
     this.createdTimestamp = new Date(data.date).getTime();
 
     /**
-     * Is a system message.
+     * Is a system message
      * @type {boolean}
      */
     this.system = data.isSystem;

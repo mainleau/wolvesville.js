@@ -8,62 +8,63 @@ const RankedAward = require('./RankedAward.js');
 class RankedSeason extends Base {
   constructor(client, data) {
     super(client);
+
     /**
-     * Season id.
+     * Season id
      * @type {string}
      */
     this.id = data.season.id;
 
     /**
-     * Ranked season.
+     * Ranked season
      * @type {number}
      */
     this.season = data.season.number + 1;
 
     /**
-     * Season awards.
+     * Season awards
      * @type {RankedAward[]}
      */
      this.awards = data.seasonAwards.map(award => new RankedAward(client, award));
 
      /**
-      * Starting skill points.
+      * Starting skill points
       * @type {number}
       */
      this.startingSkillPoints = data.startSkillDefault;
 
      /**
-      * High rank starting skill points.
+      * High rank starting skill points
       * @type {number}
       */
      this.highRankStartingSkillPoints = data.startSkillLevel1;
 
      /**
-      * High rank required skill points.
+      * High rank required skill points
       * @type {number}
       */
      this.highRankRequiredSkillPoints = data.startSkillLevel1RequiredSkill;
 
      /**
-      * Season duration.
+      * Season duration
       * @type {number}
       */
     this.duration = Math.round((new Date(data.season.endTime) - new Date(data.season.startTime)) / (1000 * 60 * 60 * 24));
 
     /**
-     * Season start timestamp.
+     * Season start timestamp
      * @type {number}
      */
     this.startTimestamp = new Date(data.season.startTime).getTime();
 
     /**
-     * Season end timestamp.
+     * Season end timestamp
      * @type {number}
      */
     this.endTimestamp = new Date(data.season.endTime).getTime();
 
     /**
-     * Wether season is ended.
+     * Wether season is ended
      * @type {boolean}
      */
     this.ended = data.season.finished;

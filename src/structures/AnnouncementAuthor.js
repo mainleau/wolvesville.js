@@ -9,7 +9,7 @@ class AnnouncementAuthor extends Base {
     super(client);
 
     /**
-     * Announcement author username.
+     * Announcement author username
      * @type {string}
      */
     this.username = data.username;

@@ -1,6 +1,6 @@
 const Base = require('./Base');
 const RoleCardPerk = require('./RoleCardPerk');
-const { ItemRarities } = require('../util/Constants');
+const { Rarities } = require('../util/Constants');
 
 /**
  * Represents a role card.
@@ -9,41 +9,39 @@ const { ItemRarities } = require('../util/Constants');
 class RoleCard extends Base {
   constructor(client, data) {
     super(client);
+
     /**
-     * Card id.
+     * Card id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Card role id.
+     * Card role id
      * @type {string}
      */
     this.role = data.roleId1;
 
     /**
-     * Card advanced role id.
+     * Card advanced role id
      * @type {?string}
      */
     this.advancedRole = data.roleId2 || null;
 
     /**
-     * Card rarity.
+     * Card rarity
      * @type {string}
      */
-    this.rarity = this.rarity = data.rarity === 'COMMON' ? ItemRarities.COMMON
-      : data.rarity === 'RARE' ? ItemRarities.RARE
-      : data.rarity === 'EPIC' ? ItemRarities.EPIC
-      : ItemRarities.LEGENDARY;
+    this.rarity = Rarities[data.rarity];
 
     /**
-     * Card perks.
+     * Card perks
      * @type {RoleCardPerk[]}
      */
     this.perks = data.allAbilities.map(ability => new RoleCardPerk(client, ability));
 
     /**
-     * Wether card is equipped.
+     * Wether card is equipped
      * @type {boolean}
      */
     this.equipped = data.equipped;

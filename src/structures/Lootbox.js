@@ -10,13 +10,13 @@ class Lootbox extends Base {
     super(client);
 
     /**
-     * Lootbox id.
+     * Lootbox id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Lootbox type.
+     * Lootbox type
      * @type {string}
      */
     this.type = data.event === 'EASTER' ? LootboxTypes.EASTER

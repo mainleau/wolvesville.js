@@ -7,21 +7,22 @@ const Base = require('./Base');
 class RoleCardPerk extends Base {
   constructor(client, data) {
     super(client);
+
     /**
-     * Perk id.
+     * Perk id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Perk tier.
+     * Perk tier
      * @type {number}
      */
     this.tier = data.tier;
 
     if(data.effectValue !== -1) {
       /**
-       * Perk efficiency.
+       * Perk efficiency
        * @type {number}
        */
       this.efficiency = data.effectValue;

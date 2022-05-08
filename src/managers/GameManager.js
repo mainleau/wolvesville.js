@@ -1,6 +1,6 @@
 const BaseManager = require('./BaseManager');
-const Routes = require('../util/Routes');
 const CustomGame = require('../structures/CustomGame');
+const Routes = require('../util/Routes');
 
 /**
  * Manages API methods for games.

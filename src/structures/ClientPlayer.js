@@ -1,7 +1,5 @@
-const fetch = require('node-fetch');
 const { Collection } = require('@discordjs/collection');
 const Player = require('./Player');
-const Routes = require('../util/Routes');
 const Role = require('./Role');
 const Announcement = require('./Announcement');
 const Inventory = require('./Inventory');
@@ -22,6 +20,7 @@ const SentFriendRequest = require('./SentFriendRequest');
 const ReceivedFriendRequest = require('./ReceivedFriendRequest');
 const LimitedCollection = require('./LimitedCollection');
 const LimitedItems = require('./LimitedItems');
+const Routes = require('../util/Routes');
 const { Genders } = require('../util/Constants');
 
 /**
@@ -131,6 +130,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<Inventory>}
    */
   async fetchInventory() {
+    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
     const data = await this.client.rest.get(Routes.INVENTORY());
     return new Inventory(this.client, data);
   }
@@ -192,6 +193,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<BattlePassSeason>}
    */
   async fetchBattlePassSeason() {
+    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
     const data = await this.client.rest.get(Routes.BATTLE_PASS_SEASON());
     return new BattlePassSeason(this.client, data);
   }
@@ -210,6 +213,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<Calendar[]>}
    */
   async fetchCalendars() {
+    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
     const response = await this.client.rest.get(Routes.CALENDARS());
     return response.map(calendar => new Calendar(this.client, calendar));
   }

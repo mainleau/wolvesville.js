@@ -1,4 +1,5 @@
 const Base = require('./Base');
+const { RewardTypes } = require('../util/Constants');
 
 /**
  * Represents a calendar reward.
@@ -7,6 +8,7 @@ const Base = require('./Base');
 class CalendarReward extends Base {
   constructor(client, data) {
     super(client);
+
     /**
      * Reward type.
      * @type {string}
@@ -17,34 +19,18 @@ class CalendarReward extends Base {
      * Reward amount.
      * @type {number}
      */
-    if(data.amount > 1) {
-      this.amount = data.amount;
-    }
+    this.amount = data.amount;
 
-    if(['AVATAR_ITEM', 'EMOJI', 'LOADING_SCREEN', 'BACKGROUND'].includes(data.type)) {
-      if(data.avatarItemIdMale) {
-        /**
-         * Male and female reward item ids.
-         * @type {Object}
-         */
-        this.itemIds = {
-          male: data.data.avatarItemIdMale,
-          female: data.data.avatarItemIdFemale
-        }
-      } else {
-        /**
-         * Reward item id.
-         * @type {string}
-         */
-        this.itemId = data.avatarItemId || data.emojiId || data.loadingScreenId || data.backgroundId;
-      }
-    }
+    this.item = this.type === RewardTypes.AVATAR_ITEM ? client.items.avatarItems.cache.get(data.avatarItemId)
+      : this.type === RewardTypes.LOADING_SCREEN ? client.items.loadingScreens.cache.get(data.loadingScreenId)
+      : this.type === RewardTypes.BACKGROUND ? client.items.backgrounds.cache.get(data.backgroundId)
+      : client.items.emojis.cache.get(data.emojiId);
 
     /**
-     * Is reward claimed.
-     * @type {boolean}
+     * Reward day.
+     * @type {number}
      */
-    this.claimed = data.claimed;
+    this.day = data.day;
   }
 }
 

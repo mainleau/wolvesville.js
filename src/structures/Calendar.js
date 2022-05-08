@@ -10,82 +10,83 @@ class Calendar extends Base {
     super(client);
 
     /**
-     * Calendar id.
+     * Calendar id
      * @type {string}
      */
     this.id = data.calendarId;
 
     /**
-     * Calendar title.
+     * Calendar title
      * @type {string}
      */
     this.title = data.title;
 
     /**
-     * Calendar description.
+     * Calendar description
      * @type {string}
      */
     this.description = data.description;
 
     /**
-     * Calendar type.
+     * Calendar type
      * @type {string}
      */
     this.type = data.gemOfferType;
 
-    /**
-     * Wether calendar is claimed.
-     * @type {boolean}
-     */
-    this.claimed = data.owned;
-    if(this.claimed) {
+    if(data.owned) {
       /**
-       * Calendar claimed timestamp.
-       * @type {string}
-       */
-      this.claimedTimestamp = new Date(data.claimTime).getTime();
-
-      /**
-       * Calendar next reward.
-       * @type {Object}
-       */
-      this.nextReward = data.nextReward;
-
-      /**
-       * Calendar next reward claim timestamp.
-       * @type {Object}
-       */
-      this.nextRewardClaimTimestamp = new Date(data.nextRewardTimestamp).getTime();
-
-      /**
-       * Calendar claimed rewards.
+       * Calendar claimed rewards
        * @type {CalendarReward[]}
        */
       this.claimedRewards = data.claimedRewards.map((reward, index) => new CalendarReward(
         client,
         Object.assign(reward, {
-          claimed: this.nextReward >= index
+          day: index
         })
       ));
+
+      /**
+       * Calendar next reward day
+       * @type {number}
+       */
+      this.nextRewardDay = data.nextRewardDay;
+
+      /**
+       * Calendar next reward claim timestamp
+       * @type {number}
+       */
+      this.nextRewardClaimTimestamp = new Date(data.claimTime).getTime();
+
+      /**
+       * Calendar claimed timestamp
+       * @type {number}
+       */
+      this.claimedTimestamp = new Date(data.claimTime).getTime();
     }
 
     /**
-     * Calendar duration.
+     * Calendar duration
      * @type {number}
      */
     this.duration = data.durationInDays;
 
     /**
-     * Calendar start timestamp.
+     * Calendar start timestamp
      * @type {number}
      */
     this.startTimestamp = new Date(data.startTime).getTime();
 
     /**
-     * Calendar end timestamp.
+     * Calendar end timestamp
      * @type {number}
      */
     this.endTimestamp = new Date(this.startTimestamp + this.duration * 24 * 60 * 60 * 1000).getTime();
+
+    /**
+     * Wether calendar is claimed
+     * @type {boolean}
+     */
+    this.claimed = data.owned;
 
     Object.defineProperty(this, '_assets', { value: {
       backgroundImage: {
@@ -103,7 +104,7 @@ class Calendar extends Base {
   }
 
   /**
-   * Calendar background image url.
+   * Calendar background image url
    * @type {string}
    * @readonly
    */
@@ -112,7 +113,7 @@ class Calendar extends Base {
   }
 
   /**
-   * Calendar icon image url.
+   * Calendar icon image url
    * @type {string}
    * @readonly
    */

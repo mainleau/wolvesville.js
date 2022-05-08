@@ -1,6 +1,6 @@
+const { Collection } = require('@discordjs/collection');
 const Base = require('./Base');
 const RankedLeaderboardPlayer = require('./RankedLeaderboardPlayer');
-const { Collection } = require('@discordjs/collection');
 
 /**
  * Represents a ranked leaderboard.
@@ -11,13 +11,13 @@ class RankedLeaderboard extends Base {
     super(client);
 
     /**
-     * Leadeboard offset.
+     * Leadeboard offset
      * @type {number}
      */
     this.offset = data.offset;
 
     /**
-     * Ranked leadeboard.
+     * Ranked leadeboard
      * @type {Collection<string, RankedLeaderboardPlayer>}
      */
     this.entries = new Collection();
@@ -33,7 +33,7 @@ class RankedLeaderboard extends Base {
     }
 
     /**
-     * Weather the player is unranked.
+     * Weather the player is unranked
      * @type {boolean}
      */
     this.unranked = data.unranked;

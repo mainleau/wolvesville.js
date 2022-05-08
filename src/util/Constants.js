@@ -21,7 +21,6 @@ exports.LootboxTypes = {
 
 exports.RewardTypes = {
   GOLD: 'GOLD',
-  ROSE: 'ROSE',
   ROSE_PACKAGE: 'ROSE_PACKAGE',
   GEM: 'GEM',
   XP: 'XP',
@@ -30,7 +29,8 @@ exports.RewardTypes = {
   LOOTBOX: 'LOOTBOX',
   PROFILE_ICON: 'PROFILE_ICON',
   EMOJI: 'EMOJI',
-  LOADING_SCREEN: 'LOADING_SCREEN'
+  LOADING_SCREEN: 'LOADING_SCREEN',
+  ROLE_CARD_ABILITY_EXCHANGE_VOUCHER: 'ROLE_CARD_ABILITY_EXCHANGE_VOUCHER'
 }
 
 exports.RankedTiers = {
@@ -63,7 +63,7 @@ exports.ItemTypes = {
   GRAVESTONE: 'GRAVESTONE'
 }
 
-exports.ItemRarities = {
+exports.Rarities = {
   COMMON: 'COMMON',
   RARE: 'RARE',
   EPIC: 'EPIC',

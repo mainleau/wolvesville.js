@@ -10,7 +10,7 @@ class ReceivedGift extends Gift {
     super(client, data);
 
     /**
-     * Gift sender.
+     * Gift sender
      * @type {GiftSender}
      */
     this.sender = new GiftSender(client, data);

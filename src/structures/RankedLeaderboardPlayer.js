@@ -9,25 +9,25 @@ class RankedLeaderboardPlayer extends LeaderboardPlayer {
     super(client);
 
     /**
-     * Player id.
+     * Player id
      * @type {string}
      */
     this.id = data.playerId;
 
     /**
-     * Player username.
+     * Player username
      * @type {string}
      */
     this.username = data.username;
 
     /**
-     * Player leaderboard skill points.
+     * Player leaderboard skill points
      * @type {number}
      */
     this.skillPoints = data.skill;
 
     /**
-     * Player leaderboard rank.
+     * Player leaderboard rank
      * @type {number}
      */
     this.rank = data.rank;

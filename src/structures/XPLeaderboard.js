@@ -17,11 +17,15 @@ class XPLeaderboard extends Base {
     });
 
     /**
-     * Xp leaderboard.
-     * @type {Collection<string, XPLeaderboardPlayer|LifetimeXPLeaderboardPlayer>}
+     * XP leaderboard
+     * @type {Collection<string, XPLeaderboardPlayer>}
      */
     this.entries = leaderboard.reduce((col, player) => col.set(player.id, player), new Collection());
 
+    /**
+     * Leaderboard update timestamp
+     * @type {string}
+     */
     this.updateTimestamp = new Date(data.nextUpdate).getTime();
   }
 }

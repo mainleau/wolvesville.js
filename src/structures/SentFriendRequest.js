@@ -11,7 +11,7 @@ class SentFriendRequest extends FriendRequest {
     super(client, data);
 
     /**
-     * Request recipient.
+     * Request recipient
      * @type {FriendRequestRecipient}
      */
     this.recipient = new FriendRequestRecipient(client, data.target);

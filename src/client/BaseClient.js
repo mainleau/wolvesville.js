@@ -20,7 +20,6 @@ class BaseClient {
     /**
      * The REST manager of the client
      * @type {RESTManager}
-     * @private
      */
     this.rest = new RESTManager(this);
   }

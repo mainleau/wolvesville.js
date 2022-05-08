@@ -11,37 +11,37 @@ class ActiveClanQuest extends ClanQuest {
     super(client, data.quest);
 
     /**
-     * Quest tier.
+     * Quest tier
      * @type {number}
      */
     this.tier = data.tier + 1;
 
     /**
-     * Quest xp.
+     * Quest xp
      * @type {number}
      */
     this.xp = data.xp;
 
     /**
-     * Quest tier start timestamp.
+     * Quest tier start timestamp
      * @type {number}
      */
     this.tierStartTimestamp = new Date(data.tierStartTime).getTime();
 
     /**
-     * Quest tier end timestamp.
+     * Quest tier end timestamp
      * @type {number}
      */
     this.tierEndTimestamp = new Date(data.tierEndTime).getTime();
 
     /**
-     * Wether quest tier completed.
+     * Wether quest tier completed
      * @type {boolean}
      */
     this.tierCompleted = data.tierFinished;
 
     /**
-     * Quest participants.
+     * Quest participants
      * @type {ClanQuestParticipant[]}
      */
     Object.defineProperty(this, 'participants', {
@@ -49,20 +49,20 @@ class ActiveClanQuest extends ClanQuest {
     });
 
     /**
-     * Required xp per quest tier.
+     * Required xp per quest tier
      * @type {number}
      */
     Object.defineProperty(this, 'requiredXp', { value: data.xpPerReward });
 
     /**
-     * Is quest duration extension claimed.
+     * Is quest duration extension claimed
      * @type {boolean}
      */
     Object.defineProperty(this, 'durationExtensionClaimed', { value: data.claimedTime });
   }
 
   /**
-   * Quest total xp.
+   * Quest total xp
    * @type {number}
    * @readonly
    */
@@ -71,7 +71,7 @@ class ActiveClanQuest extends ClanQuest {
   }
 
   /**
-   * Quest tier xp.
+   * Quest tier xp
    * @type {number}
    * @readonly
    */

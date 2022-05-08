@@ -1,7 +1,7 @@
 const CacheManager = require('./CacheManager');
-const Routes = require('../util/Routes');
 const Player = require('../structures/Player');
 const ClientPlayer = require('../structures/ClientPlayer');
+const Routes = require('../util/Routes');
 const { isUUID } = require('../util/Util');
 
 /**

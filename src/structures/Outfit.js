@@ -10,7 +10,7 @@ class Outfit extends Base {
 
     this.id = data.id;
     this.name = data.imageName;
-    this.items = data.avatarItemIds.map(id => client.items.cache.get(id));
+    this.items = data.avatarItemIds.map(id => client.items.avatarItems.cache.get(id));
     this.primaryColor = data.imagePrimaryColor;
   }
 

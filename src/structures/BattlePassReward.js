@@ -16,37 +16,34 @@ class BattlePassReward extends Base {
     this.tier = data.tier;
 
     /**
-     * Is reward claimed.
+     * Wether reward is claimed
      * @type {boolean}
      */
     this.claimed = data.claimed;
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
-    this.type = data.type === 'AVATAR_ITEM' ? RewardTypes.AVATAR_ITEM
-      : data.type === 'PROFILE_ICON' ? RewardTypes.PROFILE_ICON
-      : data.type === 'ROSE_PACKAGE' ? RewardTypes.ROSE_PACKAGE
-      : data.type === 'GOLD' ? RewardTypes.GOLD
-      : data.type === 'GEM' ? RewardTypes.GEM
-      : data.type === 'EMOJI' ? RewardTypes.EMOJI
-      : data.type === 'LOADING_SCREEN' ? RewardTypes.LOADING_SCREEN
-      : RewardTypes.LOOTBOX;
-
+    this.type = RewardTypes[data.type];
 
     /**
-     * Reward amount.
+     * Reward amount
      * @type {number}
      */
     this.amount = data.amount;
 
+    console.log(data.type)
+
     if(data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
       /**
-       * Reward item id.
+       * Reward item
        * @type {Object}
        */
-      this.item = { id: data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId }
+      this.item = client.items.avatarItems.cache.get(data.avatarItemId)
+        || client.items.rosePackages.cache.get(data.rosePackageId)
+        || client.items.emojis.cache.get(data.emojiId)
+        || client.items.profileIcons.cache.get(data.profileIconId);
     }
   }
 }

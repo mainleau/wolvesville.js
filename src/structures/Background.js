@@ -1,5 +1,5 @@
 const Base = require('./Base');
-const { ItemRarities } = require('../util/Constants');
+const { Rarities } = require('../util/Constants');
 
 /**
  * Represents a background.
@@ -9,19 +9,41 @@ class Background extends Base {
   constructor(client, data) {
     super(client);
 
+    /**
+     * Background id
+     * @type {string}
+     */
     this.id = data.id;
 
+    /**
+     * Background name
+     * @type {string}
+     */
     this.name = data.imageStoreDay.fileName.split('_').slice(0, -3).join('_');
 
-    this.rarity = data.rarity === 'COMMON' ? ItemRarities.COMMON
-      : data.rarity === 'RARE' ? ItemRarities.RARE
-      : data.rarity === 'EPIC' ? ItemRarities.EPIC
-      : ItemRarities.LEGENDARY;
+    /**
+     * Background rarity
+     * @type {string}
+     */
+    this.rarity = Rarities[data.rarity];
 
+    /**
+     * Background day color
+     * @type {string}
+     */
     Object.defineProperty(this, 'dayColor', { value: data.backgroundColorDay });
+
+    /**
+     * Background night color
+     * @type {string}
+     */
     Object.defineProperty(this, 'nightColor', { value: data.backgroundColorNight });
   }
 
+  /**
+   * Get background image url.
+   * @returns {string}
+   */
   imageURL({ night = false, large = false, zoom } = {}) {
     if(typeof large !== 'boolean' || typeof night !== 'boolean') {
       throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');

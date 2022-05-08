@@ -23,50 +23,50 @@ class Client extends BaseClient {
     Object.defineProperty(this, 'token', { writable: true });
 
     /**
-     * The player manager of the client.
+     * The player manager of the client
      * @type {PlayerManager}
      */
     this.players = new PlayerManager(this);
 
     /**
-     * The friend manager of the client.
+     * The friend manager of the client
      * @type {FriendManager}
      */
     this.friends = new FriendManager(this);
 
     /**
-     * The clan manager of the client.
+     * The clan manager of the client
      * @type {ClanManager}
      */
     this.clans = new ClanManager(this);
 
     /**
-     * The leaderboard manager of the client.
+     * The leaderboard manager of the client
      * @type {LeaderboardManager}
      */
     this.leaderboards = new LeaderboardManager(this);
 
     /**
-     * The game manager of the client.
+     * The game manager of the client
      * @type {GameManager}
      */
     this.games = new GameManager(this);
 
     /**
-     * The item manager of the client.
+     * The item manager of the client
      * @type {ItemManager}
      */
     this.items = new ItemManager(this);
 
     /**
-     * Ready timestamp.
+     * Ready timestamp
      * @type {?number}
      */
     this.readyTimestamp = null;
   }
 
   /**
-   * Time at which the client was ready.
+   * Time at which the client was ready
    * @type {?Date}
    * @readonly
    */
@@ -75,7 +75,7 @@ class Client extends BaseClient {
   }
 
   /**
-   * How long it has been since the client was ready.
+   * How long it has been since the client was ready
    * @type {?number}
    * @readonly
    */
@@ -84,7 +84,7 @@ class Client extends BaseClient {
   }
 
   /**
-   * Is client token expired.
+   * Wether client token is expired
    * @type {boolean}
    * @readonly
    */
@@ -97,7 +97,7 @@ class Client extends BaseClient {
   }
 
   /**
-   * Login.
+   * Logs the client in.
    * @param {Object} credentials Credentials
    * @param {string} credentials.email Email
    * @param {string} credentials.password Password

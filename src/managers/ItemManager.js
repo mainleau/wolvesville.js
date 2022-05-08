@@ -8,6 +8,7 @@ const LoadingScreen = require('../structures/LoadingScreen');
 const Emoji = require('../structures/Emoji');
 const Talisman = require('../structures/Talisman');
 const Offer = require('../structures/Offer');
+const RosePackage = require('../structures/RosePackage');
 const Routes = require('../util/Routes');
 
 /**
@@ -25,6 +26,7 @@ class ItemManager extends BaseManager {
     this.emojis = new CacheManager(this);
     this.talismans = new CacheManager(this);
     this.offers = new CacheManager(this);
+    this.rosePackages = new CacheManager(this);
   }
 
   /**
@@ -55,7 +57,10 @@ class ItemManager extends BaseManager {
     const offers = response.gemOffers.map(offer => new Offer(this.client, offer));
     offers.reduce((col, offer) => col.set(offer.name, this.offers._add(offer)), new Collection());
 
-    return { avatarItems, profileIcons, backgrounds, loadingScreens, emojis, talismans, offers };
+    const rosePackages = response.rosePackages.map(rosePackage => new RosePackage(this.client, rosePackage));
+    rosePackages.reduce((col, rosePackage) => col.set(rosePackage.id, this.rosePackages._add(rosePackage)), new Collection());
+
+    return { avatarItems, profileIcons, backgrounds, loadingScreens, emojis, talismans, offers, rosePackages };
   }
 
 }

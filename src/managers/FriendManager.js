@@ -1,7 +1,7 @@
 const { Collection } = require('@discordjs/collection');
 const CacheManager = require('./CacheManager');
-const Routes = require('../util/Routes');
 const Friend = require('../structures/Friend');
+const Routes = require('../util/Routes');
 
 /**
  * Manages API methods for Friends.

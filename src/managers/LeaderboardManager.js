@@ -1,11 +1,11 @@
 const BaseManager = require('./BaseManager');
-const Routes = require('../util/Routes');
 const FriendsXPLeaderboard = require('../structures/FriendsXPLeaderboard');
 const DailyXPLeaderboard = require('../structures/DailyXPLeaderboard');
 const WeeklyXPLeaderboard = require('../structures/WeeklyXPLeaderboard');
 const MonthlyXPLeaderboard = require('../structures/MonthlyXPLeaderboard');
 const LifetimeXPLeaderboard = require('../structures/LifetimeXPLeaderboard');
 const RankedLeaderboard = require('../structures/RankedLeaderboard');
+const Routes = require('../util/Routes');
 
 /**
  * Manages API methods for Leaderboards.

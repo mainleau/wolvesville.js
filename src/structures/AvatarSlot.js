@@ -10,13 +10,13 @@ class AvatarSlot extends Base {
     super(client);
 
     /**
-     * Slot number.
+     * Slot number
      * @type {number}
      */
     this.slot = data.slot;
 
     /**
-     * Avatar.
+     * Avatar
      * @type {Avatar}
      */
     this.avatar = new Avatar(client, data);

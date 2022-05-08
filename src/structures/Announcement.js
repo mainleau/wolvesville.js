@@ -1,6 +1,6 @@
 const Base = require('./Base');
 const AnnouncementAuthor = require('./AnnouncementAuthor');
-const Attachment = require('./Attachment');
+const AnnouncementAttachment = require('./AnnouncementAttachment');
 
 /**
  * Represents an announcement.
@@ -11,25 +11,25 @@ class Announcement extends Base {
     super(client);
 
     /**
-     * Announcement author.
+     * Announcement author
      * @type {AnnouncementAuthor}
      */
     this.author = new AnnouncementAuthor(client, data.author);
 
     /**
-     * Announcement content.
+     * Announcement content
      * @type {string}
      */
     this.content = data.content;
 
     /**
-     * Announcement attachments.
+     * Announcement attachments
      * @type {Attachment[]}
      */
-    this.attachments = data.attachments.map(attachment => new Attachment(client, attachment));
+    this.attachments = data.attachments.map(attachment => new AnnouncementAttachment(client, attachment));
 
     /**
-     * Announcement created timestamp.
+     * Announcement created timestamp
      * @type {number}
      */
     this.createdTimestamp = new Date(data.timestamp).getTime();

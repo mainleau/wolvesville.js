@@ -9,73 +9,73 @@ class Avatar extends Base {
     super(client);
 
     /**
-     * Avatar skin color.
+     * Avatar skin color
      * @type {number}
      */
     this.skinColor = parseInt(data.skinColor.slice(6)) - 1;
 
     /**
-     * Avatar eyes.
+     * Avatar eyes
      * @type {AvatarItem}
      */
     this.eyes = this.client.items.avatarItems.cache.get(data.avatarEyesId);
 
     /**
-     * Avatar clothes.
+     * Avatar clothes
      * @type {AvatarItem}
      */
     this.clothes = this.client.items.avatarItems.cache.get(data.avatarClothesBodyId);
 
     /**
-     * Avatar gravestone.
+     * Avatar gravestone
      * @type {AvatarItem}
      */
     this.gravestone = this.client.items.avatarItems.cache.get(data.gravestoneId);
 
     /**
-     * Avatar hat.
+     * Avatar hat
      * @type {?AvatarItem}
      */
     this.hat = this.client.items.avatarItems.cache.get(data.avatarHatId) || null;
 
     /**
-     * Avatar hair.
+     * Avatar hair
      * @type {?AvatarItem}
      */
     this.hair = this.client.items.avatarItems.cache.get(data.avatarHairId) || null;
 
     /**
-     * Avatar glasses.
+     * Avatar glasses
      * @type {?AvatarItem}
      */
     this.glasses = this.client.items.avatarItems.cache.get(data.avatarGlassesId) || null;
 
     /**
-     * Avatar mouth.
+     * Avatar mouth
      * @type {?AvatarItem}
      */
     this.mouth = this.client.items.avatarItems.cache.get(data.avatarMouthId) || null;
 
     /**
-     * Avatar mask.
+     * Avatar mask
      * @type {?AvatarItem}
      */
     this.mask = this.client.items.avatarItems.cache.get(data.avatarMaskId) || null;
 
     /**
-     * Avatar badge.
+     * Avatar badge
      * @type {?AvatarItem}
      */
     this.badge = this.client.items.avatarItems.cache.get(data.avatarBadgeId) || null;
 
     /**
-     * Avatar foreground.
+     * Avatar foreground
      * @type {?AvatarItem}
      */
     this.foreground = this.client.items.avatarItems.cache.get(data.avatarFrontId) || null;
 
     /**
-     * Avatar background.
+     * Avatar background
      * @type {?AvatarItem}
      */
     this.background = this.client.items.avatarItems.cache.get(data.avatarBackId) || null;

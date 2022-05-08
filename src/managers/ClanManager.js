@@ -1,8 +1,8 @@
 const CacheManager = require('./CacheManager');
-const Routes = require('../util/Routes');
 const ClanQuerier = require('../structures/ClanQuerier');
 const Clan = require('../structures/Clan');
 const ClientClan = require('../structures/ClientClan');
+const Routes = require('../util/Routes');
 const { isUUID } = require('../util/Util');
 
 /**
