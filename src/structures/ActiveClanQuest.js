@@ -11,14 +11,8 @@ class ActiveClanQuest extends ClanQuest {
     super(client, data.quest);
 
     /**
-     * Is quest tier completed.
-     * @type {boolean}
-     */
-    this.tierCompleted = data.tierFinished;
-
-    /**
-     * Clan tier.
-     * @type {boolean}
+     * Quest tier.
+     * @type {number}
      */
     this.tier = data.tier + 1;
 
@@ -27,12 +21,6 @@ class ActiveClanQuest extends ClanQuest {
      * @type {number}
      */
     this.xp = data.xp;
-
-    /**
-     * Required xp per quest tier.
-     * @type {number}
-     */
-    this.requiredXp = data.xpPerReward;
 
     /**
      * Quest tier start timestamp.
@@ -47,16 +35,30 @@ class ActiveClanQuest extends ClanQuest {
     this.tierEndTimestamp = new Date(data.tierEndTime).getTime();
 
     /**
-     * Quest participants.
-     * @type {Array<ClanQuestParticipant>}
+     * Wether quest tier completed.
+     * @type {boolean}
      */
-    this.participants = data.participants.map(participant => new ClanQuestParticipant(client, participant));
+    this.tierCompleted = data.tierFinished;
+
+    /**
+     * Quest participants.
+     * @type {ClanQuestParticipant[]}
+     */
+    Object.defineProperty(this, 'participants', {
+      value: data.participants.map(participant => new ClanQuestParticipant(client, participant))
+    });
+
+    /**
+     * Required xp per quest tier.
+     * @type {number}
+     */
+    Object.defineProperty(this, 'requiredXp', { value: data.xpPerReward });
 
     /**
      * Is quest duration extension claimed.
      * @type {boolean}
      */
-    this.durationExtensionClaimed = data.claimedTime;
+    Object.defineProperty(this, 'durationExtensionClaimed', { value: data.claimedTime });
   }
 
   /**
