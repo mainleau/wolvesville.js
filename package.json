@@ -2,32 +2,40 @@
   "name": "wolvesville.js",
   "version": "1.2.5",
   "description": "Javascript library for the Wolvesville API.",
+  "author": "MainLeau",
+  "license": "MIT",
   "main": "./src/index.js",
+  "scripts": {
+    "docs": "docgen --source ./src --custom ./docs/index.yml --output ./docs/docs.json"
+  },
+  "keywords": [
+    "wolvesville",
+    "api",
+    "client",
+    "node"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mainleau/wolvesville.js.git"
   },
-  "keywords": [
-    "wolvesville",
-    "node",
-    "api"
-  ],
-  "author": "MainLeau",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mainleau/wolvesville.js/issues"
   },
-  "homepage": "https://github.com/mainleau/wolvesville.js#readme",
+  "homepage": "https://wolvesvillejs.github.io/website",
   "dependencies": {
     "@discordjs/collection": "^0.5.0",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
+    "@discordjs/docgen": "^0.11.1",
     "dotenv": "^16.0.0",
     "jsdoc": "^3.6.10",
     "path": "^0.12.7",
     "process": "^0.11.10",
     "terser-webpack-plugin": "^5.3.1",
     "webpack-cli": "^4.9.2"
+  },
+  "engines": {
+    "node": ">=16.9.0"
   }
 }
