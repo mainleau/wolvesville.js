@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { Collection } = require('@discordjs/Collection');
+const { Collection } = require('@discordjs/collection');
 const Player = require('./Player');
 const Routes = require('../util/Routes');
 const Role = require('./Role');
