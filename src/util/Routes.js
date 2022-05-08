@@ -22,6 +22,7 @@ module.exports = {
   FRIEND_REQUESTS: () => '/friendRequests/pending',
   CUSTOM_GAME_OWNED_ROLES: () => '/customGames/ownRoles',
   LIMITED_OFFERS: () => '/billing/rotatingLimitedOffers',
+  ABILITY_EXCHANGE_VOUCHER_COUNT: () => '/roleCards/abilityExchangeVouchers',
 
   FRIENDS: () => '/friends',
 

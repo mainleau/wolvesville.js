@@ -271,6 +271,15 @@ class ClientPlayer extends Player {
    });
  }
 
+ /**
+  * Fetch ability exchange voucher count.
+  * @returns {number}
+  */
+ async fetchAbilityExchangeVoucherCount() {
+   const response = await this.client.rest.get(Routes.ABILITY_EXCHANGE_VOUCHER_COUNT());
+   return response.voucherCount;
+ }
+
 }
 
 module.exports = ClientPlayer;
