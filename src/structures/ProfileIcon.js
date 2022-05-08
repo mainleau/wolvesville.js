@@ -37,11 +37,11 @@ class ProfileIcon extends Base {
       });
     }
 
+    /**
+     * Wether profile icon is purchasable
+     * @type {string}
+     */
     Object.defineProperty(this, 'purchasable', {
-      /**
-       * Wether profile icon is purchasable
-       * @type {string}
-       */
       value: data.isPurchasable & data.showInInventory
     });
 
