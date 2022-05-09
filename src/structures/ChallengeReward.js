@@ -15,7 +15,9 @@ class ChallengeReward extends Base {
      * Reward type.
      * @type {number}
      */
-    this.type = data.rewardInXp ? RewardTypes.XP : data.rewardInGems ? RewardTypes.GEMS : RewardTypes.CARDS;
+    this.type = data.rewardInXp ? RewardTypes.XP
+      : data.rewardInGems ? RewardTypes.GEM
+      : RewardTypes.CARDS;
 
     /**
      * Reward amount.
