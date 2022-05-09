@@ -1,13 +1,11 @@
+'use strict';
+
 const XPLeaderboard = require('./XPLeaderboard');
 
 /**
  * Monthly xp leaderboard.
  * @extends {XPLeaderboardPlayer}
  */
-class MonthlyXPLeaderboard extends XPLeaderboard {
-  constructor(client, data) {
-    super(client, data);
-  }
-}
+class MonthlyXPLeaderboard extends XPLeaderboard {}
 
 module.exports = MonthlyXPLeaderboard;

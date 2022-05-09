@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Manages the API methods of a data model.
  */

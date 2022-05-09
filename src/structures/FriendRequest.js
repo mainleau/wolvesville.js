@@ -1,6 +1,6 @@
+'use strict';
+
 const Base = require('./Base');
-const FriendRequestSender = require('./FriendRequestSender');
-const FriendRequestRecipient = require('./FriendRequestRecipient');
 
 /**
  * Represents a friend request.

@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const Lootbox = require('./Lootbox');
 
@@ -43,7 +45,9 @@ class Inventory extends Base {
      * Profile icons.
      * @type {Array}
      */
-    this.profileIcons = data.ownedProfileIcons.map(profileIcon => client.items.profileIcons.cache.get(profileIcon.profileIconId));
+    this.profileIcons = data.ownedProfileIcons.map(profileIcon =>
+      client.items.profileIcons.cache.get(profileIcon.profileIconId),
+    );
 
     /**
      * Backgrounds.

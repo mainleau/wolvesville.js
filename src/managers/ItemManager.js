@@ -1,14 +1,16 @@
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
 const BaseManager = require('./BaseManager');
 const CacheManager = require('./CacheManager');
 const AvatarItem = require('../structures/AvatarItem');
-const ProfileIcon = require('../structures/ProfileIcon');
 const Background = require('../structures/Background');
-const LoadingScreen = require('../structures/LoadingScreen');
 const Emoji = require('../structures/Emoji');
-const Talisman = require('../structures/Talisman');
+const LoadingScreen = require('../structures/LoadingScreen');
 const Offer = require('../structures/Offer');
+const ProfileIcon = require('../structures/ProfileIcon');
 const RosePackage = require('../structures/RosePackage');
+const Talisman = require('../structures/Talisman');
 const Routes = require('../util/Routes');
 
 /**
@@ -40,13 +42,22 @@ class ItemManager extends BaseManager {
     avatarItems.reduce((col, item) => col.set(item.id, this.avatarItems._add(item)), new Collection());
 
     const profileIcons = response.profileIcons.map(profileIcon => new ProfileIcon(this.client, profileIcon));
-    profileIcons.reduce((col, profileIcon) => col.set(profileIcon.id, this.profileIcons._add(profileIcon)), new Collection());
+    profileIcons.reduce(
+      (col, profileIcon) => col.set(profileIcon.id, this.profileIcons._add(profileIcon)),
+      new Collection(),
+    );
 
     const backgrounds = response.backgrounds.map(background => new Background(this.client, background));
-    backgrounds.reduce((col, background) => col.set(background.id, this.backgrounds._add(background)), new Collection());
+    backgrounds.reduce(
+      (col, background) => col.set(background.id, this.backgrounds._add(background)),
+      new Collection(),
+    );
 
     const loadingScreens = response.loadingScreens.map(loadingScreen => new LoadingScreen(this.client, loadingScreen));
-    loadingScreens.reduce((col, loadingScreen) => col.set(loadingScreen.id, this.loadingScreens._add(loadingScreen)), new Collection());
+    loadingScreens.reduce(
+      (col, loadingScreen) => col.set(loadingScreen.id, this.loadingScreens._add(loadingScreen)),
+      new Collection(),
+    );
 
     const emojis = response.emojis.map(emoji => new Emoji(this.client, emoji));
     emojis.reduce((col, emoji) => col.set(emoji.id, this.emojis._add(emoji)), new Collection());
@@ -58,11 +69,13 @@ class ItemManager extends BaseManager {
     offers.reduce((col, offer) => col.set(offer.name, this.offers._add(offer)), new Collection());
 
     const rosePackages = response.rosePackages.map(rosePackage => new RosePackage(this.client, rosePackage));
-    rosePackages.reduce((col, rosePackage) => col.set(rosePackage.id, this.rosePackages._add(rosePackage)), new Collection());
+    rosePackages.reduce(
+      (col, rosePackage) => col.set(rosePackage.id, this.rosePackages._add(rosePackage)),
+      new Collection(),
+    );
 
     return { avatarItems, profileIcons, backgrounds, loadingScreens, emojis, talismans, offers, rosePackages };
   }
-
 }
 
 module.exports = ItemManager;

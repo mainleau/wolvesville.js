@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { Rarities } = require('../util/Constants');
 
@@ -45,19 +47,18 @@ class Background extends Base {
    * @returns {string}
    */
   imageURL({ night = false, large = false, zoom } = {}) {
-    if(typeof large !== 'boolean' || typeof night !== 'boolean') {
+    if (typeof large !== 'boolean' || typeof night !== 'boolean') {
       throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
     }
-    if(zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
+    if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
     var url = `${this.client.options.http.cdn}/backgrounds/${this.name}`;
     url += `_background_${large ? 'large' : 'small'}`;
     url += `_${night ? 'night' : 'day'}`;
-    if(zoom) url += `@${zoom}x`;
+    if (zoom) url += `@${zoom}x`;
 
     return `${url}.png`;
   }
-
 }
 
 module.exports = Background;

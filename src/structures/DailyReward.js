@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -24,7 +26,7 @@ class DailyReward extends Base {
      * Reward day.
      * @type {number}
      */
-    if(this.type === 'AVATAR_ITEM') {
+    if (this.type === 'AVATAR_ITEM') {
       /**
        * Item id.
        * @type {?string}
@@ -38,7 +40,7 @@ class DailyReward extends Base {
       this.amount = data.amount;
     }
 
-    if(['TALISMAN', 'ROLE_CARD'].includes(this.type)) {
+    if (['TALISMAN', 'ROLE_CARD'].includes(this.type)) {
       /**
        * Is an unknown item.
        * @type {?boolean}

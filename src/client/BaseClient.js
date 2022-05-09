@@ -1,3 +1,5 @@
+'use strict';
+
 const RESTManager = require('../rest/RESTManager');
 const Options = require('../util/Options');
 const Util = require('../util/Util');
@@ -7,7 +9,7 @@ const Util = require('../util/Util');
  */
 class BaseClient {
   constructor(options = {}) {
-    if(typeof options !== 'object' || options === null) {
+    if (typeof options !== 'object' || options === null) {
       throw new Error('INVALID_OPTIONS');
     }
 

@@ -1,5 +1,7 @@
+'use strict';
+
+const Avatar = require('./Avatar');
 const Base = require('./Base');
-const Avatar = require('./Avatar')
 
 /**
  * Represents an avatar slot.

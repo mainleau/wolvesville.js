@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const CustomGameHost = require('./CustomGameHost');
 
@@ -26,7 +28,7 @@ class CustomGame extends Base {
      * @type {CustomGameHost}
      */
     this.host = new CustomGameHost(client, {
-      username: data.hostName
+      username: data.hostName,
     });
 
     /**
@@ -61,8 +63,8 @@ class CustomGame extends Base {
       nightDuration: data.nightDurationInMs,
       dayDiscussionDuration: data.dayDiscussionDurationInMs,
       dayVoteDuration: data.dayVotingDurationInMs,
-      voiceEnabled: data.voiceEnabled
-    }
+      voiceEnabled: data.voiceEnabled,
+    };
   }
 }
 

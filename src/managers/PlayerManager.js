@@ -1,6 +1,8 @@
+'use strict';
+
 const CacheManager = require('./CacheManager');
-const Player = require('../structures/Player');
 const ClientPlayer = require('../structures/ClientPlayer');
+const Player = require('../structures/Player');
 const Routes = require('../util/Routes');
 const { isUUID } = require('../util/Util');
 
@@ -9,10 +11,6 @@ const { isUUID } = require('../util/Util');
  * @extends {BaseManager}
  */
 class PlayerManager extends CacheManager {
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Fetch partial player by its username.
    * @param {string} username Player username
@@ -20,8 +18,8 @@ class PlayerManager extends CacheManager {
    * @private
    */
   async #fetchPartialByUsername(username) {
-    const response = await this.client.rest.get(Routes.PARTIAL_PLAYER_BY_USERNAME(), { query: { username }})
-    if(!response.length) throw new Error('PLAYER_NOT_FOUND');
+    const response = await this.client.rest.get(Routes.PARTIAL_PLAYER_BY_USERNAME(), { query: { username } });
+    if (!response.length) throw new Error('PLAYER_NOT_FOUND');
     return response[0];
   }
 
@@ -32,16 +30,15 @@ class PlayerManager extends CacheManager {
    * @returns {Promise<Player|ClientPlayer>}
    */
   async fetchByUsername(username, options = {}) {
-
-    if(!options.force) {
+    if (!options.force) {
       const existing = this.cache.find(player => player.username === username);
-      if(existing) return existing;
+      if (existing) return existing;
     }
 
-    if(!username || typeof username !== 'string') throw new Error('INVALID_PLAYER_USERNAME_FORMAT');
-    if(username.length < 3) throw new Error('PLAYER_USERNAME_TOO_SHORT');
+    if (!username || typeof username !== 'string') throw new Error('INVALID_PLAYER_USERNAME_FORMAT');
+    if (username.length < 3) throw new Error('PLAYER_USERNAME_TOO_SHORT');
     const response = await this.#fetchPartialByUsername(username);
-    return await this.fetchById(response.id);
+    return this.fetchById(response.id);
   }
 
   /**
@@ -51,20 +48,18 @@ class PlayerManager extends CacheManager {
    * @returns {Promise<Player|ClientPlayer>}
    */
   async fetchById(id, options = {}) {
-
-    if(!options.force) {
+    if (!options.force) {
       const existing = this.cache.get(id);
-      if(existing) return existing;
+      if (existing) return existing;
     }
 
-    if(!id || typeof id !== 'string' || !isUUID(id)) throw new Error('INVALID_PLAYER_ID_FORMAT');
+    if (!id || typeof id !== 'string' || !isUUID(id)) throw new Error('INVALID_PLAYER_ID_FORMAT');
     const response = await this.client.rest.get(Routes.PLAYER(id));
-    if(response.code === 204) throw new Error('PLAYER_NOT_FOUND');
+    if (response.code === 204) throw new Error('PLAYER_NOT_FOUND');
 
     const data = response.xpTotal ? new ClientPlayer(this.client, response) : new Player(this.client, response);
     return this._add(data);
   }
-
 }
 
 module.exports = PlayerManager;

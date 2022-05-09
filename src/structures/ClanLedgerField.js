@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const ClanLedgerFieldPlayer = require('./ClanLedgerFieldPlayer');
 
@@ -38,9 +40,7 @@ class ClanLedgerField extends Base {
      * @type {number}
      */
     this.creationTimestamp = new Date(data.creationTime).getTime();
-
   }
-
 }
 
 module.exports = ClanLedgerField;

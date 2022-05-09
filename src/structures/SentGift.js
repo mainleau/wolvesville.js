@@ -1,3 +1,5 @@
+'use strict';
+
 const Gift = require('./Gift');
 const GiftRecipient = require('./GiftRecipient');
 

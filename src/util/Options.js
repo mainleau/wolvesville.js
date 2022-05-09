@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Options for a client.
  * @typedef {Object} ClientOptions
@@ -12,19 +14,18 @@
  * @property {string} [cdn='https://cdn.wolvesville.com'] Base URL of the CDN
  */
 
- /**
-  * API options
-  * @typedef {Object} APIOptions
-  * @property {string} [auth='https://api-auth.wolvesville.com'] Base URL of the auth API
-  * @property {string} [core='https://api-core.wolvesville.com'] Base URL of the core API
-  * @property {string} [game='https://api-game.wolvesville.com'] Base URL of the game API
-  */
+/**
+ * API options
+ * @typedef {Object} APIOptions
+ * @property {string} [auth='https://api-auth.wolvesville.com'] Base URL of the auth API
+ * @property {string} [core='https://api-core.wolvesville.com'] Base URL of the core API
+ * @property {string} [game='https://api-game.wolvesville.com'] Base URL of the game API
+ */
 
 /**
  * Contains various utilities for client options.
  */
 class Options {
-
   /**
    * The default client options.
    * @returns {ClientOptions}
@@ -37,13 +38,12 @@ class Options {
         api: {
           auth: 'https://api-auth.wolvesville.com',
           core: 'https://api-core.wolvesville.com',
-          game: 'https://api-game.wolvesville.com'
+          game: 'https://api-game.wolvesville.com',
         },
-        cdn: 'https://cdn.wolvesville.com'
-      }
-    }
+        cdn: 'https://cdn.wolvesville.com',
+      },
+    };
   }
-
 }
 
 module.exports = Options;

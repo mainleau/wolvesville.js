@@ -1,3 +1,5 @@
+'use strict';
+
 const BasePlayer = require('./BasePlayer');
 
 /**
@@ -48,12 +50,14 @@ class FriendRequestPlayer extends BasePlayer {
      * Player last online timestamp.
      * @type {number}
      */
-    Object.defineProperty(this, 'equippedItems', { value: {
-      icon: {
-        id: data.profileIconId || null,
-        color: data.profileIconColor || null
-      }
-    }});
+    Object.defineProperty(this, 'equippedItems', {
+      value: {
+        icon: {
+          id: data.profileIconId || null,
+          color: data.profileIconColor || null,
+        },
+      },
+    });
   }
 
   /**
@@ -73,7 +77,6 @@ class FriendRequestPlayer extends BasePlayer {
   get online() {
     return this.lastOnlineTimestamp + 10 * 60 * 1000 > Date.now();
   }
-
 }
 
 module.exports = FriendRequestPlayer;

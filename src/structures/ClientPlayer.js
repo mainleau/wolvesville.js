@@ -1,27 +1,28 @@
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
-const Player = require('./Player');
-const Role = require('./Role');
 const Announcement = require('./Announcement');
-const Inventory = require('./Inventory');
-const EquippedItems = require('./EquippedItems');
-const FriendReferralReward = require('./FriendReferralReward');
+const BattlePassSeason = require('./BattlePassSeason');
+const Calendar = require('./Calendar');
+const Challenge = require('./Challenge');
 const ClanRequest = require('./ClanRequest');
 const DailyRewards = require('./DailyRewards');
-const ClientClan = require('./ClientClan');
-const Challenge = require('./Challenge');
-const BattlePassSeason = require('./BattlePassSeason');
+const EquippedItems = require('./EquippedItems');
+const FriendReferralReward = require('./FriendReferralReward');
 const GoldenWheelReward = require('./GoldenWheelReward');
-const RankedSeason = require('./RankedSeason');
-const Calendar = require('./Calendar');
-const SentGift = require('./SentGift');
-const ReceivedGift = require('./ReceivedGift');
-const LimitedOffer = require('./LimitedOffer');
-const SentFriendRequest = require('./SentFriendRequest');
-const ReceivedFriendRequest = require('./ReceivedFriendRequest');
+const Inventory = require('./Inventory');
 const LimitedCollection = require('./LimitedCollection');
 const LimitedItems = require('./LimitedItems');
-const Routes = require('../util/Routes');
+const LimitedOffer = require('./LimitedOffer');
+const Player = require('./Player');
+const RankedSeason = require('./RankedSeason');
+const ReceivedFriendRequest = require('./ReceivedFriendRequest');
+const ReceivedGift = require('./ReceivedGift');
+const Role = require('./Role');
+const SentFriendRequest = require('./SentFriendRequest');
+const SentGift = require('./SentGift');
 const { Genders } = require('../util/Constants');
+const Routes = require('../util/Routes');
 
 /**
  * Represents a client player.
@@ -47,18 +48,16 @@ class ClientPlayer extends Player {
      * Player gender.
      * @type {string}
      */
-    Object.defineProperty(this, 'gender', { value:
-      data.gender === 'MALE' ? Genders.MALE
-        : data.gender === 'FEMALE' ? Genders.FEMALE
-        : Genders.OTHER
+    Object.defineProperty(this, 'gender', {
+      value: data.gender === 'MALE' ? Genders.MALE : data.gender === 'FEMALE' ? Genders.FEMALE : Genders.OTHER,
     });
 
     this.equippedItems.background = {
-      id: data.equippedBackgroundId || null
-    }
+      id: data.equippedBackgroundId || null,
+    };
     this.equippedItems.loadingScreen = {
-      id: data.equippedLoadingScreenId || null
-    }
+      id: data.equippedLoadingScreenId || null,
+    };
 
     this.stats.roles = Object.keys(this._roleStats).map(roleId => {
       const role = new Role(client, { id: roleId });
@@ -71,20 +70,21 @@ class ClientPlayer extends Player {
      * Player last ban.
      * @type {Object}
      */
-    Object.defineProperty(this, 'lastBan', { value:
-      data.bannedUntilTime ? {
-        expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
-        reason: data.banReason,
-        message: data.banReasonMsg
-      } : null
+    Object.defineProperty(this, 'lastBan', {
+      value: data.bannedUntilTime
+        ? {
+            expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
+            reason: data.banReason,
+            message: data.banReasonMsg,
+          }
+        : null,
     });
 
     this.options.clanChatNotificationsDisabled = data.notificationsDisabledClanChat;
     this.options.clanActionNotificationsDisabled = data.notificationsDisabledClanActions;
     this.options.clanInvitationsDisabled = data.noClanInvite;
 
-
-    if(data.deletionTime) {
+    if (data.deletionTime) {
       /**
        * Player deletion timestamp.
        * @type {number}
@@ -99,10 +99,11 @@ class ClientPlayer extends Player {
    * @readonly
    */
   static get levelTiers() {
-    return [1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130,
-    140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270,
-    280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410,
-    420, 500, 600, 700, 800, 900, 1000];
+    return [
+      1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240,
+      250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 500, 600, 700, 800, 900,
+      1000,
+    ];
   }
 
   /**
@@ -119,7 +120,7 @@ class ClientPlayer extends Player {
    * @returns {Promise<EquippedItems>}
    */
   async fetchEquippedItems() {
-    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
     const data = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
     return new EquippedItems(this.client, data);
@@ -130,7 +131,7 @@ class ClientPlayer extends Player {
    * @returns {Promise<Inventory>}
    */
   async fetchInventory() {
-    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
     const data = await this.client.rest.get(Routes.INVENTORY());
     return new Inventory(this.client, data);
@@ -151,11 +152,15 @@ class ClientPlayer extends Player {
    */
   async fetchFriendReferralRewards() {
     const data = await this.client.rest.get(Routes.FRIEND_REFERRAL_REWARDS());
-    return data.friendInvitationRewards.map((reward, index) => {
-      return new FriendReferralReward(this.client, Object.assign(reward, {
-        claimed: data.finished > index
-      }));
-    });
+    return data.friendInvitationRewards.map(
+      (reward, index) =>
+        new FriendReferralReward(
+          this.client,
+          Object.assign(reward, {
+            claimed: data.finished > index,
+          }),
+        ),
+    );
   }
 
   /**
@@ -184,8 +189,8 @@ class ClientPlayer extends Player {
     const data = await this.client.rest.get(Routes.CHALLENGES());
     return {
       daily: data.dailyChallengeProgresses.map(challenge => new Challenge(this.client, challenge)),
-      weekly: data.weeklyChallengeProgresses.map(challenge => new Challenge(this.client, challenge))
-    }
+      weekly: data.weeklyChallengeProgresses.map(challenge => new Challenge(this.client, challenge)),
+    };
   }
 
   /**
@@ -193,7 +198,7 @@ class ClientPlayer extends Player {
    * @returns {Promise<BattlePassSeason>}
    */
   async fetchBattlePassSeason() {
-    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
     const data = await this.client.rest.get(Routes.BATTLE_PASS_SEASON());
     return new BattlePassSeason(this.client, data);
@@ -213,7 +218,7 @@ class ClientPlayer extends Player {
    * @returns {Promise<Calendar[]>}
    */
   async fetchCalendars() {
-    if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
     const response = await this.client.rest.get(Routes.CALENDARS());
     return response.map(calendar => new Calendar(this.client, calendar));
@@ -244,11 +249,11 @@ class ClientPlayer extends Player {
   async fetchFriendRequests() {
     const response = await this.client.rest.get(Routes.FRIEND_REQUESTS());
 
-    const data = response.map(request => {
-      return request.originator.id === this.id
+    const data = response.map(request =>
+      request.originator.id === this.id
         ? new SentFriendRequest(this.client, request)
-        : new ReceivedFriendRequest(this.client, request);
-    });
+        : new ReceivedFriendRequest(this.client, request),
+    );
     return data.reduce((col, request) => col.set(request.id, request), new Collection());
   }
 
@@ -261,30 +266,31 @@ class ClientPlayer extends Player {
     return response.map(id => new Role(this.client, { id }));
   }
 
- /**
-  * Fetch limited offers.
-  * @returns {Promise<LimitedOffer[]>}
-  */
- async fetchLimitedOffers() {
-  if(!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+  /**
+   * Fetch limited offers.
+   * @returns {Promise<LimitedOffer[]>}
+   */
+  async fetchLimitedOffers() {
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
-  const response = await this.client.rest.get(Routes.LIMITED_OFFERS());
-   return response.map(offer => {
-     return offer.type === 'AVATAR_ITEMS' ? new LimitedItems(this.client, offer)
-       : offer.type.endsWith('OUTFITS') ? new LimitedCollection(this.client, offer)
-       : new LimitedOffer(this.client, offer);
-   });
- }
+    const response = await this.client.rest.get(Routes.LIMITED_OFFERS());
+    return response.map(offer =>
+      offer.type === 'AVATAR_ITEMS'
+        ? new LimitedItems(this.client, offer)
+        : offer.type.endsWith('OUTFITS')
+        ? new LimitedCollection(this.client, offer)
+        : new LimitedOffer(this.client, offer),
+    );
+  }
 
- /**
-  * Fetch ability exchange voucher count.
-  * @returns {number}
-  */
- async fetchAbilityExchangeVoucherCount() {
-   const response = await this.client.rest.get(Routes.ABILITY_EXCHANGE_VOUCHER_COUNT());
-   return response.voucherCount;
- }
-
+  /**
+   * Fetch ability exchange voucher count.
+   * @returns {number}
+   */
+  async fetchAbilityExchangeVoucherCount() {
+    const response = await this.client.rest.get(Routes.ABILITY_EXCHANGE_VOUCHER_COUNT());
+    return response.voucherCount;
+  }
 }
 
 module.exports = ClientPlayer;

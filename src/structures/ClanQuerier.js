@@ -1,3 +1,5 @@
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
 const Base = require('./Base');
 const QueriedClan = require('./QueriedClan');
@@ -17,10 +19,7 @@ class ClanQuerier extends Base {
     this.clans = new Collection();
 
     for (const clan of data) {
-      this.clans.set(
-        clan.id,
-        new QueriedClan(client, { clan })
-      );
+      this.clans.set(clan.id, new QueriedClan(client, { clan }));
     }
   }
 
@@ -29,19 +28,18 @@ class ClanQuerier extends Base {
    * @type {number}
    * @readonly
    */
-   get top10Requirement() {
-     return this.clans.at(9).xp;
-   }
+  get top10Requirement() {
+    return this.clans.at(9).xp;
+  }
 
-   /**
-    * Clan xp needed to be in top 100.
-    * @type {number}
-    * @readonly
-    */
-   get top100Requirement() {
-     return this.clans.at(99).xp;
-   }
-
+  /**
+   * Clan xp needed to be in top 100.
+   * @type {number}
+   * @readonly
+   */
+  get top100Requirement() {
+    return this.clans.at(99).xp;
+  }
 }
 
 module.exports = ClanQuerier;

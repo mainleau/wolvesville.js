@@ -1,5 +1,6 @@
 # Miscellaneous
 .gitignore
+.eslintrc.json
 .commitlintrc.json
 webpack.config.js
 .husky/

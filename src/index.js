@@ -1,5 +1,7 @@
+'use strict';
+
 module.exports = {
   Client: require('./client/Client'),
   Util: require('./util/Util'),
-  Constants: require('./util/Constants')
-}
+  Constants: require('./util/Constants'),
+};

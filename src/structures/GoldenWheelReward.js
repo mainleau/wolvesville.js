@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -14,7 +16,7 @@ class GoldenWheelReward extends Base {
      */
     this.type = data.type.startsWith('SILVER') ? 'GOLD' : data.type;
 
-    if(data.silver) {
+    if (data.silver) {
       /**
        * Reward amount.
        * @type {number}
@@ -22,7 +24,7 @@ class GoldenWheelReward extends Base {
       this.amount = data.silver;
     }
 
-    if(data.avatarItemId || data.profileIconId) {
+    if (data.avatarItemId || data.profileIconId) {
       /**
        * Reward item id.
        * @type {Object}

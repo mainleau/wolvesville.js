@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const ChallengeReward = require('./ChallengeReward');
 
@@ -42,7 +44,6 @@ class Challenge extends Base {
   get completed() {
     return this.progress === this.target;
   }
-
 }
 
 module.exports = Challenge;

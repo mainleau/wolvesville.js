@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const ClanQuest = require('./ClanQuest');
 
@@ -69,7 +71,6 @@ class AvailableClanQuests extends Base {
      */
     this.resetTimestamp = new Date(data.endTime).getTime();
   }
-
 }
 
 module.exports = AvailableClanQuests;

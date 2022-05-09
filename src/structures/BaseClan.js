@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -56,8 +58,8 @@ class BaseClan extends Base {
      */
     this.icon = {
       name: data.clan.icon,
-      color: data.clan.iconColor
-    }
+      color: data.clan.iconColor,
+    };
 
     /**
      * Clan join type
@@ -88,10 +90,9 @@ class BaseClan extends Base {
    * Fetch the clan.
    * @returns {Clan}
    */
-  async fetch() {
-    return await this.client.clans.fetchById(this.id);
+  fetch() {
+    return this.client.clans.fetchById(this.id);
   }
-
 }
 
 module.exports = BaseClan;

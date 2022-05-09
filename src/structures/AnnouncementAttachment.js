@@ -1,5 +1,6 @@
+'use strict';
+
 const Base = require('./Base');
-const AnnouncementAuthor = require('./AnnouncementAuthor');
 
 /**
  * Represents an announcement attachment.

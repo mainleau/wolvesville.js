@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { Rarities } = require('../util/Constants');
 
@@ -39,16 +41,15 @@ class LoadingScreen extends Base {
    * @returns {string}
    */
   imageURL({ wide = false, zoom } = {}) {
-    if(typeof wide !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
-    if(zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
+    if (typeof wide !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
+    if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
     var url = `${this.client.options.http.cdn}/loadingScreens/${this.name}`;
     url += `_background_large${wide ? '.wide' : ''}`;
-    if(zoom) url += `@${zoom}x`;
+    if (zoom) url += `@${zoom}x`;
 
     return `${url}.png`;
   }
-
 }
 
 module.exports = LoadingScreen;

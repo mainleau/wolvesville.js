@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { RewardTypes } = require('../util/Constants');
 
@@ -13,9 +15,7 @@ class ChallengeReward extends Base {
      * Reward type.
      * @type {number}
      */
-    this.type = data.rewardInXp ? RewardTypes.XP
-      : data.rewardInGems ? RewardTypes.GEMS
-      : RewardTypes.CARDS;
+    this.type = data.rewardInXp ? RewardTypes.XP : data.rewardInGems ? RewardTypes.GEMS : RewardTypes.CARDS;
 
     /**
      * Reward amount.

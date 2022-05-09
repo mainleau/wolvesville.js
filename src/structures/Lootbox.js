@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { LootboxTypes } = require('../util/Constants');
 
@@ -19,12 +21,18 @@ class Lootbox extends Base {
      * Lootbox type
      * @type {string}
      */
-    this.type = data.event === 'EASTER' ? LootboxTypes.EASTER
-      : data.event === 'HALLOWEEN' ? LootboxTypes.HALLOWEEN
-      : data.event === 'XMAS' ? LootboxTypes.CHRISTMAS
-      : data.event === 'ROLE_CARDS' ? LootboxTypes.ROLE_CARDS
-      : data.event === 'LEVEL_UP_CARD' ? LootboxTypes.LEVEL_UP_CARD
-      : LootboxTypes.DEFAULT;
+    this.type =
+      data.event === 'EASTER'
+        ? LootboxTypes.EASTER
+        : data.event === 'HALLOWEEN'
+        ? LootboxTypes.HALLOWEEN
+        : data.event === 'XMAS'
+        ? LootboxTypes.CHRISTMAS
+        : data.event === 'ROLE_CARDS'
+        ? LootboxTypes.ROLE_CARDS
+        : data.event === 'LEVEL_UP_CARD'
+        ? LootboxTypes.LEVEL_UP_CARD
+        : LootboxTypes.DEFAULT;
   }
 }
 

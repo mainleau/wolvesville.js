@@ -1,4 +1,5 @@
-const Base = require('./Base');
+'use strict';
+
 const ClanQuest = require('./ClanQuest');
 const ClanQuestParticipant = require('./ClanQuestParticipant');
 
@@ -45,7 +46,7 @@ class ActiveClanQuest extends ClanQuest {
      * @type {ClanQuestParticipant[]}
      */
     Object.defineProperty(this, 'participants', {
-      value: data.participants.map(participant => new ClanQuestParticipant(client, participant))
+      value: data.participants.map(participant => new ClanQuestParticipant(client, participant)),
     });
 
     /**
@@ -78,7 +79,6 @@ class ActiveClanQuest extends ClanQuest {
   get tierXp() {
     return this.xp % this.requiredXp;
   }
-
 }
 
 module.exports = ActiveClanQuest;

@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const ClanQuestReward = require('./ClanQuestReward');
 const { QuestTypes } = require('../util/Constants');
@@ -43,7 +45,6 @@ class ClanQuest extends Base {
   get imageURL() {
     return `${this.client.options.http.cdn}/promotions/${this.name}.jpg`;
   }
-
 }
 
 module.exports = ClanQuest;

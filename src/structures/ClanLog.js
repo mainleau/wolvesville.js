@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const ClanLogPlayer = require('./ClanLogPlayer');
 
@@ -26,16 +28,16 @@ class ClanLog extends Base {
      * @type {string}
      */
     this.target = new ClanLogPlayer(client, {
-      username: data.playerUsername ? data.playerUsername : data.memberUsername
+      username: data.playerUsername ? data.playerUsername : data.memberUsername,
     });
 
-    if(data.playerUsername) {
+    if (data.playerUsername) {
       /**
-      * Log executor username.
-      * @type {string}
-      */
+       * Log executor username.
+       * @type {string}
+       */
       this.executor = new ClanLogPlayer(client, {
-        username: data.playerUsername ? data.memberUsername : data.playerUsername
+        username: data.playerUsername ? data.memberUsername : data.playerUsername,
       });
     }
   }

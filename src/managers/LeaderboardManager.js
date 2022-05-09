@@ -1,10 +1,12 @@
+'use strict';
+
 const BaseManager = require('./BaseManager');
-const FriendsXPLeaderboard = require('../structures/FriendsXPLeaderboard');
 const DailyXPLeaderboard = require('../structures/DailyXPLeaderboard');
-const WeeklyXPLeaderboard = require('../structures/WeeklyXPLeaderboard');
-const MonthlyXPLeaderboard = require('../structures/MonthlyXPLeaderboard');
+const FriendsXPLeaderboard = require('../structures/FriendsXPLeaderboard');
 const LifetimeXPLeaderboard = require('../structures/LifetimeXPLeaderboard');
+const MonthlyXPLeaderboard = require('../structures/MonthlyXPLeaderboard');
 const RankedLeaderboard = require('../structures/RankedLeaderboard');
+const WeeklyXPLeaderboard = require('../structures/WeeklyXPLeaderboard');
 const Routes = require('../util/Routes');
 
 /**
@@ -12,13 +14,9 @@ const Routes = require('../util/Routes');
  * @extends {BaseManager}
  */
 class LeaderboardManager extends BaseManager {
-  constructor(client) {
-    super(client);
-  }
-
   async fetchFriendsXP() {
     const friends = await this.client.friends.fetch({ force: true });
-    if(!friends.size < 2) throw new Error('NOT_ENOUGH_FRIENDS');
+    if (!friends.size < 2) throw new Error('NOT_ENOUGH_FRIENDS');
 
     const response = await this.client.rest.get(Routes.XP_LEADERBOARD_FRIENDS());
     return new FriendsXPLeaderboard(this.client, response);
@@ -45,14 +43,13 @@ class LeaderboardManager extends BaseManager {
   }
 
   async fetchRanked({ offset = false } = {}) {
-    if(typeof offset !== 'boolean') {
+    if (typeof offset !== 'boolean') {
       throw new Error('OPTION_MUST_BE_A_BOOLEAN');
     }
 
-    const response = await this.client.rest.get(Routes.RANKED_SEASON_LEADERBOARD(offset))
+    const response = await this.client.rest.get(Routes.RANKED_SEASON_LEADERBOARD(offset));
     return new RankedLeaderboard(this.client, response);
   }
-
 }
 
 module.exports = LeaderboardManager;

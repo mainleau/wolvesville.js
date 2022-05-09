@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const RoleCardPerk = require('./RoleCardPerk');
 const { Rarities } = require('../util/Constants');

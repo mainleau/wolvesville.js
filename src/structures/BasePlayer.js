@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -5,24 +7,19 @@ const Base = require('./Base');
  * @extends {Base}
  */
 class BasePlayer extends Base {
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Fetch the player.
    * @returns {Player|ClientPlayer}
    */
-  async fetch() {
-    if(this.id) {
-      return await this.client.players.fetchById(this.id);
-    } else if(this.username) {
-      return await this.client.players.fetchByUsername(this.username);
+  fetch() {
+    if (this.id) {
+      return this.client.players.fetchById(this.id);
+    } else if (this.username) {
+      return this.client.players.fetchByUsername(this.username);
     } else {
       throw new Error('PLAYER_NOT_FOUND');
     }
   }
-
 }
 
 module.exports = BasePlayer;

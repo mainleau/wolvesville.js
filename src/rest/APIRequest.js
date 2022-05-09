@@ -1,3 +1,5 @@
+'use strict';
+
 const fetch = require('node-fetch');
 
 class APIRequest {
@@ -9,12 +11,13 @@ class APIRequest {
     this.options = options;
 
     let queryString = '';
-    if(options.query) {
-      const query = typeof options.query === 'string'
-        ? options.query
-        : Object.entries(options.query)
-          .filter(([, value]) => value !== null && typeof value !== 'undefined')
-          .flatMap(([key, value]) => (Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]));
+    if (options.query) {
+      const query =
+        typeof options.query === 'string'
+          ? options.query
+          : Object.entries(options.query)
+              .filter(([, value]) => value !== null && typeof value !== 'undefined')
+              .flatMap(([key, value]) => (Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]));
       queryString = new URLSearchParams(query).toString();
     }
     this.path = `${path}${queryString && `?${queryString}`}`;
@@ -25,15 +28,15 @@ class APIRequest {
 
     let headers = {};
 
-    if(this.options.api !== this.client.options.http.api.auth) headers.Authorization = `Bearer ${this.client.token}`;
+    if (this.options.api !== this.client.options.http.api.auth) headers.Authorization = `Bearer ${this.client.token}`;
 
     let body;
 
-    if((this.options.api || this.client.options.http.api.core) === this.client.options.http.api.core) {
+    if ((this.options.api || this.client.options.http.api.core) === this.client.options.http.api.core) {
       headers.ids = 1;
     }
 
-    if(this.options.data != null) {
+    if (this.options.data !== null && this.options.data !== undefined) {
       body = JSON.stringify(this.options.data);
       headers['Content-Type'] = 'application/json';
     }

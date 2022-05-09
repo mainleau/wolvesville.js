@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const CalendarReward = require('./CalendarReward');
 
@@ -33,17 +35,20 @@ class Calendar extends Base {
      */
     this.type = data.gemOfferType;
 
-    if(data.owned) {
+    if (data.owned) {
       /**
        * Calendar claimed rewards
        * @type {CalendarReward[]}
        */
-      this.claimedRewards = data.claimedRewards.map((reward, index) => new CalendarReward(
-        client,
-        Object.assign(reward, {
-          day: index
-        })
-      ));
+      this.claimedRewards = data.claimedRewards.map(
+        (reward, index) =>
+          new CalendarReward(
+            client,
+            Object.assign(reward, {
+              day: index,
+            }),
+          ),
+      );
 
       /**
        * Calendar next reward day
@@ -88,19 +93,21 @@ class Calendar extends Base {
      */
     this.claimed = data.owned;
 
-    Object.defineProperty(this, '_assets', { value: {
-      backgroundImage: {
-        name: data.backgroundImageName,
-        color : data.backgroundImagePrimaryColor
+    Object.defineProperty(this, '_assets', {
+      value: {
+        backgroundImage: {
+          name: data.backgroundImageName,
+          color: data.backgroundImagePrimaryColor,
+        },
+        iconImage: {
+          name: data.iconImageName,
+        },
+        text: {
+          color: data.textColor,
+          backgroundColor: data.textBackgroundColor,
+        },
       },
-      iconImage: {
-        name: data.iconImageName
-      },
-      text: {
-        color: data.textColor,
-        backgroundColor: data.textBackgroundColor
-      }
-    }});
+    });
   }
 
   /**
@@ -120,7 +127,6 @@ class Calendar extends Base {
   get iconImageURL() {
     return `${this.client.options.http.cdn}/calendars/${this._assets.iconImage}.png`;
   }
-
 }
 
 module.exports = Calendar;

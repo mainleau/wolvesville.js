@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -20,7 +22,7 @@ class RoleCardPerk extends Base {
      */
     this.tier = data.tier;
 
-    if(data.effectValue !== -1) {
+    if (data.effectValue !== -1) {
       /**
        * Perk efficiency
        * @type {number}

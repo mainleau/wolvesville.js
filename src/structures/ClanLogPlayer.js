@@ -1,3 +1,5 @@
+'use strict';
+
 const BasePlayer = require('./BasePlayer');
 
 /**
@@ -14,7 +16,6 @@ class ClanLogPlayer extends BasePlayer {
      */
     this.username = data.username;
   }
-
 }
 
 module.exports = ClanLogPlayer;

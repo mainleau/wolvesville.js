@@ -1,13 +1,11 @@
+'use strict';
+
 const BaseClan = require('./BaseClan');
 
 /**
  * Represents a requesting clan.
  * @extends {BaseClan}
  */
-class RequestingClan extends BaseClan {
-  constructor(client, data) {
-    super(client, data);
-  }
-}
+class RequestingClan extends BaseClan {}
 
 module.exports = RequestingClan;

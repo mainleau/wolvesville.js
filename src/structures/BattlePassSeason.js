@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const BattlePassReward = require('./BattlePassReward.js');
 
@@ -31,35 +33,39 @@ class BattlePassSeason extends Base {
      * Battle pass rewards
      * @type {BattlePassReward[]}
      */
-     this.rewards = data.battlePassSeason.rewards.map((reward, tier) => {
-       return new BattlePassReward(client, Object.assign(reward, {
-         tier,
-         claimed: data.battlePassSeason.rewards.indexOf(reward) <= this.tier ? true : false
-       }));
-     });
+    this.rewards = data.battlePassSeason.rewards.map(
+      (reward, tier) =>
+        new BattlePassReward(
+          client,
+          Object.assign(reward, {
+            tier,
+            claimed: data.battlePassSeason.rewards.indexOf(reward) <= this.tier,
+          }),
+        ),
+    );
 
-     /**
-      * Battle pass xp required to complete a tier
-      * @type {number}
-      */
-     this.tierXpRequired = data.battlePassSeason.xpPerReward;
+    /**
+     * Battle pass xp required to complete a tier
+     * @type {number}
+     */
+    this.tierXpRequired = data.battlePassSeason.xpPerReward;
 
-     /**
-      * Battle pass price in gold
-      * @type {number}
-      */
-     this.price = data.battlePassSeason.goldPrice;
+    /**
+     * Battle pass price in gold
+     * @type {number}
+     */
+    this.price = data.battlePassSeason.goldPrice;
 
-     /**
-      * Battle pass price to skip tier
-      * @type {number}
-      */
-     this.skipPrice = data.battlePassSeason.goldPricePerReward;
+    /**
+     * Battle pass price to skip tier
+     * @type {number}
+     */
+    this.skipPrice = data.battlePassSeason.goldPricePerReward;
 
-     /**
-      * Season duration
-      * @type {number}
-      */
+    /**
+     * Season duration
+     * @type {number}
+     */
     this.duration = data.battlePassSeason.durationInDays;
 
     /**
@@ -81,7 +87,7 @@ class BattlePassSeason extends Base {
    * @readonly
    */
   get tier() {
-    return this.xp / this.tierXpRequired | 0;
+    return (this.xp / this.tierXpRequired) | 0;
   }
 
   /**
@@ -101,7 +107,6 @@ class BattlePassSeason extends Base {
   get completed() {
     return this.xp === this.tierXpRequired * 100;
   }
-
 }
 
 module.exports = BattlePassSeason;

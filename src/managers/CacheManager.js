@@ -1,3 +1,5 @@
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
 const BaseManager = require('./BaseManager');
 
@@ -16,7 +18,6 @@ class CacheManager extends BaseManager {
     this.cache.set(data.id, data);
     return data;
   }
-
 }
 
 module.exports = CacheManager;

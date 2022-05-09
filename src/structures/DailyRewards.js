@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const DailyReward = require('./DailyReward');
 
@@ -54,7 +56,6 @@ class DailyRewards extends Base {
   get available() {
     return this.active && Date.now() > this.claimTimestamp;
   }
-
 }
 
 module.exports = DailyRewards;

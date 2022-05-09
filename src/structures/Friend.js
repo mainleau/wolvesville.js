@@ -1,5 +1,6 @@
-const BasePlayer = require('./BasePlayer')
-const fetch = require('node-fetch');
+'use strict';
+
+const BasePlayer = require('./BasePlayer');
 
 /**
  * Represents a friend.
@@ -39,8 +40,8 @@ class Friend extends BasePlayer {
      */
     this.profileIcon = {
       id: data.profileIconId,
-      color: data.profileIconColor
-    }
+      color: data.profileIconColor,
+    };
 
     /**
      * Friend clan tag.
@@ -64,7 +65,6 @@ class Friend extends BasePlayer {
   get online() {
     return this.lastOnlineTimestamp + 10 * 60 * 1000 > Date.now();
   }
-
 }
 
 module.exports = Friend;

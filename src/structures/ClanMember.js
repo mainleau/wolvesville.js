@@ -1,3 +1,5 @@
+'use strict';
+
 const BasePlayer = require('./BasePlayer');
 const { ClanRanks } = require('../util/Constants');
 
@@ -45,8 +47,8 @@ class ClanMember extends BasePlayer {
      */
     this.profileIcon = {
       id: data.profileIconId,
-      color: data.profileIconColor
-    }
+      color: data.profileIconColor,
+    };
 
     /**
      * Xp the player brought to the clan.
@@ -64,9 +66,8 @@ class ClanMember extends BasePlayer {
      * Member rank.
      * @type {string}
      */
-    this.rank = this.id === data.clan.leaderId ? ClanRanks.LEADER
-      : data.coLeader ? ClanRanks.COLEADER
-      : ClanRanks.MEMBER;
+    this.rank =
+      this.id === data.clan.leaderId ? ClanRanks.LEADER : data.coLeader ? ClanRanks.COLEADER : ClanRanks.MEMBER;
   }
 }
 

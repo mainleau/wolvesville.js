@@ -1,3 +1,5 @@
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
 const Base = require('./Base');
 const RankedLeaderboardPlayer = require('./RankedLeaderboardPlayer');
@@ -26,10 +28,13 @@ class RankedLeaderboard extends Base {
       const player = data.seasonPlayerRanks[index];
       this.entries.set(
         player.playerId,
-        new RankedLeaderboardPlayer(client, Object.assign(player, {
-          rank: parseInt(index)
-        }))
-      )
+        new RankedLeaderboardPlayer(
+          client,
+          Object.assign(player, {
+            rank: parseInt(index),
+          }),
+        ),
+      );
     }
 
     /**

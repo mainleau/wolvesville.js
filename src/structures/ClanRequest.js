@@ -1,6 +1,8 @@
+'use strict';
+
 const Base = require('./Base');
-const RequestingClan = require('./RequestingClan');
 const ClanMember = require('./ClanMember');
+const RequestingClan = require('./RequestingClan');
 
 /**
  * Represents a clan request.

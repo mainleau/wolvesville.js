@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = {
   SIGN_IN: () => '/players/signInWithEmailAndPassword',
   TOKEN_REFRESH: () => '/players/createIdToken',
@@ -5,7 +7,7 @@ module.exports = {
   ITEMS: () => '/purchasableItems/minimized',
 
   PARTIAL_PLAYER_BY_USERNAME: () => '/players/search',
-  PLAYER: (id) => `/players/${id ? id : 'me'}`,
+  PLAYER: id => `/players/${id || 'me'}`,
   INVENTORY: () => '/inventory',
   EQUIPPED_ITEMS: () => '/equippedItems',
   ANNOUNCEMENTS: () => '/announcements',
@@ -26,7 +28,7 @@ module.exports = {
 
   FRIENDS: () => '/friends',
 
-  CLAN: (id) => `/clans/${id ? id : 'myClan'}`,
+  CLAN: id => `/clans/${id || 'myClan'}`,
   CLAN_BY_PLAYER_ID: () => '/clans/byPlayer',
   QUERY_CLAN: () => '/clans/v2/searchAdvanced',
   CLAN_CHAT: () => '/clans/chat/v2',
@@ -36,7 +38,7 @@ module.exports = {
   XP_LEADERBOARD_WEEKLY: () => '/highScores/top100Weekly',
   XP_LEADERBOARD_MONTHLY: () => '/highScores/top100Monthly',
   XP_LEADERBOARD: () => '/highScores/top100',
-  RANKED_SEASON_LEADERBOARD: (offset) => `/ranked/highScore${!offset ? '/top100' : ''}`,
+  RANKED_SEASON_LEADERBOARD: offset => `/ranked/highScore${!offset ? '/top100' : ''}`,
 
-  CUSTOM_GAME_LOBBIES: () => '/api/public/game/custom'
-}
+  CUSTOM_GAME_LOBBIES: () => '/api/public/game/custom',
+};

@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { Rarities } = require('../util/Constants');
 
@@ -27,13 +29,13 @@ class ProfileIcon extends Base {
      */
     this.rarity = Rarities[data.rarity];
 
-    if(data.costInSilver !== -1 || data.costInRoses !== -1) {
+    if (data.costInSilver !== -1 || data.costInRoses !== -1) {
       /**
        * Profile icon cost
        * @type {number}
        */
       Object.defineProperty(this, 'cost', {
-        value: data.costInSilver !== -1 ? data.costInSilver : data.costInRoses
+        value: data.costInSilver !== -1 ? data.costInSilver : data.costInRoses,
       });
     }
 
@@ -42,10 +44,10 @@ class ProfileIcon extends Base {
      * @type {string}
      */
     Object.defineProperty(this, 'purchasable', {
-      value: data.isPurchasable & data.showInInventory
+      value: data.isPurchasable & data.showInInventory,
     });
 
-    if(data.event) {
+    if (data.event) {
       /**
        * Profile icon event
        * @type {string}

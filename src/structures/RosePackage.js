@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { Rarities } = require('../util/Constants');
 

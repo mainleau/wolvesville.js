@@ -1,12 +1,14 @@
+'use strict';
+
 const BaseClient = require('./BaseClient');
-const PlayerManager = require('../managers/PlayerManager');
 const ClanManager = require('../managers/ClanManager');
 const FriendManager = require('../managers/FriendManager');
-const LeaderboardManager = require('../managers/LeaderboardManager');
 const GameManager = require('../managers/GameManager');
 const ItemManager = require('../managers/ItemManager');
-const Routes = require('../util/Routes');
+const LeaderboardManager = require('../managers/LeaderboardManager');
+const PlayerManager = require('../managers/PlayerManager');
 const ClientPlayer = require('../structures/ClientPlayer');
+const Routes = require('../util/Routes');
 
 /**
  * Wolvesville client.
@@ -89,7 +91,7 @@ class Client extends BaseClient {
    * @readonly
    */
   static get expired() {
-    if(!this.refreshToken || typeof this.refreshToken !== 'string') {
+    if (!this.refreshToken || typeof this.refreshToken !== 'string') {
       throw new Error('REFRESH_TOKEN_NOT_FOUND');
     }
 
@@ -104,24 +106,23 @@ class Client extends BaseClient {
    * @returns {Client}
    */
   async login(credentials) {
-
-    if(process.env.WOLVESVILLE_EMAIL && process.env.WOLVESVILLE_PASSWORD) {
+    if (process.env.WOLVESVILLE_EMAIL && process.env.WOLVESVILLE_PASSWORD) {
       credentials = {
         email: process.env.WOLVESVILLE_EMAIL,
-        password: process.env.WOLVESVILLE_PASSWORD
-      }
+        password: process.env.WOLVESVILLE_PASSWORD,
+      };
     }
 
-    if(!credentials || typeof credentials !== 'object') throw new Error('INVALID_CREDENTIALS_FORMAT');
+    if (!credentials || typeof credentials !== 'object') throw new Error('INVALID_CREDENTIALS_FORMAT');
     const response = await this.rest.post(Routes.SIGN_IN(), {
       api: this.options.http.api.auth,
       data: {
         email: credentials.email,
-        password: credentials.password
-      }
+        password: credentials.password,
+      },
     });
 
-    if(response.code === 401) throw new Error('INVALID_CREDENTIALS');
+    if (response.code === 401) throw new Error('INVALID_CREDENTIALS');
     this.refreshToken = response.refreshToken;
     this.lastTokenRefreshTimestamp = Date.now();
     this.token = response.idToken;
@@ -134,16 +135,16 @@ class Client extends BaseClient {
    * Refresh client token.
    */
   async tokenRefresh() {
-    if(!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
+    if (!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
 
     const response = await this.rest.post(Routes.TOKEN_REFRESH(), {
       api: this.options.http.api.auth,
       data: {
-        refreshToken: this.refreshToken
-      }
+        refreshToken: this.refreshToken,
+      },
     });
 
-    if(response.code === 401) throw new Error('INVALID_REFRESH_TOKEN');
+    if (response.code === 401) throw new Error('INVALID_REFRESH_TOKEN');
     this.token = response.idToken;
     this.lastTokenRefreshTimestamp = Date.now();
   }
@@ -164,10 +165,9 @@ class Client extends BaseClient {
    * @returns {ClientPlayer}
    */
   async fetchPlayer(options = {}) {
-
-    if(!options.force) {
+    if (!options.force) {
       const existing = this.players.cache.find(player => player.own);
-      if(existing) return existing;
+      if (existing) return existing;
     }
 
     const response = await this.rest.get(Routes.PLAYER());
@@ -184,7 +184,6 @@ class Client extends BaseClient {
   get player() {
     return this.players.cache.find(player => player.own) || null;
   }
-
 }
 
 module.exports = Client;

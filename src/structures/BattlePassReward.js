@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 const { RewardTypes } = require('../util/Constants');
 
@@ -33,17 +35,18 @@ class BattlePassReward extends Base {
      */
     this.amount = data.amount;
 
-    console.log(data.type)
+    console.log(data.type);
 
-    if(data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
+    if (data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
       /**
        * Reward item
        * @type {Object}
        */
-      this.item = client.items.avatarItems.cache.get(data.avatarItemId)
-        || client.items.rosePackages.cache.get(data.rosePackageId)
-        || client.items.emojis.cache.get(data.emojiId)
-        || client.items.profileIcons.cache.get(data.profileIconId);
+      this.item =
+        client.items.avatarItems.cache.get(data.avatarItemId) ||
+        client.items.rosePackages.cache.get(data.rosePackageId) ||
+        client.items.emojis.cache.get(data.emojiId) ||
+        client.items.profileIcons.cache.get(data.profileIconId);
     }
   }
 }

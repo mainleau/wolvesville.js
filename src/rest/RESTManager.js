@@ -1,3 +1,5 @@
+'use strict';
+
 const APIRequest = require('./APIRequest');
 
 class RESTManager {
@@ -17,10 +19,10 @@ class RESTManager {
     const request = new APIRequest(this, method, route, options);
 
     const response = await request.make();
-    if(response.status !== 200) return { code: response.status }
+    if (response.status !== 200) return { code: response.status };
 
-    if(response.headers.get('Content-Type')?.startsWith('application/json')) {
-      return await response.json();
+    if (response.headers.get('Content-Type')?.startsWith('application/json')) {
+      return response.json();
     } else {
       throw new Error('INVALID_RESPONSE');
     }

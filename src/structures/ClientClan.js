@@ -1,12 +1,14 @@
-const Clan = require('./Clan');
-const ClanChatManager = require('../managers/ClanChatManager');
-const AvailableClanQuests = require('./AvailableClanQuests');
-const ActiveClanQuest = require('./ActiveClanQuest');
-const ClanLog = require('./ClanLog');
-const ClanLedgerField = require('./ClanLedgerField');
+'use strict';
+
 const { Collection } = require('@discordjs/collection');
-const { getAuthenticationHeaders } = require('../util/Headers');
 const fetch = require('node-fetch');
+const ActiveClanQuest = require('./ActiveClanQuest');
+const AvailableClanQuests = require('./AvailableClanQuests');
+const Clan = require('./Clan');
+const ClanLedgerField = require('./ClanLedgerField');
+const ClanLog = require('./ClanLog');
+const ClanChatManager = require('../managers/ClanChatManager');
+const { getAuthenticationHeaders } = require('../util/Headers');
 
 /**
  * Represents a client clan.
@@ -42,9 +44,9 @@ class ClientClan extends Clan {
   async fetchActiveQuest() {
     const request = await fetch(`${this.client.options.http.api.core}/clanQuests/active`, {
       method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
+      headers: getAuthenticationHeaders(this.client.token),
     });
-    if(request.status === 204) return null;
+    if (request.status === 204) return null;
 
     const response = await request.json();
     return new ActiveClanQuest(this.client, response);
@@ -57,7 +59,7 @@ class ClientClan extends Clan {
   async fetchAvailableQuests() {
     const request = await fetch(`${this.client.options.http.api.core}/clanQuests/available`, {
       method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
+      headers: getAuthenticationHeaders(this.client.token),
     });
     const response = await request.json();
     return new AvailableClanQuests(this.client, response);
@@ -66,17 +68,14 @@ class ClientClan extends Clan {
   async fetchLedger() {
     const request = await fetch(`${this.client.options.http.api.core}/clans/gold/all`, {
       method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
+      headers: getAuthenticationHeaders(this.client.token),
     });
     const response = await request.json();
 
     const fetchedFields = new Collection();
 
     for (const field of response) {
-      fetchedFields.set(
-        field.id,
-        new ClanLedgerField(this.client, field)
-      )
+      fetchedFields.set(field.id, new ClanLedgerField(this.client, field));
     }
     return fetchedFields;
   }
@@ -84,13 +83,12 @@ class ClientClan extends Clan {
   async fetchLog() {
     const request = await fetch(`${this.client.options.http.api.core}/clans/logs`, {
       method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token)
+      headers: getAuthenticationHeaders(this.client.token),
     });
 
     const response = await request.json();
     return response.map(log => new ClanLog(this.client, log));
   }
-
 }
 
 module.exports = ClientClan;

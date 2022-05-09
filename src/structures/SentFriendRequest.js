@@ -1,4 +1,5 @@
-const Base = require('./Base');
+'use strict';
+
 const FriendRequest = require('./FriendRequest');
 const FriendRequestRecipient = require('./FriendRequestRecipient');
 

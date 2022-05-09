@@ -1,5 +1,7 @@
+'use strict';
+
+const Avatar = require('./Avatar');
 const Base = require('./Base');
-const Avatar = require('./Avatar')
 
 /**
  * Represents player equipped items.
@@ -21,8 +23,8 @@ class EquippedItems extends Base {
      */
     this.icon = {
       id: data.profileIconId,
-      color: data.profileIconColor
-    }
+      color: data.profileIconColor,
+    };
   }
 }
 

@@ -1,5 +1,7 @@
-const Base = require('./Base');
+'use strict';
+
 const AvatarItem = require('./AvatarItem');
+const Base = require('./Base');
 
 /**
  * Represents limited items.

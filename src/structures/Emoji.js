@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -12,7 +14,7 @@ class Emoji extends Base {
 
     this.name = data.name;
 
-    if(data.costInGems) {
+    if (data.costInGems) {
       Object.defineProperty(this, 'cost', { value: data.costInGems });
     }
 

@@ -1,3 +1,5 @@
+'use strict';
+
 const Base = require('./Base');
 
 /**
@@ -14,7 +16,7 @@ class FriendReferralReward extends Base {
      */
     this.type = data.type;
 
-    if(data.amount > 1) {
+    if (data.amount > 1) {
       /**
        * Reward amount.
        * @type {number}
@@ -22,7 +24,7 @@ class FriendReferralReward extends Base {
       this.amount = data.amount;
     }
 
-    if(data.avatarItemId) {
+    if (data.avatarItemId) {
       /**
        * Reward item id.
        * @type {Object}
