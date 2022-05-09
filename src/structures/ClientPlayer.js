@@ -33,19 +33,19 @@ class ClientPlayer extends Player {
     super(client, data);
 
     /**
-     * Player xp.
+     * Player xp
      * @type {number}
      */
     this.xp = data.xpTotal;
 
     /**
-     * Xp required to level up.
+     * Xp required to level up
      * @type {number}
      */
     Object.defineProperty(this, 'requiredXp', { value: data.xpUntilNextLevel });
 
     /**
-     * Player gender.
+     * Player gender
      * @type {string}
      */
     Object.defineProperty(this, 'gender', {
@@ -67,7 +67,7 @@ class ClientPlayer extends Player {
     });
 
     /**
-     * Player last ban.
+     * Player last ban
      * @type {Object}
      */
     Object.defineProperty(this, 'lastBan', {
@@ -86,7 +86,7 @@ class ClientPlayer extends Player {
 
     if (data.deletionTime) {
       /**
-       * Player deletion timestamp.
+       * Player deletion timestamp
        * @type {number}
        */
       Object.defineProperty(this, 'deletionTimestamp', { value: new Date(data.deletionTime).getTime() });
@@ -94,7 +94,7 @@ class ClientPlayer extends Player {
   }
 
   /**
-   * Level tiers.
+   * Level tiers
    * @type {number[]}
    * @readonly
    */
@@ -151,6 +151,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<FriendReferralReward[]>}
    */
   async fetchFriendReferralRewards() {
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
     const data = await this.client.rest.get(Routes.FRIEND_REFERRAL_REWARDS());
     return data.friendInvitationRewards.map(
       (reward, index) =>
@@ -168,6 +170,8 @@ class ClientPlayer extends Player {
    * @returns {Promise<DailyRewards>}
    */
   async fetchDailyRewards() {
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
     const data = await this.client.rest.get(Routes.DAILY_REWARDS());
     return new DailyRewards(this.client, data);
   }

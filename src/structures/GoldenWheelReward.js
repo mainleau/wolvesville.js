@@ -1,6 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
+const { RewardTypes } = require('../util/Constants');
 
 /**
  * Represents a golden wheel reward.
@@ -11,25 +12,25 @@ class GoldenWheelReward extends Base {
     super(client);
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
-    this.type = data.type.startsWith('SILVER') ? 'GOLD' : data.type;
+    this.type = data.type.startsWith('SILVER') ? RewardTypes.GOLD : data.type;
 
-    if (data.silver) {
-      /**
-       * Reward amount.
-       * @type {number}
-       */
-      this.amount = data.silver;
-    }
+    /**
+     * Reward amount
+     * @type {number}
+     */
+    this.amount = data.silver;
 
     if (data.avatarItemId || data.profileIconId) {
       /**
-       * Reward item id.
-       * @type {Object}
+       * Reward item id
+       * @type {AvatarItem|ProfileIcon}
        */
-      this.item = { id: data.avatarItemId || data.profileIconId };
+      this.item =
+        client.items.avatarItems.cache.get(data.avatarItemId) ||
+        client.items.profileIcons.cache.get(data.profileIconId);
     }
   }
 }

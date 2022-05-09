@@ -11,14 +11,14 @@ class ClanQuestReward extends Base {
     super(client);
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
     this.type = data.type;
 
     if (data.amount > 1) {
       /**
-       * Reward amount.
+       * Reward amount
        * @type {?number}
        */
       this.amount = data.amount;
@@ -26,7 +26,7 @@ class ClanQuestReward extends Base {
 
     if (data.avatarItemId) {
       /**
-       * Reward item id.
+       * Reward item id
        * @type {?string}
        */
       this.avatarItemId = data.avatarItemId;

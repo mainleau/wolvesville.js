@@ -12,7 +12,7 @@ class BattlePassReward extends Base {
     super(client);
 
     /**
-     * Reward tier.
+     * Reward tier
      * @type {number}
      */
     this.tier = data.tier;
@@ -34,8 +34,6 @@ class BattlePassReward extends Base {
      * @type {number}
      */
     this.amount = data.amount;
-
-    console.log(data.type);
 
     if (data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
       /**

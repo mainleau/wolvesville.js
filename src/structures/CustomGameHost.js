@@ -9,6 +9,11 @@ const BasePlayer = require('./BasePlayer');
 class CustomGameHost extends BasePlayer {
   constructor(client, data) {
     super(client);
+
+    /**
+     * Host username
+     * @type {string}
+     */
     this.username = data.username;
   }
 }

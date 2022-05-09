@@ -12,15 +12,13 @@ class ChallengeReward extends Base {
     super(client);
 
     /**
-     * Reward type.
+     * Reward type
      * @type {number}
      */
-    this.type = data.rewardInXp ? RewardTypes.XP
-      : data.rewardInGems ? RewardTypes.GEM
-      : RewardTypes.CARDS;
+    this.type = data.rewardInXp ? RewardTypes.XP : data.rewardInGems ? RewardTypes.GEM : RewardTypes.CARDS;
 
     /**
-     * Reward amount.
+     * Reward amount
      * @type {number}
      */
     this.amount = data.rewardInXp || data.rewardInGems || data.rewardInCards;

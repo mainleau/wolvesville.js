@@ -12,37 +12,37 @@ class Inventory extends Base {
     super(client);
 
     /**
-     * Gold count.
+     * Gold count
      * @type {number}
      */
     this.goldCount = data.silverCount;
 
     /**
-     * Rose count.
+     * Rose count
      * @type {number}
      */
     this.roseCount = data.roseCount;
 
     /**
-     * Gem count.
+     * Gem count
      * @type {number}
      */
     this.gemCount = data.gemCount;
 
     /**
-     * Loyalty token count.
+     * Loyalty token count
      * @type {number}
      */
     this.loyaltyTokenCount = data.loyaltyTokenCount;
 
     /**
-     * Avatar items.
+     * Avatar items
      * @type {Array}
      */
     this.avatarItems = data.avatarItemIds.map(id => client.items.avatarItems.cache.get(id));
 
     /**
-     * Profile icons.
+     * Profile icons
      * @type {Array}
      */
     this.profileIcons = data.ownedProfileIcons.map(profileIcon =>
@@ -50,31 +50,31 @@ class Inventory extends Base {
     );
 
     /**
-     * Backgrounds.
+     * Backgrounds
      * @type {Array}
      */
     this.backgrounds = data.ownedBackgroundIds.map(id => client.items.backgrounds.cache.get(id));
 
     /**
-     * Loading screens.
+     * Loading screens
      * @type {Array}
      */
     this.loadingScreens = data.ownedLoadingScreenIds.map(id => client.items.loadingScreens.cache.get(id));
 
     /**
-     * Emojis.
+     * Emojis
      * @type {Array}
      */
     this.emojis = data.ownedEmojis.map(emoji => client.items.emojis.cache.get(emoji.emojiId));
 
     /**
-     * Taslismans.
+     * Taslismans
      * @type {Array}
      */
     this.talismans = data.ownedTalismans.map(talisman => client.items.talismans.cache.get(talisman.talismanId));
 
     /**
-     * Lootboxes.
+     * Lootboxes
      * @type {Array}
      */
     this.lootboxes = data.lootBoxes.map(lootbox => new Lootbox(client, lootbox));

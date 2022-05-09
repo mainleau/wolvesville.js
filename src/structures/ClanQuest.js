@@ -13,32 +13,32 @@ class ClanQuest extends Base {
     super(client);
 
     /**
-     * Quest name.
+     * Quest name
      * @type {string}
      */
     this.name = data.imgName;
 
     /**
-     * Quest id.
+     * Quest id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Quest type.
+     * Quest type
      * @type {number}
      */
     this.type = data.isPurchasableWithGems ? QuestTypes.GEM : QuestTypes.GOLD;
 
     /**
-     * Quest rewards.
+     * Quest rewards
      * @type {ClanQuestReward[]}
      */
     this.rewards = data.rewards.map(reward => new ClanQuestReward(client, reward));
   }
 
   /**
-   * Quest image url.
+   * Quest image url
    * @type {string}
    * @readonly
    */

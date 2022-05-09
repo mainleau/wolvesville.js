@@ -72,7 +72,7 @@ class AvatarItem extends Base {
     }
 
     /**
-     * Wether item is purchasable
+     * Whether item is purchasable
      * @type {boolean}
      */
     Object.defineProperty(this, 'purchasable', { value: !!(data[5] & data[6]) });

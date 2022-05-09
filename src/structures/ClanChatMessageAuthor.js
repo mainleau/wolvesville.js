@@ -11,7 +11,7 @@ class ClanChatMessageAuthor extends BasePlayer {
     super(client);
 
     /**
-     * Message author id.
+     * Message author id
      * @type {string}
      */
     this.id = data.id;

@@ -12,13 +12,13 @@ class CalendarReward extends Base {
     super(client);
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
     this.type = data.type;
 
     /**
-     * Reward amount.
+     * Reward amount
      * @type {number}
      */
     this.amount = data.amount;
@@ -33,7 +33,7 @@ class CalendarReward extends Base {
         : client.items.emojis.cache.get(data.emojiId);
 
     /**
-     * Reward day.
+     * Reward day
      * @type {number}
      */
     this.day = data.day;

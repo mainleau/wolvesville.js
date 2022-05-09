@@ -11,7 +11,7 @@ class Role extends Base {
     super(client);
 
     /**
-     * Role id.
+     * Role id
      * @type {string}
      */
     this.id = data.id;

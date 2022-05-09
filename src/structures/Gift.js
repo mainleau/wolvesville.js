@@ -11,13 +11,13 @@ class Gift extends Base {
     super(client);
 
     /**
-     * Gift type.
+     * Gift type
      * @type {string}
      */
     this.type = data.description;
 
     /**
-     * Gift pruchase timestamp.
+     * Gift pruchase timestamp
      * @type {number}
      */
     this.purchaseTimestamp = new Date(data.purchaseTime).getTime();

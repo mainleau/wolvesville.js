@@ -30,6 +30,12 @@ class BattlePassSeason extends Base {
     this.claimed = data.battlePass.claimed;
 
     /**
+     * Battle pass xp required to complete a tier
+     * @type {number}
+     */
+    this.tierXpRequired = data.battlePassSeason.xpPerReward;
+
+    /**
      * Battle pass rewards
      * @type {BattlePassReward[]}
      */
@@ -39,16 +45,10 @@ class BattlePassSeason extends Base {
           client,
           Object.assign(reward, {
             tier,
-            claimed: data.battlePassSeason.rewards.indexOf(reward) <= this.tier,
+            claimed: tier <= this.tier,
           }),
         ),
     );
-
-    /**
-     * Battle pass xp required to complete a tier
-     * @type {number}
-     */
-    this.tierXpRequired = data.battlePassSeason.xpPerReward;
 
     /**
      * Battle pass price in gold

@@ -1,6 +1,5 @@
 'use strict';
 
-const AvatarItem = require('./AvatarItem');
 const Base = require('./Base');
 
 /**
@@ -11,9 +10,28 @@ class LimitedItems extends Base {
   constructor(client, data) {
     super(client);
 
+    /**
+     * Offer type
+     * @type {string}
+     */
     this.type = data.type;
-    this.items = data.avatarItemIds.map(id => new AvatarItem(client, { id }));
+
+    /**
+     * Offer items
+     * @type {AvatarItem[]}
+     */
+    this.items = data.avatarItemIds.map(id => client.items.avatarItems.cache.get(id));
+
+    /**
+     * Offer expiration timestamp
+     * @type {number}
+     */
     this.expirationTimestamp = new Date(data.expireDate).getTime();
+
+    /**
+     * Wether offer is giftable
+     * @type {boolean}
+     */
     this.giftable = data.canBeGifted;
   }
 }

@@ -12,13 +12,13 @@ class EquippedItems extends Base {
     super(client);
 
     /**
-     * Player avatar.
+     * Player avatar
      * @type {Avatar}
      */
     this.avatar = new Avatar(client, data);
 
     /**
-     * Player icon.
+     * Player icon
      * @type {Object}
      */
     this.icon = {

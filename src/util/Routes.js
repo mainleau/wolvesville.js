@@ -33,6 +33,8 @@ module.exports = {
   QUERY_CLAN: () => '/clans/v2/searchAdvanced',
   CLAN_CHAT: () => '/clans/chat/v2',
 
+  ACTIVE_QUEST: () => '/clanQuests/active',
+
   XP_LEADERBOARD_FRIENDS: () => '/highScores/top100Friends',
   XP_LEADERBOARD_DAILY: () => '/highScores/top100Daily',
   XP_LEADERBOARD_WEEKLY: () => '/highScores/top100Weekly',

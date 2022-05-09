@@ -12,37 +12,37 @@ class ClanMember extends BasePlayer {
     super(client);
 
     /**
-     * Member id.
+     * Member id
      * @type {string}
      */
     this.id = data.playerId;
 
     /**
-     * Member username.
+     * Member username
      * @type {string}
      */
     this.username = data.username;
 
     /**
-     * Member level.
+     * Member level
      * @type {number}
      */
     this.level = data.level;
 
     /**
-     * Member status.
+     * Member status
      * @type {string}
      */
     this.status = data.playerStatus;
 
     /**
-     * Member last online timestamp.
+     * Member last online timestamp
      * @type {number}
      */
     this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
 
     /**
-     * Member profile icon.
+     * Member profile icon
      * @type {Object}
      */
     this.profileIcon = {
@@ -51,19 +51,19 @@ class ClanMember extends BasePlayer {
     };
 
     /**
-     * Xp the player brought to the clan.
+     * Xp the player brought to the clan
      * @type {number}
      */
     this.clanXp = data.xp;
 
     /**
-     * Member status.
+     * Member status
      * @type {string}
      */
     this.clanStatus = data.status;
 
     /**
-     * Member rank.
+     * Member rank
      * @type {string}
      */
     this.rank =

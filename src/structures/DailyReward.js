@@ -1,6 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
+const { RewardTypes } = require('../util/Constants');
 
 /**
  * Represents a daily reward.
@@ -11,45 +12,41 @@ class DailyReward extends Base {
     super(client);
 
     /**
-     * Reward day.
+     * Reward day
      * @type {number}
      */
     this.day = data.day;
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
-    this.type = data.type;
+    this.type = RewardTypes[data.type];
 
-    /**
-     * Reward day.
-     * @type {number}
-     */
-    if (this.type === 'AVATAR_ITEM') {
+    if (this.type === RewardTypes.AVATAR_ITEM) {
       /**
-       * Item id.
-       * @type {?string}
+       * Item id
+       * @type {string}
        */
-      this.itemId = data.avatarItemId;
-    } else {
-      /**
-       * Reward amount.
-       * @type {?number}
-       */
-      this.amount = data.amount;
+      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
     }
 
-    if (['TALISMAN', 'ROLE_CARD'].includes(this.type)) {
+    if ([RewardTypes.TALISMAN, RewardTypes.ROLE_CARD].includes(this.type)) {
       /**
-       * Is an unknown item.
-       * @type {?boolean}
+       * Whether the item is unknown
+       * @type {boolean}
        */
       this.unknown = data.unknown;
     }
 
     /**
-     * Is the reward claimed.
+     * Reward amount
+     * @type {number}
+     */
+    this.amount = data.amount;
+
+    /**
+     * Whether the reward is claimed
      * @type {boolean}
      */
     this.claimed = data.claimed;

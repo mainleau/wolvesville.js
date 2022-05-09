@@ -12,19 +12,19 @@ class ClanLog extends Base {
     super(client);
 
     /**
-     * Log action.
+     * Log action
      * @type {string}
      */
     this.action = data.action;
 
     /**
-     * Log created timestamp.
+     * Log created timestamp
      * @type {number}
      */
     this.createdTimestamp = new Date(data.creationTime).getTime();
 
     /**
-     * Log target username.
+     * Log target username
      * @type {string}
      */
     this.target = new ClanLogPlayer(client, {
@@ -33,7 +33,7 @@ class ClanLog extends Base {
 
     if (data.playerUsername) {
       /**
-       * Log executor username.
+       * Log executor username
        * @type {string}
        */
       this.executor = new ClanLogPlayer(client, {

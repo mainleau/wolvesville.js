@@ -11,29 +11,27 @@ class FriendReferralReward extends Base {
     super(client);
 
     /**
-     * Reward type.
+     * Reward type
      * @type {string}
      */
     this.type = data.type;
 
-    if (data.amount > 1) {
-      /**
-       * Reward amount.
-       * @type {number}
-       */
-      this.amount = data.amount;
-    }
+    /**
+     * Reward amount.
+     * @type {number}
+     */
+    this.amount = data.amount;
 
     if (data.avatarItemId) {
       /**
-       * Reward item id.
-       * @type {Object}
+       * Reward item id
+       * @type {AvatarItem}
        */
-      this.item = { id: data.avatarItemId };
+      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
     }
 
     /**
-     * Wether reward is claimed.
+     * Wether reward is claimed
      * @type {boolean}
      */
     this.claimed = data.claimed;

@@ -48,7 +48,7 @@ class Clan extends BaseClan {
   }
 
   /**
-   * Wether the clan is the client clan
+   * Whether the clan is the client clan
    * @type {boolean}
    * @readonly
    */

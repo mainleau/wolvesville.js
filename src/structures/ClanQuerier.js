@@ -13,7 +13,7 @@ class ClanQuerier extends Base {
     super(client);
 
     /**
-     * Clans.
+     * Clans
      * @type {Collection<string, Clan>}
      */
     this.clans = new Collection();
@@ -24,7 +24,7 @@ class ClanQuerier extends Base {
   }
 
   /**
-   * Clan xp needed to be in top 10.
+   * Clan xp needed to be in top 10
    * @type {number}
    * @readonly
    */
@@ -33,7 +33,7 @@ class ClanQuerier extends Base {
   }
 
   /**
-   * Clan xp needed to be in top 100.
+   * Clan xp needed to be in top 100
    * @type {number}
    * @readonly
    */

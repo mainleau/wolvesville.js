@@ -11,43 +11,43 @@ class FriendRequestPlayer extends BasePlayer {
     super(client);
 
     /**
-     * Player id.
+     * Player id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Player username.
+     * Player username
      * @type {string}
      */
     this.username = data.username;
 
     /**
-     * Player clan tag.
+     * Player clan tag
      * @type {string}
      */
     this.clanTag = data.clanTag || null;
 
     /**
-     * Player level.
+     * Player level
      * @type {number}
      */
     this.level = data.level;
 
     /**
-     * Player status.
+     * Player status
      * @type {number}
      */
     Object.defineProperty(this, 'status', { value: data.playersStatus });
 
     /**
-     * Player last online timestamp.
+     * Player last online timestamp
      * @type {number}
      */
     Object.defineProperty(this, 'lastOnlineTimestamp', { value: new Date(data.lastOnline).getTime() });
 
     /**
-     * Player last online timestamp.
+     * Player last online timestamp
      * @type {number}
      */
     Object.defineProperty(this, 'equippedItems', {
@@ -61,7 +61,7 @@ class FriendRequestPlayer extends BasePlayer {
   }
 
   /**
-   * Clan tag and username.
+   * Clan tag and username
    * @type {string}
    * @readonly
    */
@@ -70,7 +70,7 @@ class FriendRequestPlayer extends BasePlayer {
   }
 
   /**
-   * Wether the player is online.
+   * Wether the player is online
    * @type {boolean}
    * @readonly
    */

@@ -36,7 +36,7 @@ class ActiveClanQuest extends ClanQuest {
     this.tierEndTimestamp = new Date(data.tierEndTime).getTime();
 
     /**
-     * Wether quest tier completed
+     * Whether quest tier completed
      * @type {boolean}
      */
     this.tierCompleted = data.tierFinished;
@@ -56,7 +56,7 @@ class ActiveClanQuest extends ClanQuest {
     Object.defineProperty(this, 'requiredXp', { value: data.xpPerReward });
 
     /**
-     * Is quest duration extension claimed
+     * Whether quest duration extension is claimed
      * @type {boolean}
      */
     Object.defineProperty(this, 'durationExtensionClaimed', { value: data.claimedTime });

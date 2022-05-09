@@ -3,7 +3,7 @@
 const XPLeaderboard = require('./XPLeaderboard');
 
 /**
- * Lifetime xp leaderboard.
+ * Represents a lifetime xp leaderboard.
  * @extends {XPLeaderboard}
  */
 class LifetimeXPLeaderboard extends XPLeaderboard {}

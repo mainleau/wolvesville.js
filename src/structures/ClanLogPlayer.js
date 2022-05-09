@@ -11,7 +11,7 @@ class ClanLogPlayer extends BasePlayer {
     super(client);
 
     /**
-     * Field player.
+     * Field player
      * @type {string}
      */
     this.username = data.username;

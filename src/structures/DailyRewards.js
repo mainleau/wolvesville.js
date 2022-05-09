@@ -12,13 +12,13 @@ class DailyRewards extends Base {
     super(client);
 
     /**
-     * Daily rewards offset.
+     * Daily rewards offset
      * @type {number}
      */
     this.offset = data.offset;
 
     /**
-     * Daily rewards.
+     * Daily rewards
      * @type {Collection<DailyReward>}
      */
     this.rewards = data.rewards.map((reward, index) => {
@@ -27,20 +27,20 @@ class DailyRewards extends Base {
     });
 
     /**
-     * Daily rewards claim timestamp.
+     * Daily rewards claim timestamp
      * @type {number}
      */
     this.claimTimestamp = new Date(data.rewards.find(reward => reward.canBeClaimedDate).canBeClaimedDate).getTime();
 
     /**
-     * Are daily rewards active.
+     * Are daily rewards active
      * @type {boolean}
      */
     this.active = !data.recentGameWinRequired;
   }
 
   /**
-   * Next daily reward.
+   * Next daily reward
    * @type {DailyReward}
    * @readonly
    */
@@ -49,7 +49,7 @@ class DailyRewards extends Base {
   }
 
   /**
-   * Wether next daily reward claimable.
+   * Whether next daily reward is claimable
    * @type {boolean}
    * @readonly
    */

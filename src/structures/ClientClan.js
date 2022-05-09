@@ -19,19 +19,19 @@ class ClientClan extends Clan {
     super(client, data);
 
     /**
-     * Clan gold count.
+     * Clan gold count
      * @type {string}
      */
     this.goldCount = data.clan.gold;
 
     /**
-     * Clan gem count.
+     * Clan gem count
      * @type {string}
      */
     this.gemCount = data.clan.gems;
 
     /**
-     * Clan chat.
+     * Clan chat
      * @type {string}
      */
     this.chat = new ClanChatManager(client);

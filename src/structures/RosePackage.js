@@ -12,25 +12,25 @@ class RosePackage extends Base {
     super(client);
 
     /**
-     * Package id.
+     * Package id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Package name.
+     * Package name
      * @type {string}
      */
     this.name = data.type;
 
     /**
-     * Package rarity.
+     * Package rarity
      * @type {string}
      */
     this.rarity = Rarities[data.rarity];
 
     /**
-     * Talisman cost.
+     * Talisman cost
      * @type {number}
      */
     Object.defineProperty(this, 'cost', { value: data.costInSilver });

@@ -11,19 +11,19 @@ class ClanQuestParticipant extends BasePlayer {
     super(client);
 
     /**
-     * Participant id.
+     * Participant id
      * @type {string}
      */
     this.id = data.playerId;
 
     /**
-     * Participant username.
+     * Participant username
      * @type {string}
      */
     this.username = data.username;
 
     /**
-     * Xp the participant brought for the quest.
+     * Xp the participant brought for the quest
      * @type {number}
      */
     this.xp = data.xp;

@@ -12,19 +12,19 @@ class CustomGame extends Base {
     super(client);
 
     /**
-     * Game id.
+     * Game id
      * @type {string}
      */
     this.id = data.gameId;
 
     /**
-     * Game name.
+     * Game name
      * @type {string}
      */
     this.name = data.name;
 
     /**
-     * Game host.
+     * Game host
      * @type {CustomGameHost}
      */
     this.host = new CustomGameHost(client, {
@@ -32,31 +32,31 @@ class CustomGame extends Base {
     });
 
     /**
-     * Game language.
+     * Game language
      * @type {string}
      */
     this.language = data.language;
 
     /**
-     * Game roles.
+     * Game roles
      * @type {Array<string>}
      */
     this.roles = data.roles;
 
     /**
-     * Game player count.
+     * Game player count
      * @type {number}
      */
     this.playerCount = data.playerCount;
 
     /**
-     * Does the game give regular xp.
+     * Does the game give regular xp
      * @type {number}
      */
     this.xp = data.regularXp;
 
     /**
-     * Game parameters.
+     * Game parameters
      * @type {Object}
      */
     this.parameters = {

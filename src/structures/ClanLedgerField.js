@@ -12,31 +12,31 @@ class ClanLedgerField extends Base {
     super(client);
 
     /**
-     * Field id.
+     * Field id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Field creation timestamp.
+     * Field creation timestamp
      * @type {ClanLedgerFieldPlayer}
      */
     this.player = new ClanLedgerFieldPlayer(client, data);
 
     /**
-     * Field type.
+     * Field type
      * @type {boolean}
      */
     this.type = data.gold ? 0 : 1;
 
     /**
-     * Field amount.
+     * Field amount
      * @type {number}
      */
     this.amount = data.gold || data.gems;
 
     /**
-     * Field creation timestamp.
+     * Field creation timestamp
      * @type {number}
      */
     this.creationTimestamp = new Date(data.creationTime).getTime();

@@ -32,7 +32,7 @@ class ClanChatMessage extends Base {
     this.createdTimestamp = new Date(data.date).getTime();
 
     /**
-     * Is a system message
+     * Whether message is a system message
      * @type {boolean}
      */
     this.system = data.isSystem;

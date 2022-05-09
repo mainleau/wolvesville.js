@@ -11,13 +11,13 @@ class FriendRequest extends Base {
     super(client);
 
     /**
-     * Request id.
+     * Request id
      * @type {string}
      */
     this.id = data.id;
 
     /**
-     * Request created timestamp.
+     * Request created timestamp
      * @type {number}
      */
     this.createdTimestamp = new Date(data.creationTime).getTime();

@@ -11,7 +11,7 @@ class GiftRecipient extends BasePlayer {
     super(client);
 
     /**
-     * Recipient username.
+     * Recipient username
      * @type {string}
      */
     this.username = data.recipientUsername;
