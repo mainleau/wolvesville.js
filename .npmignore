@@ -1,5 +1,8 @@
 # Miscellaneous
 .gitignore
+.commitlintrc.json
 webpack.config.js
+.husky/
 test/
 webpack/
+docs/
