@@ -25,15 +25,19 @@ module.exports = {
   CUSTOM_GAME_OWNED_ROLES: () => '/customGames/ownRoles',
   LIMITED_OFFERS: () => '/billing/rotatingLimitedOffers',
   ABILITY_EXCHANGE_VOUCHER_COUNT: () => '/roleCards/abilityExchangeVouchers',
-
+  AVATAR_SLOTS: id => `/inventory/slots/${id}`,
+  BADGES: id => `/players/${id}/badgeIdsV2`,
+  ROLE_CARDS: (own, id) => `/roleCards/owned/${!own ? id : ''}`,
   FRIENDS: () => '/friends',
 
   CLAN: id => `/clans/${id || 'myClan'}`,
   CLAN_BY_PLAYER_ID: () => '/clans/byPlayer',
   QUERY_CLAN: () => '/clans/v2/searchAdvanced',
   CLAN_CHAT: () => '/clans/chat/v2',
-
   ACTIVE_QUEST: () => '/clanQuests/active',
+  AVAILABLE_QUEST: () => '/clanQuests/available',
+  LEDGER: () => '/clans/gold/all',
+  LOG: () => '/clans/logs',
 
   XP_LEADERBOARD_FRIENDS: () => '/highScores/top100Friends',
   XP_LEADERBOARD_DAILY: () => '/highScores/top100Daily',

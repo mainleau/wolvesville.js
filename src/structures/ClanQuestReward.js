@@ -1,6 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a clan quest reward.
@@ -14,22 +15,20 @@ class ClanQuestReward extends Base {
      * Reward type
      * @type {string}
      */
-    this.type = data.type;
+    this.type = ItemTypes[data.type];
 
-    if (data.amount > 1) {
-      /**
-       * Reward amount
-       * @type {?number}
-       */
-      this.amount = data.amount;
-    }
+    /**
+     * Reward amount
+     * @type {?number}
+     */
+    this.amount = data.amount;
 
-    if (data.avatarItemId) {
+    if (this.type === ItemTypes.AVATAR_ITEM) {
       /**
        * Reward item id
-       * @type {?string}
+       * @type {AvatarItem}
        */
-      this.avatarItemId = data.avatarItemId;
+      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
     }
   }
 }

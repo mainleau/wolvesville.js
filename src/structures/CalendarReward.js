@@ -1,7 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
-const { RewardTypes } = require('../util/Constants');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a calendar reward.
@@ -24,11 +24,11 @@ class CalendarReward extends Base {
     this.amount = data.amount;
 
     this.item =
-      this.type === RewardTypes.AVATAR_ITEM
+      this.type === ItemTypes.AVATAR_ITEM
         ? client.items.avatarItems.cache.get(data.avatarItemId)
-        : this.type === RewardTypes.LOADING_SCREEN
+        : this.type === ItemTypes.LOADING_SCREEN
         ? client.items.loadingScreens.cache.get(data.loadingScreenId)
-        : this.type === RewardTypes.BACKGROUND
+        : this.type === ItemTypes.BACKGROUND
         ? client.items.backgrounds.cache.get(data.backgroundId)
         : client.items.emojis.cache.get(data.emojiId);
 

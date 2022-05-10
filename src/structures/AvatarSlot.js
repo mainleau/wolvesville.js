@@ -1,27 +1,20 @@
 'use strict';
 
 const Avatar = require('./Avatar');
-const Base = require('./Base');
 
 /**
  * Represents an avatar slot.
- * @extends {Base}
+ * @extends {Avatar}
  */
-class AvatarSlot extends Base {
+class AvatarSlot extends Avatar {
   constructor(client, data) {
-    super(client);
+    super(client, data);
 
     /**
      * Slot number
      * @type {number}
      */
-    this.slot = data.slot;
-
-    /**
-     * Avatar
-     * @type {Avatar}
-     */
-    this.avatar = new Avatar(client, data);
+    Object.defineProperty(this, 'slot', { value: data.slot });
   }
 }
 

@@ -2,6 +2,7 @@
 
 const Base = require('./Base');
 const ClanLogPlayer = require('./ClanLogPlayer');
+const { ClanActions } = require('../util/Constants');
 
 /**
  * Represents a clan log.
@@ -15,17 +16,11 @@ class ClanLog extends Base {
      * Log action
      * @type {string}
      */
-    this.action = data.action;
+    this.action = ClanActions[data.action];
 
     /**
-     * Log created timestamp
-     * @type {number}
-     */
-    this.createdTimestamp = new Date(data.creationTime).getTime();
-
-    /**
-     * Log target username
-     * @type {string}
+     * Log target player
+     * @type {ClanLogPlayer}
      */
     this.target = new ClanLogPlayer(client, {
       username: data.playerUsername ? data.playerUsername : data.memberUsername,
@@ -40,6 +35,12 @@ class ClanLog extends Base {
         username: data.playerUsername ? data.memberUsername : data.playerUsername,
       });
     }
+
+    /**
+     * Log created timestamp
+     * @type {number}
+     */
+    this.createdTimestamp = new Date(data.creationTime).getTime();
   }
 }
 

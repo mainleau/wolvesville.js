@@ -1,7 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
-const { RewardTypes } = require('../util/Constants');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a battle pass reward.
@@ -27,7 +27,7 @@ class BattlePassReward extends Base {
      * Reward type
      * @type {string}
      */
-    this.type = RewardTypes[data.type];
+    this.type = ItemTypes[data.type];
 
     /**
      * Reward amount

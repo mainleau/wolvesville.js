@@ -1,7 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
-const { ItemTypes, Rarities } = require('../util/Constants');
+const { AvatarItemTypes, Rarities } = require('../util/Constants');
 
 /**
  * Represents an avatar item.
@@ -29,26 +29,26 @@ class AvatarItem extends Base {
      */
     this.type =
       data[8] === 2
-        ? ItemTypes.HAT
+        ? AvatarItemTypes.HAT
         : data[8] === 1
-        ? ItemTypes.HAIR
+        ? AvatarItemTypes.HAIR
         : data[8] === 7
-        ? ItemTypes.EYES
+        ? AvatarItemTypes.EYES
         : data[8] === 3
-        ? ItemTypes.GLASSES
+        ? AvatarItemTypes.GLASSES
         : data[8] === 10
-        ? ItemTypes.MOUTH
+        ? AvatarItemTypes.MOUTH
         : data[8] === 9
-        ? ItemTypes.MASK
+        ? AvatarItemTypes.MASK
         : data[8] === 0
-        ? ItemTypes.CLOTHES
+        ? AvatarItemTypes.CLOTHES
         : data[8] === 5
-        ? ItemTypes.FOREGROUND
+        ? AvatarItemTypes.FOREGROUND
         : data[8] === 6
-        ? ItemTypes.BACKGROUND
+        ? AvatarItemTypes.BACKGROUND
         : data[8] === 8
-        ? ItemTypes.BADGE
-        : ItemTypes.GRAVESTONE;
+        ? AvatarItemTypes.BADGE
+        : AvatarItemTypes.GRAVESTONE;
 
     /**
      * Item rarity

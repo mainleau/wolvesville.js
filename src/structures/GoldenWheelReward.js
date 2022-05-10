@@ -1,7 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
-const { RewardTypes } = require('../util/Constants');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a golden wheel reward.
@@ -15,7 +15,7 @@ class GoldenWheelReward extends Base {
      * Reward type
      * @type {string}
      */
-    this.type = data.type.startsWith('SILVER') ? RewardTypes.GOLD : data.type;
+    this.type = data.type.startsWith('SILVER') ? ItemTypes.GOLD : data.type;
 
     /**
      * Reward amount

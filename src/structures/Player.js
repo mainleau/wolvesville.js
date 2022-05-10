@@ -1,11 +1,10 @@
 'use strict';
 
 const { Collection } = require('@discordjs/collection');
-const fetch = require('node-fetch');
 const AvatarSlot = require('./AvatarSlot');
 const BasePlayer = require('./BasePlayer');
 const RoleCard = require('./RoleCard');
-const { getAuthenticationHeaders } = require('../util/Headers');
+const Routes = require('../util/Routes');
 
 /**
  * Represents a player.
@@ -124,55 +123,55 @@ class Player extends BasePlayer {
     });
   }
 
+  /**
+   * Fetch player clan.
+   * @returns {Promise<Clan|ClientClan>}
+   */
   fetchClan() {
     return this.constructor.name === Player
       ? this.client.clans.fetchByUsername(this.username)
       : this.client.clans.fetchOwn();
   }
 
+  /**
+   * Fetch player avatar slots.
+   * @returns {Promise<Collection<number, AvatarSlot>>}
+   */
   async fetchAvatarSlots() {
-    const request = await fetch(`${this.client.options.http.api.core}/inventory/slots/${this.id}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token),
-    });
-    const response = await request.json();
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
 
-    const fetchedAvatarSlots = new Collection();
+    const response = await this.client.rest.get(Routes.AVATAR_SLOTS(this.id));
 
-    for (const avatarSlot of response.values()) {
-      fetchedAvatarSlots.set(avatarSlot.slot, new AvatarSlot(this.client, avatarSlot));
-    }
-
-    return fetchedAvatarSlots;
-  }
-
-  async fetchBadges() {
-    const request = await fetch(`${this.client.options.http.api.core}/players/${this.id}/badgeIdsV2`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token),
-    });
-    const response = await request.json();
-    return response.ids;
-  }
-
-  async fetchRoleCards() {
-    const request = await fetch(`${this.client.options.http.api.core}/roleCards/owned/${!this.own ? this.id : ''}`, {
-      method: 'GET',
-      headers: getAuthenticationHeaders(this.client.token),
-    });
-    const response = await request.json();
-
-    const fetchedRoleCards = new Collection();
-
-    for (const roleCard of response) {
-      fetchedRoleCards.set(roleCard.id, new RoleCard(this.client, roleCard));
-    }
-
-    return fetchedRoleCards;
+    const data = response.map(avatarSlot => new AvatarSlot(this.client, avatarSlot));
+    return data.reduce((col, avatarSlot) => col.set(avatarSlot.slot, avatarSlot), new Collection());
   }
 
   /**
-   * Wether the player is the client player
+   * Fetch player badges.
+   * @returns {Promise<Collection<string, AvatarItem>>}
+   */
+  async fetchBadges() {
+    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
+
+    const response = await this.client.rest.get(Routes.BADGES(this.id));
+
+    const data = response.ids.map(badgeId => this.client.items.avatarItems.cache.get(badgeId));
+    return data.reduce((col, badge) => col.set(badge.id, badge), new Collection());
+  }
+
+  /**
+   * Fetch player role cards.
+   * @returns {Promise<Collection<string, RoleCard>>}
+   */
+  async fetchRoleCards() {
+    const response = await this.client.rest.get(Routes.ROLE_CARDS(this.own, this.id));
+
+    const data = response.map(roleCard => new RoleCard(this.client, roleCard));
+    return data.reduce((col, roleCard) => col.set(roleCard.id, roleCard), new Collection());
+  }
+
+  /**
+   * Whether the player is the client player
    * @type {boolean}
    * @readonly
    */

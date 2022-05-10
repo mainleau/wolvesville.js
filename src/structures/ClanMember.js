@@ -36,12 +36,6 @@ class ClanMember extends BasePlayer {
     this.status = data.playerStatus;
 
     /**
-     * Member last online timestamp
-     * @type {number}
-     */
-    this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
-
-    /**
      * Member profile icon
      * @type {Object}
      */
@@ -68,6 +62,12 @@ class ClanMember extends BasePlayer {
      */
     this.rank =
       this.id === data.clan.leaderId ? ClanRanks.LEADER : data.coLeader ? ClanRanks.COLEADER : ClanRanks.MEMBER;
+
+    /**
+     * Member last online timestamp
+     * @type {number}
+     */
+    this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
   }
 }
 

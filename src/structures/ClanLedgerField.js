@@ -2,6 +2,7 @@
 
 const Base = require('./Base');
 const ClanLedgerFieldPlayer = require('./ClanLedgerFieldPlayer');
+const { ItemTypes, ClanLedgerActions } = require('../util/Constants');
 
 /**
  * Represents a clan ledger field.
@@ -18,16 +19,10 @@ class ClanLedgerField extends Base {
     this.id = data.id;
 
     /**
-     * Field creation timestamp
-     * @type {ClanLedgerFieldPlayer}
-     */
-    this.player = new ClanLedgerFieldPlayer(client, data);
-
-    /**
      * Field type
-     * @type {boolean}
+     * @type {string}
      */
-    this.type = data.gold ? 0 : 1;
+    this.type = data.gold ? ItemTypes.GOLD : ItemTypes.GEM;
 
     /**
      * Field amount
@@ -36,10 +31,22 @@ class ClanLedgerField extends Base {
     this.amount = data.gold || data.gems;
 
     /**
+     * Field action
+     * @type {string}
+     */
+    this.action = ClanLedgerActions[data.type];
+
+    /**
      * Field creation timestamp
+     * @type {ClanLedgerFieldPlayer}
+     */
+    this.player = new ClanLedgerFieldPlayer(client, data);
+
+    /**
+     * Field created timestamp
      * @type {number}
      */
-    this.creationTimestamp = new Date(data.creationTime).getTime();
+    this.createdTimestamp = new Date(data.creationTime).getTime();
   }
 }
 

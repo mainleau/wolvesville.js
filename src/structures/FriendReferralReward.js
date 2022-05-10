@@ -1,6 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a friend referral reward.
@@ -14,7 +15,7 @@ class FriendReferralReward extends Base {
      * Reward type
      * @type {string}
      */
-    this.type = data.type;
+    this.type = ItemTypes[data.type];
 
     /**
      * Reward amount.
@@ -22,7 +23,7 @@ class FriendReferralReward extends Base {
      */
     this.amount = data.amount;
 
-    if (data.avatarItemId) {
+    if (this.type === ItemTypes.AVATAR_ITEM) {
       /**
        * Reward item id
        * @type {AvatarItem}
@@ -31,7 +32,7 @@ class FriendReferralReward extends Base {
     }
 
     /**
-     * Wether reward is claimed
+     * Whether reward is claimed
      * @type {boolean}
      */
     this.claimed = data.claimed;
