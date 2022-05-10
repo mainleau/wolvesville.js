@@ -14,8 +14,8 @@ class CacheManager extends BaseManager {
     this.cache = new Collection();
   }
 
-  _add(data) {
-    this.cache.set(data.id, data);
+  _add(data, { id } = {}) {
+    this.cache.set(id ?? data.id, data);
     return data;
   }
 }

@@ -66,7 +66,7 @@ class ItemManager extends BaseManager {
     talismans.reduce((col, talisman) => col.set(talisman.id, this.talismans._add(talisman)), new Collection());
 
     const offers = response.gemOffers.map(offer => new Offer(this.client, offer));
-    offers.reduce((col, offer) => col.set(offer.name, this.offers._add(offer)), new Collection());
+    offers.reduce((col, offer) => col.set(offer.name, this.offers._add(offer, { id: offer.name })), new Collection());
 
     const rosePackages = response.rosePackages.map(rosePackage => new RosePackage(this.client, rosePackage));
     rosePackages.reduce(

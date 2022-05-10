@@ -1,21 +1,21 @@
 'use strict';
 
-const Base = require('./Base');
+const Offer = require('./Offer');
 const Outfit = require('./Outfit');
 
 /**
  * Represents a limited offer.
- * @extends {Base}
+ * @extends {Offer}
  */
-class LimitedOffer extends Base {
+class LimitedOffer extends Offer {
   constructor(client, data) {
-    super(client);
+    super(client, data);
 
     /**
-     * Offer type
-     * @type {string}
+     * Offer cost
+     * @type {Offer}
      */
-    this.type = data.type;
+    this.cost = client.items.offers.cache.get(this.name).cost;
 
     /**
      * Offer outfit
@@ -30,7 +30,7 @@ class LimitedOffer extends Base {
     this.expirationTimestamp = new Date(data.expireDate).getTime();
 
     /**
-     * Wether offer is giftable
+     * Whether offer is giftable
      * @type {boolean}
      */
     this.giftable = data.canBeGifted;

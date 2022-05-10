@@ -1,21 +1,21 @@
 'use strict';
 
-const Base = require('./Base');
+const Offer = require('./Offer');
 const Outfit = require('./Outfit');
 
 /**
  * Represents a limited collection.
- * @extends {Base}
+ * @extends {Offer}
  */
-class LimitedCollection extends Base {
+class LimitedCollection extends Offer {
   constructor(client, data) {
-    super(client);
+    super(client, data);
 
     /**
-     * Offer type
-     * @type {string}
+     * Offer cost
+     * @type {Offer}
      */
-    this.type = data.type;
+    this.cost = client.items.offers.cache.get(this.name).cost;
 
     /**
      * Offer outfits
