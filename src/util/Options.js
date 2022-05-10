@@ -4,18 +4,19 @@
  * Options for a client.
  * @typedef {Object} ClientOptions
  * @property {number} [tokenRefreshInterval=3_300_000] Token refresh interval
+ * @property {number} [restRequestTimeout=15_000] REST request timeout
  * @property {HTTPOptions} [http] HTTP options
  */
 
 /**
- * HTTP options
+ * HTTP options.
  * @typedef {Object} HTTPOptions
  * @property {APIOptions} [api] API urls
  * @property {string} [cdn='https://cdn.wolvesville.com'] Base URL of the CDN
  */
 
 /**
- * API options
+ * API options.
  * @typedef {Object} APIOptions
  * @property {string} [auth='https://api-auth.wolvesville.com'] Base URL of the auth API
  * @property {string} [core='https://api-core.wolvesville.com'] Base URL of the core API

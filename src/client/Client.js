@@ -86,7 +86,7 @@ class Client extends BaseClient {
   }
 
   /**
-   * Wether client token is expired
+   * Whether client connection is expired
    * @type {boolean}
    * @readonly
    */
@@ -100,20 +100,23 @@ class Client extends BaseClient {
 
   /**
    * Logs the client in.
-   * @param {Object} credentials Credentials
+   * @param {Object} [credentials] Credentials
    * @param {string} credentials.email Email
    * @param {string} credentials.password Password
    * @returns {Client}
    */
   async login(credentials) {
-    if (process.env.WOLVESVILLE_EMAIL && process.env.WOLVESVILLE_PASSWORD) {
+    if (!credentials && process.env.WOLVESVILLE_EMAIL && process.env.WOLVESVILLE_PASSWORD) {
       credentials = {
         email: process.env.WOLVESVILLE_EMAIL,
         password: process.env.WOLVESVILLE_PASSWORD,
       };
     }
 
-    if (!credentials || typeof credentials !== 'object') throw new Error('INVALID_CREDENTIALS_FORMAT');
+    if (!(credentials && typeof credentials.email === 'string' && typeof credentials.password === 'string')) {
+      throw new Error('INVALID_CREDENTIALS_FORMAT');
+    }
+
     const response = await this.rest.post(Routes.SIGN_IN(), {
       api: this.options.http.api.auth,
       data: {
@@ -131,9 +134,6 @@ class Client extends BaseClient {
     return this;
   }
 
-  /**
-   * Refresh client token.
-   */
   async tokenRefresh() {
     if (!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
 
