@@ -50,19 +50,24 @@ class CustomGame extends Base {
     this.playerCount = data.playerCount;
 
     /**
-     * Does the game give regular xp
-     * @type {number}
+     * Custom game settings.
+     * @typedef {Object} CustomGameSettings
+     * @property {number} nightDuration Night period duration
+     * @property {number} discussionDuration Discussion period duration
+     * @property {number} voteDuration Vote period duration
+     * @property {boolean} xpEnabled Whether regular xp is enabled
+     * @property {boolean} voiceEnabled Whether voice mode is enabled
      */
-    this.xp = data.regularXp;
 
     /**
-     * Game parameters
-     * @type {Object}
+     * Game settings
+     * @type {CustomGameSettings}
      */
-    this.parameters = {
+    this.settings = {
       nightDuration: data.nightDurationInMs,
-      dayDiscussionDuration: data.dayDiscussionDurationInMs,
-      dayVoteDuration: data.dayVotingDurationInMs,
+      discussionDuration: data.dayDiscussionDurationInMs,
+      voteDuration: data.dayVotingDurationInMs,
+      xpEnabled: data.regularXp,
       voiceEnabled: data.voiceEnabled,
     };
   }
