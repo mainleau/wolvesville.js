@@ -19,8 +19,10 @@ class GameManager extends BaseManager {
     if (!['en', 'de', 'fr', 'tr', 'pt', 'th', 'nl', 'es', 'ru', 'vi', 'it'].includes(language)) {
       throw new Error('INCORRECT_LANGUAGE');
     }
-    const response = await this.client.rest.get(Routes.CUSTOM_GAME_LOBBIES(), { query: { language } });
-
+    const response = await this.client.rest.get(Routes.CUSTOM_GAME_LOBBIES(), {
+      api: this.client.options.http.api.game,
+      query: { language },
+    });
     return response.openGames.map(game => new CustomGame(this.client, game));
   }
 }
