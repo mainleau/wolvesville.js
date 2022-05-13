@@ -4,7 +4,7 @@ const FriendRequestPlayer = require('./FriendRequestPlayer');
 
 /**
  * Represents a friend request sender.
- * @extends {BasePlayer}
+ * @extends {FriendRequestPlayer}
  */
 class FriendRequestSender extends FriendRequestPlayer {}
 

@@ -4,7 +4,7 @@ const BasePlayer = require('./BasePlayer');
 
 /**
  * Represents a clan chat message author.
- * @extends {Base}
+ * @extends {BasePlayer}
  */
 class ClanChatMessageAuthor extends BasePlayer {
   constructor(client, data) {

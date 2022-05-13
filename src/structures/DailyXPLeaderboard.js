@@ -3,7 +3,7 @@
 const XPLeaderboard = require('./XPLeaderboard');
 
 /**
- * Represents daily xp leaderboard.
+ * Represents a daily xp leaderboard.
  * @extends {XPLeaderboard}
  */
 class DailyXPLeaderboard extends XPLeaderboard {}

@@ -3,8 +3,8 @@
 const XPLeaderboard = require('./XPLeaderboard');
 
 /**
- * Monthly xp leaderboard.
- * @extends {XPLeaderboardPlayer}
+ * Represents a monthly xp leaderboard.
+ * @extends {XPLeaderboard}
  */
 class MonthlyXPLeaderboard extends XPLeaderboard {}
 
