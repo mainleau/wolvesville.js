@@ -12,7 +12,7 @@
  * HTTP options.
  * @typedef {Object} HTTPOptions
  * @property {APIOptions} [api] API urls
- * @property {string} [cdn='https://cdn.wolvesville.com'] Base URL of the CDN
+ * @property {CDNOptions} [cdn] CDN urls
  */
 
 /**
@@ -21,6 +21,13 @@
  * @property {string} [auth='https://api-auth.wolvesville.com'] Base URL of the auth API
  * @property {string} [core='https://api-core.wolvesville.com'] Base URL of the core API
  * @property {string} [game='https://api-game.wolvesville.com'] Base URL of the game API
+ */
+
+/**
+ * CDN options.
+ * @typedef {Object} CDNOptions
+ * @property {string} [items='https://cdn.wolvesville.com'] CDN URL of the items
+ * @property {string} [avatars='https://cdn-avatars.wolvesville.com'] CDN URL of the avatars
  */
 
 /**
