@@ -13,7 +13,7 @@ class AvailableClanQuests extends Base {
 
     /**
      * Clan quests
-     * @type {Array<ClanQuest>}
+     * @type {ClanQuest[]>}
      */
     this.quests = data.quests.map(quest => new ClanQuest(client, quest));
 

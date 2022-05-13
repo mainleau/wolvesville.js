@@ -11,6 +11,12 @@ class Avatar extends Base {
     super(client);
 
     /**
+     * Avatar id
+     * @type {string}
+     */
+    this.id = data.renderedAvatarImage.fileName.slice(0, -4);
+
+    /**
      * Avatar skin color
      * @type {number}
      */
@@ -81,6 +87,18 @@ class Avatar extends Base {
      * @type {?AvatarItem}
      */
     this.background = this.client.items.avatarItems.cache.get(data.avatarBackId) || null;
+  }
+
+  /**
+  * Get avatar image url.
+  * @returns {string}
+  */
+  imageURL({ zoom } = {}) {
+    if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
+    var url = `${this.client.options.http.cdn.avatars}/${this.id}`;
+    if (zoom) url += `@${zoom}x`;
+
+    return `${url}.png`;
   }
 }
 

@@ -43,7 +43,7 @@ class ClanQuest extends Base {
    * @readonly
    */
   get imageURL() {
-    return `${this.client.options.http.cdn}/promotions/${this.name}.jpg`;
+    return `${this.client.options.http.cdn.items}/promotions/${this.name}.jpg`;
   }
 }
 

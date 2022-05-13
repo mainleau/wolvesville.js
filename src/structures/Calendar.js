@@ -116,7 +116,7 @@ class Calendar extends Base {
    * @readonly
    */
   get backgroundImageURL() {
-    return `${this.client.options.http.cdn}/calendars/${this._assets.backgroundImage}.png`;
+    return `${this.client.options.http.cdn.items}/calendars/${this._assets.backgroundImage}.png`;
   }
 
   /**
@@ -125,7 +125,7 @@ class Calendar extends Base {
    * @readonly
    */
   get iconImageURL() {
-    return `${this.client.options.http.cdn}/calendars/${this._assets.iconImage}.png`;
+    return `${this.client.options.http.cdn.items}/calendars/${this._assets.iconImage}.png`;
   }
 }
 

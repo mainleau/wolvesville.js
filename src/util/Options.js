@@ -41,7 +41,10 @@ class Options {
           core: 'https://api-core.wolvesville.com',
           game: 'https://api-game.wolvesville.com',
         },
-        cdn: 'https://cdn.wolvesville.com',
+        cdn: {
+          items: 'https://cdn.wolvesville.com',
+          avatars: 'https://cdn-avatars.wolvesville.com',
+        },
       },
     };
   }
