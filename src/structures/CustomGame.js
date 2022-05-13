@@ -39,7 +39,7 @@ class CustomGame extends Base {
 
     /**
      * Game roles
-     * @type {Array<string>}
+     * @type {string[]}
      */
     this.roles = data.roles;
 

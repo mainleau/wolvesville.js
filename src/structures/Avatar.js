@@ -90,9 +90,9 @@ class Avatar extends Base {
   }
 
   /**
-  * Get avatar image url.
-  * @returns {string}
-  */
+   * Get avatar image url.
+   * @returns {string}
+   */
   imageURL({ zoom } = {}) {
     if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
     var url = `${this.client.options.http.cdn.avatars}/${this.id}`;
