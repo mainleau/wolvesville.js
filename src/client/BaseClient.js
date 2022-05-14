@@ -1,6 +1,6 @@
 'use strict';
 
-const RESTManager = require('../rest/RESTManager');
+const REST = require('../rest/REST');
 const Options = require('../util/Options');
 const Util = require('../util/Util');
 
@@ -21,9 +21,9 @@ class BaseClient {
 
     /**
      * The REST manager of the client
-     * @type {RESTManager}
+     * @type {REST}
      */
-    this.rest = new RESTManager(this);
+    this.rest = new REST(this.options.rest);
   }
 }
 

@@ -2,9 +2,13 @@
 
 const APIRequest = require('./APIRequest');
 
-class RESTManager {
-  constructor(client) {
-    this.client = client;
+class REST {
+  constructor(options) {
+    this.options = options;
+  }
+
+  setToken(token) {
+    this.token = token;
   }
 
   get(route, options = {}) {
@@ -29,4 +33,4 @@ class RESTManager {
   }
 }
 
-module.exports = RESTManager;
+module.exports = REST;

@@ -22,7 +22,6 @@ class Client extends BaseClient {
     super(options);
 
     Object.defineProperty(this, 'refreshToken', { writable: true });
-    Object.defineProperty(this, 'token', { writable: true });
 
     /**
      * The player manager of the client
@@ -118,7 +117,7 @@ class Client extends BaseClient {
     }
 
     const response = await this.rest.post(Routes.SIGN_IN(), {
-      api: this.options.http.api.auth,
+      api: this.rest.options.api.auth,
       data: {
         email: credentials.email,
         password: credentials.password,
@@ -128,7 +127,7 @@ class Client extends BaseClient {
     if (response.code === 401) throw new Error('INVALID_CREDENTIALS');
     this.refreshToken = response.refreshToken;
     this.lastTokenRefreshTimestamp = Date.now();
-    this.token = response.idToken;
+    this.rest.setToken(response.idToken);
     this.readyTimestamp = Date.now();
     this.upper = setInterval(() => this.tokenRefresh(), this.options.tokenRefreshInterval);
     return this;
@@ -138,14 +137,14 @@ class Client extends BaseClient {
     if (!this.refreshToken || typeof this.refreshToken !== 'string') throw new Error('REFRESH_TOKEN_NOT_FOUND');
 
     const response = await this.rest.post(Routes.TOKEN_REFRESH(), {
-      api: this.options.http.api.auth,
+      api: this.rest.options.api.auth,
       data: {
         refreshToken: this.refreshToken,
       },
     });
 
     if (response.code === 401) throw new Error('INVALID_REFRESH_TOKEN');
-    this.token = response.idToken;
+    this.rest.setToken(response.idToken);
     this.lastTokenRefreshTimestamp = Date.now();
   }
 
@@ -155,7 +154,7 @@ class Client extends BaseClient {
   destroy() {
     this.upper = clearInterval(this.upper);
     this.refreshToken = null;
-    this.token = null;
+    this.rest.setToken(null);
     this.readyTimestamp = null;
   }
 

@@ -20,7 +20,7 @@ class GameManager extends BaseManager {
       throw new Error('INCORRECT_LANGUAGE');
     }
     const response = await this.client.rest.get(Routes.CUSTOM_GAME_LOBBIES(), {
-      api: this.client.options.http.api.game,
+      api: this.client.rest.options.api.game,
       query: { language },
     });
     return response.openGames.map(game => new CustomGame(this.client, game));

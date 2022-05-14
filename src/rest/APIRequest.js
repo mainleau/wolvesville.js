@@ -5,7 +5,6 @@ const fetch = require('node-fetch');
 class APIRequest {
   constructor(rest, method, path, options) {
     this.rest = rest;
-    this.client = rest.client;
     this.method = method;
     this.route = options.route;
     this.options = options;
@@ -24,15 +23,15 @@ class APIRequest {
   }
 
   make() {
-    const url = (this.options.api || this.client.options.http.api.core) + this.path;
+    const url = (this.options.api || this.rest.options.api.core) + this.path;
 
     let headers = {};
 
-    if (this.options.api !== this.client.options.http.api.auth) headers.Authorization = `Bearer ${this.client.token}`;
+    if (this.options.api !== this.rest.options.api.auth) headers.Authorization = `Bearer ${this.rest.token}`;
 
     let body;
 
-    if ((this.options.api || this.client.options.http.api.core) === this.client.options.http.api.core) {
+    if ((this.options.api || this.rest.options.api.core) === this.rest.options.api.core) {
       headers.ids = 1;
     }
 
@@ -42,7 +41,7 @@ class APIRequest {
     }
 
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), this.client.options.restRequestTimeout);
+    const timeout = setTimeout(() => controller.abort(), this.rest.options.timeout);
     return fetch(url, {
       method: this.method,
       headers,
