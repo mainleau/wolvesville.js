@@ -13,7 +13,7 @@ class LimitedCollection extends Offer {
 
     /**
      * Offer cost
-     * @type {Offer}
+     * @type {number}
      */
     this.cost = client.items.offers.cache.get(this.name).cost;
 
@@ -30,8 +30,8 @@ class LimitedCollection extends Offer {
     this.expirationTimestamp = new Date(data.expireDate).getTime();
 
     /**
-     * Wether offer is giftable
-     * @type {string}
+     * Whether offer is giftable
+     * @type {boolean}
      */
     this.giftable = data.canBeGifted;
   }

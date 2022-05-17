@@ -29,7 +29,7 @@ class LimitedItems extends Base {
     this.expirationTimestamp = new Date(data.expireDate).getTime();
 
     /**
-     * Wether offer is giftable
+     * Whether offer is giftable
      * @type {boolean}
      */
     this.giftable = data.canBeGifted;

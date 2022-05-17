@@ -13,7 +13,7 @@ class LimitedOffer extends Offer {
 
     /**
      * Offer cost
-     * @type {Offer}
+     * @type {number}
      */
     this.cost = client.items.offers.cache.get(this.name).cost;
 
