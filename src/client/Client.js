@@ -89,11 +89,7 @@ class Client extends BaseClient {
    * @type {boolean}
    * @readonly
    */
-  static get expired() {
-    if (!this.refreshToken || typeof this.refreshToken !== 'string') {
-      throw new Error('REFRESH_TOKEN_NOT_FOUND');
-    }
-
+  get expired() {
     return new Date(this.lastTokenRefreshTimestamp).getTime() + 60 * 60 * 1000 < Date.now();
   }
 
