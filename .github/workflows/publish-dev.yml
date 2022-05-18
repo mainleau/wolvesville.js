@@ -1,0 +1,38 @@
+name: Publish dev
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */12 * * *'
+jobs:
+  npm:
+    name: npm
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'mainleau'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install node.js v16
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+
+      - name: Check previous released version
+        id: pre-release
+        run: |
+          if [[ $(npm view wolvesville.js@dev version | grep -e "$(jq --raw-output '.version' package.json)\..*-$(git rev-parse --short HEAD)") ]]; \
+          then echo '::set-output name=release::false'; \
+          else echo '::set-output name=release::true'; fi
+
+      - name: Install dependencies
+        if: steps.pre-release.outputs.release == 'true'
+        run: npm install
+
+      - name: Publish
+        if: steps.pre-release.outputs.release == 'true'
+        run: |
+          npm version $(jq --raw-output '.version' package.json).$(date +%s)-$(git rev-parse --short HEAD)
+          npm publish --tag dev || true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.WJS_PUBLISH }}
