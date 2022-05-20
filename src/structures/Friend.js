@@ -63,7 +63,7 @@ class Friend extends BasePlayer {
   }
 
   /**
-   * Wether friend is online
+   * Whether friend is online
    * @type {boolean}
    */
   get online() {

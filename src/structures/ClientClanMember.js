@@ -11,7 +11,7 @@ class ClientClanMember extends ClanMember {
     super(client, data);
 
     /**
-     * Does the member participate in clan quests
+     * Whether the member participate in clan quests
      * @type {boolean}
      */
     this.questParticipant = data.participateInClanQuests;
