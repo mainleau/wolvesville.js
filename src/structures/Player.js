@@ -3,6 +3,7 @@
 const { Collection } = require('@discordjs/collection');
 const AvatarSlot = require('./AvatarSlot');
 const BasePlayer = require('./BasePlayer');
+const EquippedItems = require('./EquippedItems');
 const RoleCard = require('./RoleCard');
 const Routes = require('../util/Routes');
 
@@ -76,14 +77,12 @@ class Player extends BasePlayer {
 
     /**
      * Player equipped items
-     * @type {Object}
+     * @type {EquippedItems}
      */
-    Object.defineProperty(this, 'equippedItems', {
-      value: {
-        icon: {
-          id: data.equippedProfileIconId,
-          color: data.equippedProfileIconColor,
-        },
+    this.equippedItems = new EquippedItems(client, {
+      profileIcon: {
+        id: data.equippedProfileIconId,
+        color: data.equippedProfileIconColor,
       },
     });
 

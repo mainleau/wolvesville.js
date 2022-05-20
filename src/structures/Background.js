@@ -11,35 +11,59 @@ class Background extends Base {
   constructor(client, data) {
     super(client);
 
-    /**
-     * Background id
-     * @type {string}
-     */
-    this.id = data.id;
+    this._patch(data);
+  }
 
-    /**
-     * Background name
-     * @type {string}
-     */
-    this.name = data.imageStoreDay.fileName.split('_').slice(0, -3).join('_');
+  _patch(data) {
+    if ('id' in data) {
+      /**
+       * Background id
+       * @type {string}
+       */
+      this.id = data.id;
+    } else {
+      this.id ??= null;
+    }
 
-    /**
-     * Background rarity
-     * @type {string}
-     */
-    this.rarity = Rarities[data.rarity];
+    if ('name' in data) {
+      /**
+       * Background name
+       * @type {string}
+       */
+      this.name = data.name;
+    } else {
+      this.name ??= null;
+    }
 
-    /**
-     * Background day color
-     * @type {string}
-     */
-    Object.defineProperty(this, 'dayColor', { value: data.backgroundColorDay });
+    if ('rarity' in data) {
+      /**
+       * Background rarity
+       * @type {string}
+       */
+      this.rarity = Rarities[data.rarity];
+    } else {
+      this.rarity ??= null;
+    }
 
-    /**
-     * Background night color
-     * @type {string}
-     */
-    Object.defineProperty(this, 'nightColor', { value: data.backgroundColorNight });
+    if ('dayColor' in data) {
+      /**
+       * Background day color
+       * @type {string}
+       */
+      this.dayColor = data.dayColor;
+    } else {
+      this.dayColor ??= null;
+    }
+
+    if ('nightColor' in data) {
+      /**
+       * Background night color
+       * @type {string}
+       */
+      this.nightColor = data.nightColor;
+    } else {
+      this.nightColor ??= null;
+    }
   }
 
   /**

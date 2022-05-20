@@ -52,12 +52,10 @@ class ClientPlayer extends Player {
       value: data.gender === 'MALE' ? Genders.MALE : data.gender === 'FEMALE' ? Genders.FEMALE : Genders.OTHER,
     });
 
-    this.equippedItems.background = {
-      id: data.equippedBackgroundId || null,
-    };
-    this.equippedItems.loadingScreen = {
-      id: data.equippedLoadingScreenId || null,
-    };
+    this.equippedItems._patch({
+      background: { id: data.equippedBackgroundId },
+      loadingScreen: { id: data.equippedLoadingScreenId },
+    });
 
     this.stats.roles = Object.keys(this._roleStats).map(roleId => {
       const role = new Role(client, { id: roleId });
@@ -120,10 +118,24 @@ class ClientPlayer extends Player {
    * @returns {Promise<EquippedItems>}
    */
   async fetchEquippedItems() {
-    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
-
     const data = await this.client.rest.get(Routes.EQUIPPED_ITEMS());
-    return new EquippedItems(this.client, data);
+    return new EquippedItems(this.client, {
+      avatar: {
+        id: data.renderedAvatarImage.fileName.slice(0, -4),
+        avatarHairId: data.avatarHairId,
+        avatarHatId: data.avatarHatId,
+        avatarEyesId: data.avatarEyesId,
+        avatarGlassesId: data.avatarGlassesId,
+        avatarMouthId: data.avatarMouthId,
+        avatarMaskId: data.avatarMaskId,
+        avatarClothesBodyId: data.avatarClothesBodyId,
+        avatarFrontId: data.avatarFrontId,
+        avatarBackId: data.avatarBackId,
+        avatarBadgeId: data.avatarBadgeId,
+        gravestoneId: data.gravestoneId,
+        skinColor: parseInt(data.skinColor.slice(6)) - 1,
+      },
+    });
   }
 
   /**

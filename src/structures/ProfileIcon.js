@@ -11,48 +11,64 @@ class ProfileIcon extends Base {
   constructor(client, data) {
     super(client);
 
-    /**
-     * Profile icon id
-     * @type {string}
-     */
-    this.id = data.id;
+    this._patch(data);
+  }
 
-    /**
-     * Profile icon name
-     * @type {string}
-     */
-    this.name = data.name.split(':')[1];
-
-    /**
-     * Profile icon rarity
-     * @type {string}
-     */
-    this.rarity = Rarities[data.rarity];
-
-    if (data.costInSilver !== -1 || data.costInRoses !== -1) {
+  _patch(data) {
+    if ('id' in data) {
       /**
-       * Profile icon cost
-       * @type {number}
+       * Profile icon id
+       * @type {string}
        */
-      Object.defineProperty(this, 'cost', {
-        value: data.costInSilver !== -1 ? data.costInSilver : data.costInRoses,
-      });
+      this.id = data.id;
+    } else {
+      this.id ??= null;
     }
 
-    /**
-     * Wether profile icon is purchasable
-     * @type {string}
-     */
-    Object.defineProperty(this, 'purchasable', {
-      value: data.isPurchasable & data.showInInventory,
-    });
+    if ('name' in data) {
+      /**
+       * Profile icon name
+       * @type {string}
+       */
+      this.name = data.name.split(':')[1];
+    } else {
+      this.name ??= null;
+    }
 
-    if (data.event) {
+    if ('rarity' in data) {
+      /**
+       * Profile icon rarity
+       * @type {string}
+       */
+      this.rarity = Rarities[data.rarity];
+    } else {
+      this.rarity ??= null;
+    }
+
+    if ('event' in data) {
       /**
        * Profile icon event
        * @type {string}
        */
-      Object.defineProperty(this, 'event', { value: data.event });
+      this.event = data.event;
+    }
+
+    if (('costInSilver' in data && data.costInSilver !== -1) || ('costInRoses' in data && data.costInRoses !== -1)) {
+      /**
+       * Profile icon cost
+       * @type {number}
+       */
+      this.cost = data.costInSilver !== -1 ? data.costInSilver : data.costInRoses;
+    } else {
+      this.cost ??= null;
+    }
+
+    if ('isPurchasable' in data || 'showInInventory' in data) {
+      /**
+       * Whether profile icon is purchasable
+       * @type {string}
+       */
+      this.purchasable = Boolean(data.isPurchasable & data.showInInventory);
     }
   }
 }

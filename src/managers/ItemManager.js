@@ -11,6 +11,7 @@ const Offer = require('../structures/Offer');
 const ProfileIcon = require('../structures/ProfileIcon');
 const RosePackage = require('../structures/RosePackage');
 const Talisman = require('../structures/Talisman');
+const { ItemTypes } = require('../util/Constants');
 const Routes = require('../util/Routes');
 
 /**
@@ -47,13 +48,32 @@ class ItemManager extends BaseManager {
       new Collection(),
     );
 
-    const backgrounds = response.backgrounds.map(background => new Background(this.client, background));
+    const backgrounds = response.backgrounds.map(
+      background =>
+        new Background(this.client, {
+          id: background.id,
+          name: background.imageStoreDay.fileName.slice(0, -4),
+          rarity: background.rarity,
+          dayColor: background.backgroundColorDay,
+          nightColor: background.backgroundColorNight,
+        }),
+    );
+
     backgrounds.reduce(
       (col, background) => col.set(background.id, this.backgrounds._add(background)),
       new Collection(),
     );
 
-    const loadingScreens = response.loadingScreens.map(loadingScreen => new LoadingScreen(this.client, loadingScreen));
+    const loadingScreens = response.loadingScreens.map(
+      loadingScreen =>
+        new LoadingScreen(this.client, {
+          id: loadingScreen.id,
+          name: loadingScreen.imageStore.fileName.slice(0, -4),
+          rarity: loadingScreen.rarity,
+          accentColor: loadingScreen.imagePrimaryColor,
+        }),
+    );
+
     loadingScreens.reduce(
       (col, loadingScreen) => col.set(loadingScreen.id, this.loadingScreens._add(loadingScreen)),
       new Collection(),
@@ -75,6 +95,38 @@ class ItemManager extends BaseManager {
     );
 
     return { avatarItems, profileIcons, backgrounds, loadingScreens, emojis, talismans, offers, rosePackages };
+  }
+
+  /**
+   * Resolve an item.
+   * @param {Object|string} item Item object of id
+   * @param {string} [type] Item type
+   * @returns {?(AvatarItem|Background|LoadingScreen|ProfileIcon|Emoji|Talisman|RosePackage|Offer)}
+   */
+  resolve(item, type) {
+    if(!item || !type) return null;
+    if (typeof item === 'string') item = { id: item };
+
+    switch (type) {
+      case ItemTypes.AVATAR_ITEM:
+        return this.avatarItems.cache.get(item.id) ?? new AvatarItem(this.client, [item.id]);
+      case ItemTypes.BACKGROUND:
+        return this.backgrounds.cache.get(item.id) ?? new Background(this.client, item);
+      case ItemTypes.LOADING_SCREEN:
+        return this.loadingScreens.cache.get(item.id) ?? new LoadingScreen(this.client, item);
+      case ItemTypes.PROFILE_ICON:
+        return this.profileIcons.cache.get(item.id) ?? new ProfileIcon(this.client, item);
+      case ItemTypes.EMOJI:
+        return this.emojis.cache.get(item.id) ?? new Emoji(this.client, item);
+      case ItemTypes.TALISMAN:
+        return this.talismans.cache.get(item.id) ?? new Talisman(this.client, item);
+      case ItemTypes.ROSE_PACKAGE:
+        return this.rosePackages.cache.get(item.id) ?? new RosePackage(this.client, item);
+      case ItemTypes.OFFER:
+        return this.offers.cache.get(item.id) ?? new Offer(this.client, item);
+      default:
+        return null;
+    }
   }
 }
 

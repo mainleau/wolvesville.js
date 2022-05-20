@@ -17,72 +17,97 @@ class AvatarItem extends Base {
      */
     this.id = data[0];
 
-    /**
-     * Item name
-     * @type {string}
-     */
-    this.name = data[11];
+    this._patch(data);
+  }
 
-    /**
-     * Item type
-     * @type {string}
-     */
-    this.type =
-      data[8] === 2
-        ? AvatarItemTypes.HAT
-        : data[8] === 1
-        ? AvatarItemTypes.HAIR
-        : data[8] === 7
-        ? AvatarItemTypes.EYES
-        : data[8] === 3
-        ? AvatarItemTypes.GLASSES
-        : data[8] === 10
-        ? AvatarItemTypes.MOUTH
-        : data[8] === 9
-        ? AvatarItemTypes.MASK
-        : data[8] === 0
-        ? AvatarItemTypes.CLOTHES
-        : data[8] === 5
-        ? AvatarItemTypes.FOREGROUND
-        : data[8] === 6
-        ? AvatarItemTypes.BACKGROUND
-        : data[8] === 8
-        ? AvatarItemTypes.BADGE
-        : AvatarItemTypes.GRAVESTONE;
+  _patch(data) {
 
-    /**
-     * Item rarity
-     * @type {string}
-     */
-    this.rarity =
-      data[1] === 0
-        ? Rarities.COMMON
-        : data[1] === 1
-        ? Rarities.RARE
-        : data[1] === 2
-        ? Rarities.EPIC
-        : Rarities.LEGENDARY;
+    if(11 in data) {
+      /**
+       * Item name
+       * @type {string}
+       */
+      this.name = data[11];
+    } else {
+      this.name ??= null;
+    }
 
-    if (data[2] !== -1 || data[3] !== -1 || data[4] !== -1) {
+    if(8 in data) {
+      /**
+       * Item type
+       * @type {string}
+       */
+      this.type =
+        data[8] === 2
+          ? AvatarItemTypes.HAT
+          : data[8] === 1
+          ? AvatarItemTypes.HAIR
+          : data[8] === 7
+          ? AvatarItemTypes.EYES
+          : data[8] === 3
+          ? AvatarItemTypes.GLASSES
+          : data[8] === 10
+          ? AvatarItemTypes.MOUTH
+          : data[8] === 9
+          ? AvatarItemTypes.MASK
+          : data[8] === 0
+          ? AvatarItemTypes.CLOTHES
+          : data[8] === 5
+          ? AvatarItemTypes.FOREGROUND
+          : data[8] === 6
+          ? AvatarItemTypes.BACKGROUND
+          : data[8] === 8
+          ? AvatarItemTypes.BADGE
+          : AvatarItemTypes.GRAVESTONE;
+    } else {
+      this.type ??= null;
+    }
+
+    if(1 in data) {
+      /**
+       * Item rarity
+       * @type {string}
+       */
+      this.rarity =
+        data[1] === 0
+          ? Rarities.COMMON
+          : data[1] === 1
+          ? Rarities.RARE
+          : data[1] === 2
+          ? Rarities.EPIC
+          : Rarities.LEGENDARY;
+    } else {
+      this.rarity ??= null;
+    }
+
+    if ((2 in data && data[2] !== -1) || (3 in data && data[3] !== -1) || (4 in data && data[4] !== -1)) {
       /**
        * Item cost
        * @type {number}
        */
-      Object.defineProperty(this, 'cost', { value: data[2] !== -1 ? data[2] : data[3] !== -1 ? data[3] : data[4] });
+      this.cost = data[2] !== -1 ? data[2] : data[3] !== -1 ? data[3] : data[4];
+    } else {
+      this.cost ??= null;
     }
 
-    /**
-     * Whether item is purchasable
-     * @type {boolean}
-     */
-    Object.defineProperty(this, 'purchasable', { value: !!(data[5] & data[6]) });
+    if(5 in data && 6 in data) {
+      /**
+       * Whether item is purchasable
+       * @type {boolean}
+       */
+      this.purchasable = Boolean(data[5] & data[6]);
+    } else {
+      this.purchasable ??= null;
+    }
 
-    if (data[10] !== -1) {
+    if (10 in data && data[10] !== -1) {
       /**
        * Item required level
        * @type {number}
        */
-      Object.defineProperty(this, 'requiredLevel', { value: data[10] });
+      this.requiredLevel = data[10];
+    } else {
+      this.requiredLevel ??= null;
     }
   }
 

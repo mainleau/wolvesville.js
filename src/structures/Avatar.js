@@ -1,6 +1,7 @@
 'use strict';
 
 const Base = require('./Base');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents an avatar.
@@ -12,81 +13,129 @@ class Avatar extends Base {
 
     /**
      * Avatar id
-     * @type {string}
+     * @type {?string}
      */
-    this.id = data.renderedAvatarImage.fileName.slice(0, -4);
+    this.id = data.id;
 
     /**
      * Avatar skin color
-     * @type {number}
+     * @type {?number}
      */
-    this.skinColor = parseInt(data.skinColor.slice(6)) - 1;
+    this.skinColor = data.skinColor;
 
-    /**
-     * Avatar eyes
-     * @type {AvatarItem}
-     */
-    this.eyes = this.client.items.avatarItems.cache.get(data.avatarEyesId);
+    this._patch(data);
+  }
 
-    /**
-     * Avatar clothes
-     * @type {AvatarItem}
-     */
-    this.clothes = this.client.items.avatarItems.cache.get(data.avatarClothesBodyId);
+  _patch(data) {
+    if ('avatarHairId' in data) {
+      /**
+       * Avatar hair
+       * @type {?AvatarItem}
+       */
+      this.hair = this.client.items.resolve(data.avatarHairId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.hair ??= null;
+    }
 
-    /**
-     * Avatar gravestone
-     * @type {AvatarItem}
-     */
-    this.gravestone = this.client.items.avatarItems.cache.get(data.gravestoneId);
+    if ('avatarHatId' in data) {
+      /**
+       * Avatar hat
+       * @type {?AvatarItem}
+       */
+      this.hat = this.client.items.resolve(data.avatarHatId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.hat ??= null;
+    }
 
-    /**
-     * Avatar hat
-     * @type {?AvatarItem}
-     */
-    this.hat = this.client.items.avatarItems.cache.get(data.avatarHatId) || null;
+    if ('avatarEyesId' in data) {
+      /**
+       * Avatar eyes
+       * @type {?AvatarItem}
+       */
+      this.eyes = this.client.items.resolve(data.avatarEyesId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.eyes ??= null;
+    }
 
-    /**
-     * Avatar hair
-     * @type {?AvatarItem}
-     */
-    this.hair = this.client.items.avatarItems.cache.get(data.avatarHairId) || null;
+    if ('avatarGlassesId' in data) {
+      /**
+       * Avatar glasses
+       * @type {?AvatarItem}
+       */
+      this.glasses = this.client.items.resolve(data.avatarGlassesId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.glasses ??= null;
+    }
 
-    /**
-     * Avatar glasses
-     * @type {?AvatarItem}
-     */
-    this.glasses = this.client.items.avatarItems.cache.get(data.avatarGlassesId) || null;
+    if ('avatarMouthId' in data) {
+      /**
+       * Avatar mouth
+       * @type {?AvatarItem}
+       */
+      this.mouth = this.client.items.resolve(data.avatarMouthId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.mouth ??= null;
+    }
 
-    /**
-     * Avatar mouth
-     * @type {?AvatarItem}
-     */
-    this.mouth = this.client.items.avatarItems.cache.get(data.avatarMouthId) || null;
+    if ('avatarMaskId' in data) {
+      /**
+       * Avatar mask
+       * @type {?AvatarItem}
+       */
+      this.mask = this.client.items.resolve(data.avatarMaskId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.mask ??= null;
+    }
 
-    /**
-     * Avatar mask
-     * @type {?AvatarItem}
-     */
-    this.mask = this.client.items.avatarItems.cache.get(data.avatarMaskId) || null;
+    if ('avatarClothesBodyId' in data) {
+      /**
+       * Avatar clothes
+       * @type {?AvatarItem}
+       */
+      this.clothes = this.client.items.resolve(data.avatarClothesBodyId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.clothes ??= null;
+    }
 
-    /**
-     * Avatar badge
-     * @type {?AvatarItem}
-     */
-    this.badge = this.client.items.avatarItems.cache.get(data.avatarBadgeId) || null;
+    if ('avatarFrontId' in data) {
+      /**
+       * Avatar foreground
+       * @type {?AvatarItem}
+       */
+      this.foreground = this.client.items.resolve(data.avatarFrontId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.foreground ??= null;
+    }
 
-    /**
-     * Avatar foreground
-     * @type {?AvatarItem}
-     */
-    this.foreground = this.client.items.avatarItems.cache.get(data.avatarFrontId) || null;
+    if ('avatarBackId' in data) {
+      /**
+       * Avatar background
+       * @type {?AvatarItem}
+       */
+      this.background = this.client.items.resolve(data.avatarBackId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.background ??= null;
+    }
 
-    /**
-     * Avatar background
-     * @type {?AvatarItem}
-     */
-    this.background = this.client.items.avatarItems.cache.get(data.avatarBackId) || null;
+    if ('avatarBadgeId' in data) {
+      /**
+       * Avatar badge
+       * @type {?AvatarItem}
+       */
+      this.badge = this.client.items.resolve(data.avatarBadgeId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.badge ??= null;
+    }
+
+    if ('gravestoneId' in data) {
+      /**
+       * Avatar gravestone
+       * @type {?AvatarItem}
+       */
+      this.gravestone = this.client.items.resolve(data.gravestoneId, ItemTypes.AVATAR_ITEM);
+    } else {
+      this.gravestone ??= null;
+    }
   }
 
   /**

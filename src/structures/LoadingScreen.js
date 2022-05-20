@@ -11,29 +11,49 @@ class LoadingScreen extends Base {
   constructor(client, data) {
     super(client);
 
-    /**
-     * Loading screen id
-     * @type {string}
-     */
-    this.id = data.id;
+    this._patch(data);
+  }
 
-    /**
-     * Loading screen name
-     * @type {string}
-     */
-    this.name = data.imageStore.fileName.split('_').slice(0, -1).join('_');
+  _patch(data) {
+    if ('id' in data) {
+      /**
+       * Loading screen id
+       * @type {string}
+       */
+      this.id = data.id;
+    } else {
+      this.id ??= null;
+    }
 
-    /**
-     * Loading screen name
-     * @type {string}
-     */
-    this.rarity = Rarities[data.rarity];
+    if ('name' in data) {
+      /**
+       * Loading screen name
+       * @type {string}
+       */
+      this.name = data.name;
+    } else {
+      this.name ??= null;
+    }
 
-    /**
-     * Loading screen primary color
-     * @type {string}
-     */
-    Object.defineProperty(this, 'primaryColor', { value: data.imagePrimaryColor });
+    if ('rarity' in data) {
+      /**
+       * Loading screen rarity
+       * @type {string}
+       */
+      this.rarity = Rarities[data.rarity];
+    } else {
+      this.rarity ??= null;
+    }
+
+    if ('accentColor' in data) {
+      /**
+       * Loading screen accent color
+       * @type {string}
+       */
+      this.accentColor = data.accentColor;
+    } else {
+      this.accentColor ??= null;
+    }
   }
 
   /**
