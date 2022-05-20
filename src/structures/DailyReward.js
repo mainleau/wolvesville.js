@@ -31,19 +31,17 @@ class DailyReward extends Base {
       this.item = client.items.avatarItems.cache.get(data.avatarItemId);
     }
 
-    if ([ItemTypes.TALISMAN, ItemTypes.ROLE_CARD].includes(this.type)) {
-      /**
-       * Whether the item is unknown
-       * @type {boolean}
-       */
-      this.unknown = data.unknown;
-    }
-
     /**
      * Reward amount
      * @type {number}
      */
     this.amount = data.amount;
+
+    /**
+     * Whether the reward is unknown
+     * @type {boolean}
+     */
+    this.unknown = Boolean(data.unknown);
 
     /**
      * Whether the reward is claimed
