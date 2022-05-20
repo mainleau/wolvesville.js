@@ -44,7 +44,7 @@ class LoadingScreen extends Base {
     if (typeof wide !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
     if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
-    var url = `${this.client.options.http.cdn.items}/loadingScreens/${this.name}`;
+    var url = `${this.client.rest.options.cdn.items}/loadingScreens/${this.name}`;
     url += `_background_large${wide ? '.wide' : ''}`;
     if (zoom) url += `@${zoom}x`;
 

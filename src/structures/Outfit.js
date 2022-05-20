@@ -41,7 +41,7 @@ class Outfit extends Base {
    * @readonly
    */
   get imageURL() {
-    return `${this.client.options.http.cdn.items}/promotions/${this.name}.jpg`;
+    return `${this.client.rest.options.cdn.items}/promotions/${this.name}.jpg`;
   }
 }
 

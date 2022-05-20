@@ -94,7 +94,7 @@ class AvatarItem extends Base {
     if (typeof large !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
     if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
-    var url = `${this.client.options.http.cdn.items}/avatarItems/${this.name}`;
+    var url = `${this.client.rest.options.cdn.items}/avatarItems/${this.name}`;
     url += `.avatar-${large ? 'large' : 'small'}`;
     if (zoom) url += `@${zoom}x`;
 

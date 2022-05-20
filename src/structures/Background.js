@@ -52,7 +52,7 @@ class Background extends Base {
     }
     if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
-    var url = `${this.client.options.http.cdn.items}/backgrounds/${this.name}`;
+    var url = `${this.client.rest.options.cdn.items}/backgrounds/${this.name}`;
     url += `_background_${large ? 'large' : 'small'}`;
     url += `_${night ? 'night' : 'day'}`;
     if (zoom) url += `@${zoom}x`;

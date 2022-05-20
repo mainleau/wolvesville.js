@@ -38,12 +38,11 @@ class ClanQuest extends Base {
   }
 
   /**
-   * Quest image url
-   * @type {string}
-   * @readonly
+   * Get quest image url
+   * @returns {string}
    */
-  get imageURL() {
-    return `${this.client.options.http.cdn.items}/promotions/${this.name}.jpg`;
+  imageURL() {
+    return `${this.client.rest.options.cdn.items}/promotions/${this.name}.jpg`;
   }
 }
 
