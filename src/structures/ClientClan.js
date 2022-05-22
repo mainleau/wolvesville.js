@@ -6,7 +6,7 @@ const AvailableClanQuests = require('./AvailableClanQuests');
 const Clan = require('./Clan');
 const ClanLedgerField = require('./ClanLedgerField');
 const ClanLog = require('./ClanLog');
-const ClanChatManager = require('../managers/ClanChatManager');
+const ClanChatMessage = require('../structures/ClanChatMessage');
 const Routes = require('../util/Routes');
 
 /**
@@ -28,12 +28,6 @@ class ClientClan extends Clan {
      * @type {string}
      */
     this.gemCount = data.clan.gems;
-
-    /**
-     * Clan chat
-     * @type {string}
-     */
-    this.chat = new ClanChatManager(client);
   }
 
   /**
@@ -76,6 +70,22 @@ class ClientClan extends Clan {
   async fetchLog() {
     const response = await this.client.rest.get(Routes.LOG());
     return response.map(log => new ClanLog(this.client, log));
+  }
+
+  /**
+   * Fetch chat messages.
+   * @param {number} timestamp Timestamp of messages around
+   * @returns {Promise<ClanChatMessage[]>}
+   */
+  async fetchChatMessages(timestamp) {
+    if (timestamp) {
+      const date = new Date(timestamp);
+      if (isNaN(timestamp) || timestamp !== date.getTime()) throw new Error('INVALID_TIMESTAMP');
+      timestamp = date.toISOString();
+    }
+
+    const response = await this.client.rest.get(Routes.CLAN_CHAT(), { query: { oldest: timestamp } });
+    return response.map(message => new ClanChatMessage(this.client, message));
   }
 }
 

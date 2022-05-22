@@ -4,7 +4,6 @@ exports.Client = require('./client/Client');
 
 exports.BaseManager = require('./managers/BaseManager');
 exports.CacheManager = require('./managers/CacheManager');
-exports.ClanChatManager = require('./managers/ClanChatManager');
 exports.ClanManager = require('./managers/ClanManager');
 exports.FriendManager = require('./managers/FriendManager');
 exports.GameManager = require('./managers/GameManager');
