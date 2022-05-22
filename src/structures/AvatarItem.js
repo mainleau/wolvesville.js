@@ -21,8 +21,7 @@ class AvatarItem extends Base {
   }
 
   _patch(data) {
-
-    if(11 in data) {
+    if (11 in data) {
       /**
        * Item name
        * @type {string}
@@ -32,7 +31,7 @@ class AvatarItem extends Base {
       this.name ??= null;
     }
 
-    if(8 in data) {
+    if (8 in data) {
       /**
        * Item type
        * @type {string}
@@ -63,7 +62,7 @@ class AvatarItem extends Base {
       this.type ??= null;
     }
 
-    if(1 in data) {
+    if (1 in data) {
       /**
        * Item rarity
        * @type {string}
@@ -90,7 +89,7 @@ class AvatarItem extends Base {
       this.cost ??= null;
     }
 
-    if(5 in data && 6 in data) {
+    if (5 in data && 6 in data) {
       /**
        * Whether item is purchasable
        * @type {boolean}

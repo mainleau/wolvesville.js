@@ -104,7 +104,7 @@ class ItemManager extends BaseManager {
    * @returns {?(AvatarItem|Background|LoadingScreen|ProfileIcon|Emoji|Talisman|RosePackage|Offer)}
    */
   resolve(item, type) {
-    if(!item || !type) return null;
+    if (!item || !type) return null;
     if (typeof item === 'string') item = { id: item };
 
     switch (type) {
