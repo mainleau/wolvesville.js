@@ -23,6 +23,10 @@ class CalendarReward extends Base {
      */
     this.amount = data.amount;
 
+    /**
+     * Reward item
+     * @type {AvatarItem|LoadingScreen|Background|Emoji}
+     */
     this.item = client.items.resolve(
       data.avatarItemId || data.loadingScreenId || data.backgroundId || data.emojiId,
       this.type,
