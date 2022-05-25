@@ -15,7 +15,7 @@ class CalendarReward extends Base {
      * Reward type
      * @type {string}
      */
-    this.type = data.type;
+    this.type = ItemTypes[data.type];
 
     /**
      * Reward amount
@@ -23,14 +23,10 @@ class CalendarReward extends Base {
      */
     this.amount = data.amount;
 
-    this.item =
-      this.type === ItemTypes.AVATAR_ITEM
-        ? client.items.avatarItems.cache.get(data.avatarItemId)
-        : this.type === ItemTypes.LOADING_SCREEN
-        ? client.items.loadingScreens.cache.get(data.loadingScreenId)
-        : this.type === ItemTypes.BACKGROUND
-        ? client.items.backgrounds.cache.get(data.backgroundId)
-        : client.items.emojis.cache.get(data.emojiId);
+    this.item = client.items.resolve(
+      data.avatarItemId || data.loadingScreenId || data.backgroundId || data.emojiId,
+      this.type,
+    );
 
     /**
      * Reward day

@@ -3,13 +3,15 @@ const { Client } = require('../src');
 
 new Client().login()
   .then(async client => {
+    await client.items.fetch();
     const player = await client.fetchPlayer();
+    player.fetchAvatarSlots().then(console.log);
     player.fetchAnnouncements().then(console.log);
     player.fetchEquippedItems().then(console.log);
     player.fetchInventory().then(console.log);
     player.fetchClanRequests().then(console.log);
     player.fetchFriendReferralRewards().then(console.log);
-    player.fetchDailyRewards().then(x => console.log(x));
+    player.fetchDailyRewards().then(console.log);
     player.fetchGoldenWheelRewards().then(console.log);
     player.fetchChallenges().then(console.log);
     player.fetchBattlePassSeason().then(console.log);

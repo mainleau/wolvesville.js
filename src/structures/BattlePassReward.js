@@ -18,7 +18,7 @@ class BattlePassReward extends Base {
     this.tier = data.tier;
 
     /**
-     * Wether reward is claimed
+     * Whether reward is claimed
      * @type {boolean}
      */
     this.claimed = data.claimed;
@@ -35,16 +35,15 @@ class BattlePassReward extends Base {
      */
     this.amount = data.amount;
 
-    if (data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId) {
+    if ([ItemTypes.AVATAR_ITEM, ItemTypes.PROFILE_ICON, ItemTypes.EMOJI, ItemTypes.ROSE_PACKAGE].includes(this.type)) {
       /**
        * Reward item
-       * @type {Object}
+       * @type {AvatarItem|ProfileIcon|Emoji|RosePackage}
        */
-      this.item =
-        client.items.avatarItems.cache.get(data.avatarItemId) ||
-        client.items.rosePackages.cache.get(data.rosePackageId) ||
-        client.items.emojis.cache.get(data.emojiId) ||
-        client.items.profileIcons.cache.get(data.profileIconId);
+      this.item = client.items.resolve(
+        data.avatarItemId || data.rosePackageId || data.emojiId || data.profileIconId,
+        this.type,
+      );
     }
   }
 }

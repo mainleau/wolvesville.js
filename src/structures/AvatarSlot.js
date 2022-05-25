@@ -14,7 +14,7 @@ class AvatarSlot extends Avatar {
      * Slot number
      * @type {number}
      */
-    Object.defineProperty(this, 'slot', { value: data.slot });
+    this.slot = data.slot;
   }
 }
 

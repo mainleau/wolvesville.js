@@ -101,7 +101,7 @@ class ItemManager extends BaseManager {
    * Resolve an item.
    * @param {Object|string} item Item object of id
    * @param {string} [type] Item type
-   * @returns {?(AvatarItem|Background|LoadingScreen|ProfileIcon|Emoji|Talisman|RosePackage|Offer)}
+   * @returns {?(AvatarItem|Background|LoadingScreen|ProfileIcon|Emoji|Talisman|RosePackage)}
    */
   resolve(item, type) {
     if (!item || !type) return null;
@@ -122,8 +122,6 @@ class ItemManager extends BaseManager {
         return this.talismans.cache.get(item.id) ?? new Talisman(this.client, item);
       case ItemTypes.ROSE_PACKAGE:
         return this.rosePackages.cache.get(item.id) ?? new RosePackage(this.client, item);
-      case ItemTypes.OFFER:
-        return this.offers.cache.get(item.id) ?? new Offer(this.client, item);
       default:
         return null;
     }

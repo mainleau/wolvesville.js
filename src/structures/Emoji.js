@@ -16,31 +16,49 @@ class Emoji extends Base {
      */
     this.id = data.id;
 
-    /**
-     * Emoji name
-     * @type {string}
-     */
-    this.name = data.name;
+    this._patch(data);
+  }
 
-    if (data.costInGems) {
+  _patch(data) {
+    if ('name' in data) {
+      /**
+       * Emoji name
+       * @type {string}
+       */
+      this.name = data.name;
+    } else {
+      this.name ??= null;
+    }
+
+    if ('event' in data) {
+      /**
+       * Emoji event
+       * @type {string}
+       */
+      this.event = data.event;
+    } else {
+      this.event ??= null;
+    }
+
+    if ('costInGems' in data) {
       /**
        * Emoji cost
        * @type {number}
        */
-      Object.defineProperty(this, 'cost', { value: data.costInGems });
+      this.cost = data.costInGems;
+    } else {
+      this.cost ??= null;
     }
 
-    /**
-     * Whether emoji is purchasable
-     * @type {boolean}
-     */
-    Object.defineProperty(this, 'purchasable', { value: data.showInInventory & data.isPurchasable });
-
-    /**
-     * Emoji event
-     * @type {string}
-     */
-    Object.defineProperty(this, 'event', { value: data.event });
+    if ('showInInventory' in data && 'isPurchasable' in data) {
+      /**
+       * Whether emoji is purchasable
+       * @type {boolean}
+       */
+      this.purchasable = Boolean(data.showInInventory & data.isPurchasable);
+    } else {
+      this.purchasable ??= null;
+    }
   }
 }
 

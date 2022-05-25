@@ -137,11 +137,18 @@ class Player extends BasePlayer {
    * @returns {Promise<Collection<number, AvatarSlot>>}
    */
   async fetchAvatarSlots() {
-    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
-
     const response = await this.client.rest.get(Routes.AVATAR_SLOTS(this.id));
 
-    const data = response.map(avatarSlot => new AvatarSlot(this.client, avatarSlot));
+    const data = response.map(
+      avatarSlot =>
+        new AvatarSlot(
+          this.client,
+          Object.assign(avatarSlot, {
+            id: avatarSlot.renderedAvatarImage.fileName.slice(0, -4),
+            skinColor: parseInt(avatarSlot.skinColor.slice(6)) - 1,
+          }),
+        ),
+    );
     return data.reduce((col, avatarSlot) => col.set(avatarSlot.slot, avatarSlot), new Collection());
   }
 
@@ -150,8 +157,6 @@ class Player extends BasePlayer {
    * @returns {Promise<Collection<string, AvatarItem>>}
    */
   async fetchBadges() {
-    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
-
     const response = await this.client.rest.get(Routes.BADGES(this.id));
 
     const data = response.ids.map(badgeId => this.client.items.avatarItems.cache.get(badgeId));

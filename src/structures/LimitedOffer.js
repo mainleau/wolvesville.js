@@ -15,7 +15,7 @@ class LimitedOffer extends Offer {
      * Offer cost
      * @type {number}
      */
-    this.cost = client.items.offers.cache.get(this.name).cost;
+    this.cost = client.items.offers.cache.get(this.name)?.cost ?? null;
 
     /**
      * Offer outfit

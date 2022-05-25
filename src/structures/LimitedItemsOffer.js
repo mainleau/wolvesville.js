@@ -1,27 +1,23 @@
 'use strict';
 
 const Offer = require('./Offer');
-const Outfit = require('./Outfit');
+const { ItemTypes } = require('../util/Constants');
 
 /**
- * Represents a limited collection.
+ * Represents a limited items offer.
  * @extends {Offer}
  */
-class LimitedCollection extends Offer {
+class LimitedItemsOffer extends Offer {
   constructor(client, data) {
     super(client, data);
 
     /**
-     * Offer cost
-     * @type {number}
+     * Offer items
+     * @type {AvatarItem[]|Emoji[]}
      */
-    this.cost = client.items.offers.cache.get(this.name)?.cost ?? null;
-
-    /**
-     * Offer outfits
-     * @type {Outfit[]}
-     */
-    this.outfits = data.itemSets.map(outfit => new Outfit(client, outfit));
+    this.items =
+      data.avatarItemIds?.map(id => client.items.resolve(id, ItemTypes.AVATAR_ITEM)) ||
+      data.emojiIds?.map(id => client.items.resolve(id, ItemTypes.EMOJI));
 
     /**
      * Offer expiration timestamp
@@ -37,4 +33,4 @@ class LimitedCollection extends Offer {
   }
 }
 
-module.exports = LimitedCollection;
+module.exports = LimitedItemsOffer;

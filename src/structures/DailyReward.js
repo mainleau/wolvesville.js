@@ -28,7 +28,7 @@ class DailyReward extends Base {
        * Item id
        * @type {string}
        */
-      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
+      this.item = client.items.resolve(data.avatarItemId, ItemTypes.AVATAR_ITEM);
     }
 
     /**

@@ -18,7 +18,7 @@ class FriendReferralReward extends Base {
     this.type = ItemTypes[data.type];
 
     /**
-     * Reward amount.
+     * Reward amount
      * @type {number}
      */
     this.amount = data.amount;
@@ -28,7 +28,7 @@ class FriendReferralReward extends Base {
        * Reward item id
        * @type {AvatarItem}
        */
-      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
+      this.item = client.items.resolve(data.avatarItemId, ItemTypes.AVATAR_ITEM);
     }
 
     /**
