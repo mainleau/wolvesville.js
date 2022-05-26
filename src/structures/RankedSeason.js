@@ -24,6 +24,24 @@ class RankedSeason extends Base {
     this.season = data.season.number + 1;
 
     /**
+     * Village placement game count
+     * @type {number}
+     */
+    this.villagePlacementGameCount = data.villagePlacementGamesNumber;
+
+    /**
+     * Werewolf placement game count
+     * @type {number}
+     */
+    this.werewolfPlacementGameCount = data.werewolfPlacementGamesNumber;
+
+    /**
+     * Other placement game count
+     * @type {number}
+     */
+    this.otherPlacementGameCount = data.otherPlacementGamesNumber;
+
+    /**
      * Season awards
      * @type {RankedAward[]}
      */
@@ -68,7 +86,7 @@ class RankedSeason extends Base {
     this.endTimestamp = new Date(data.season.endTime).getTime();
 
     /**
-     * Wether season is ended
+     * Whether season is ended
      * @type {boolean}
      */
     this.ended = data.season.finished;
