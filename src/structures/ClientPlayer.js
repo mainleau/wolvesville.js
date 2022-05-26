@@ -105,6 +105,14 @@ class ClientPlayer extends Player {
   }
 
   /**
+   * Fetch client player clan.
+   * @returns {Promise<ClientClan>}
+   */
+  fetchClan() {
+    return this.client.clans.fetchOwn();
+  }
+
+  /**
    * Fetch developer announcements.
    * @returns {Promise<Announcement[]>}
    */
