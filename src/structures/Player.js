@@ -127,8 +127,8 @@ class Player extends BasePlayer {
    * @returns {Promise<Clan|ClientClan>}
    */
   fetchClan() {
-    return this.constructor.name === Player
-      ? this.client.clans.fetchByUsername(this.username)
+    return this.constructor === Player
+      ? this.client.clans.fetchByPlayerId(this.id)
       : this.client.clans.fetchOwn();
   }
 
