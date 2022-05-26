@@ -2,6 +2,7 @@
 
 const { Collection } = require('@discordjs/collection');
 const Announcement = require('./Announcement');
+const Ban = require('./Ban');
 const BattlePassSeason = require('./BattlePassSeason');
 const Calendar = require('./Calendar');
 const Challenge = require('./Challenge');
@@ -42,45 +43,34 @@ class ClientPlayer extends Player {
      * Xp required to level up
      * @type {number}
      */
-    Object.defineProperty(this, 'requiredXp', { value: data.xpUntilNextLevel });
+    this.requiredXp = data.xpUntilNextLevel;
 
     /**
      * Player gender
      * @type {string}
      */
-    Object.defineProperty(this, 'gender', {
-      value: data.gender === 'MALE' ? Genders.MALE : data.gender === 'FEMALE' ? Genders.FEMALE : Genders.OTHER,
-    });
+    this.gender = data.gender === 'MALE' ? Genders.MALE : data.gender === 'FEMALE' ? Genders.FEMALE : Genders.OTHER;
 
     this.equippedItems._patch({
       background: { id: data.equippedBackgroundId },
       loadingScreen: { id: data.equippedLoadingScreenId },
     });
 
-    this.stats.roles = Object.keys(this._roleStats).map(roleId => {
-      const role = new Role(client, { id: roleId });
-      role.loseCount = this._roleStats[roleId].loseCount;
-      role.winCount = this._roleStats[roleId].winCount;
-      return role;
-    });
-
     /**
      * Player last ban
      * @type {Object}
      */
-    Object.defineProperty(this, 'lastBan', {
-      value: data.bannedUntilTime
-        ? {
-            expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
-            reason: data.banReason,
-            message: data.banReasonMsg,
-          }
-        : null,
-    });
+    this.lastBan = data.bannedUntilTime
+      ? new Ban(client, {
+          expirationTimestamp: new Date(data.bannedUntilTime).getTime(),
+          reason: data.banReason,
+          message: data.banReasonMsg,
+        })
+      : null;
 
     this.options.clanChatNotificationsDisabled = data.notificationsDisabledClanChat;
     this.options.clanActionNotificationsDisabled = data.notificationsDisabledClanActions;
-    this.options.clanInvitationsDisabled = data.noClanInvite;
+    this.options.clanInvitesDisabled = data.noClanInvite;
 
     if (data.deletionTime) {
       /**

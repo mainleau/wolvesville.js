@@ -1,6 +1,7 @@
 'use strict';
 
 const { Collection } = require('@discordjs/collection');
+const Achievement = require('./Achievement');
 const AvatarSlot = require('./AvatarSlot');
 const BasePlayer = require('./BasePlayer');
 const EquippedItems = require('./EquippedItems');
@@ -31,13 +32,13 @@ class Player extends BasePlayer {
      * Player clan tag
      * @type {?string}
      */
-    this.clanTag = data.clanTag || null;
+    this.clanTag = data.clanTag ?? null;
 
     /**
      * Player personal message
      * @type {?string}
      */
-    this.personalMessage = data.personalMsg || null;
+    this.personalMessage = data.personalMsg ?? null;
 
     /**
      * Player level
@@ -49,31 +50,19 @@ class Player extends BasePlayer {
      * Player status
      * @type {string}
      */
-    Object.defineProperty(this, 'status', { value: data.playerStatus });
+    this.status = data.playerStatus;
 
     /**
      * Number of roses the player received
      * @type {number}
      */
-    Object.defineProperty(this, 'receivedRoses', { value: data.receivedRoses || 0 });
+    this.receivedRoses = data.receivedRoses ?? 0;
 
     /**
      * Number of roses the player sent
      * @type {number}
      */
-    Object.defineProperty(this, 'sentRoses', { value: data.sentRoses || 0 });
-
-    /**
-     * Player creation timestamp
-     * @type {?string}
-     */
-    Object.defineProperty(this, 'creationTimestamp', { value: new Date(data.creationTime).getTime() || null });
-
-    /**
-     * Player last online timestamp
-     * @type {string}
-     */
-    Object.defineProperty(this, 'lastOnlineTimestamp', { value: new Date(data.lastOnline).getTime() });
+    this.sentRoses = data.sentRoses ?? 0;
 
     /**
      * Player equipped items
@@ -86,40 +75,94 @@ class Player extends BasePlayer {
       },
     });
 
-    Object.defineProperty(this, '_roleStats', { value: data.playerStats.roleStats });
+    /**
+     * Number of games played where the player stayed until the end
+     * @type {number}
+     */
+    this.finishedGameCount = data.finishedGamesCount;
 
     /**
-     * Player stats
-     * @type {Object}
+     * Number of games the player has survived to the end
+     * @type {number}
      */
-    Object.defineProperty(this, 'stats', {
-      value: {
-        wonGameCount: Object.values(this._roleStats).reduce((t, n) => t + n.winCount, 0),
-        lostGameCount: Object.values(this._roleStats).reduce((t, n) => t + n.loseCount, 0),
-        finishedGameCount: data.playerStats.finishedGamesCount,
-        gamesSurvivedCount: data.playerStats.gamesSurvivedCount,
-        gamesKilledCount: data.playerStats.gamesKilledCount,
-        gamesExitedCount: data.playerStats.exitGameAfterDeathCount,
-        fledGameCount: data.playerStats.exitGameBySuicideCount,
-        minutesPlayedInGame: data.playerStats.totalPlayTimeInMinutes,
-        ranked: {
-          seasonSkill: data.seasonSkill !== -1 ? data.seasonSkill : null,
-          seasonSkillRecord: data.seasonMaxSkill !== -1 ? data.seasonMaxSkill : null,
-          seasonFinalRankRecord: data.seasonBestRank !== -1 ? data.seasonBestRank : null,
-          seasonPlayedCount: data.seasonPlayedCount,
-        },
-      },
-    });
+    this.gamesSurvivedCount = data.gamesSurvivedCount;
+
+    /**
+     * Number of games where the player was killed
+     * @type {number}
+     */
+    this.gamesKilledCount = data.gamesKilledCount;
+
+    /**
+     * Number of games the player left before the end
+     * @type {number}
+     */
+    this.gamesLeftCount = data.exitGameAfterDeathCount;
+
+    /**
+     * Number of games the player has fled
+     * @type {number}
+     */
+    this.fledGameCount = data.exitGameBySuicideCount;
+
+    /**
+     * Number of hours spent in game by the player
+     * @type {number}
+     */
+    this.playTime = data.totalPlayTimeInMinutes;
+
+    /**
+     * Ranked season skill points
+     * @type {?number}
+     */
+    this.seasonSkill = data.seasonSkill !== -1 ? data.seasonSkill : null;
+
+    /**
+     * Ranked season skill points record
+     * @type {?number}
+     */
+    this.skillRecord = data.seasonMaxSkill !== -1 ? data.seasonMaxSkill : null;
+
+    /**
+     * Ranked final rank record
+     * @type {?number}
+     */
+    this.rankRecord = data.seasonBestRank !== -1 ? data.seasonBestRank : null;
+
+    /**
+     * Ranked season played count
+     * @type {number}
+     */
+    this.seasonPlayedCount = data.seasonPlayedCount;
+
+    /**
+     * Player creation timestamp
+     * @type {?string}
+     */
+    this.creationTimestamp = new Date(data.creationTime).getTime() ?? null;
+
+    /**
+     * Player last online timestamp
+     * @type {string}
+     */
+    this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
+
+    /**
+     * Options for a player.
+     * @typedef {Object} PlayerOptions
+     * @property {boolean} clanTagHidden Whether the player has hidden their clan tag
+     * @property {boolean} clanChatNotificationsDisabled Whether the player disabled their clan chat notifications
+     * @property {boolean} clanActionNotificationsDisabled Whether the player disabled their clan actions notifications
+     * @property {boolean} clanInvitesDisabled Whether the player has disabled the receipt of clan invites
+     */
 
     /**
      * Player options
-     * @type {Object}
+     * @type {PlayerOptions}
      */
-    Object.defineProperty(this, 'options', {
-      value: {
-        clanTagHidden: data.hideClanTag,
-      },
-    });
+    this.options = {
+      clanTagHidden: data.hideClanTag,
+    };
   }
 
   /**
@@ -170,6 +213,45 @@ class Player extends BasePlayer {
 
     const data = response.map(roleCard => new RoleCard(this.client, roleCard));
     return data.reduce((col, roleCard) => col.set(roleCard.id, roleCard), new Collection());
+  }
+
+  /**
+   * Player role stats.
+   * @typedef {Object} PlayerRoleStats
+   * @property {number} villageWinCount Village win count
+   * @property {number} villageLoseCount Village lose count
+   * @property {number} werewolfWinCount Werewolf win count
+   * @property {number} werewolfLoseCount Werewolf lose count
+   * @property {number} votingWinCount Voting win count
+   * @property {number} votingLoseCount Voting lose count
+   * @property {number} soloWinCount Solo win count
+   * @property {number} soloLoseCount Solo lose count
+   * @property {number} totalWinCount Total win count
+   * @property {number} totalLoseCount Total win count
+   * @property {number} totalTieCount Total win count
+   * @property {Achievement[]} achievements Achievements
+   */
+
+  /**
+   * Fetch player role stats.
+   * @returns {Promise<PlayerRoleStats>}
+   */
+  async fetchRoleStats() {
+    const response = await this.client.rest.get(Routes.ROLE_STATS_SUMMARY(this.id));
+    return {
+      villageWinCount: response.villageWinCount,
+      villageLoseCount: response.villageLoseCount,
+      werewolfWinCount: response.werewolfWinCount,
+      werewolfLoseCount: response.werewolfLoseCount,
+      votingWinCount: response.votingWinCount,
+      votingLoseCount: response.votingLoseCount,
+      soloWinCount: response.soloWinCount,
+      soloLoseCount: response.soloLoseCount,
+      totalWinCount: response.totalWinCount,
+      totalLoseCount: response.totalLoseCount,
+      totalTieCount: response.totalTieCount,
+      achievements: response.achievements.map(achievement => new Achievement(this.client, achievement)),
+    };
   }
 
   /**

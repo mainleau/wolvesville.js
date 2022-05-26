@@ -28,6 +28,7 @@ module.exports = {
   AVATAR_SLOTS: id => `/inventory/slots/${id}`,
   BADGES: id => `/players/${id}/badgeIdsV2`,
   ROLE_CARDS: (own, id) => `/roleCards/owned/${!own ? id : ''}`,
+  ROLE_STATS_SUMMARY: id => `/playerRoleStats/summary/${id}`,
   FRIENDS: () => '/friends',
 
   CLAN: id => `/clans/${id || 'myClan'}`,
