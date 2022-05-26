@@ -30,7 +30,7 @@ class Achievement extends Base {
     this.points = data.points;
 
     /**
-     * Achievement points
+     * Achievement required points
      * @type {number}
      */
     this.requiredPoints = data.pointsNextLevel;
