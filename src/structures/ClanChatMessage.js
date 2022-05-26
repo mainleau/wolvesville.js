@@ -2,6 +2,7 @@
 
 const Base = require('./Base');
 const ClanChatMessageAuthor = require('./ClanChatMessageAuthor');
+const { ItemTypes } = require('../util/Constants');
 
 /**
  * Represents a clan chat message.
@@ -21,21 +22,27 @@ class ClanChatMessage extends Base {
 
     /**
      * Message content
-     * @type {string}
+     * @type {?string}
      */
-    this.content = data.msg;
+    this.content = data.msg ?? null;
 
     /**
-     * Message created timestamp
-     * @type {number}
+     * Message emoji
+     * @type {?Emoji}
      */
-    this.createdTimestamp = new Date(data.date).getTime();
+    this.emoji = client.items.resolve(data.emojiId, ItemTypes.EMOJI) ?? null;
 
     /**
      * Whether message is a system message
      * @type {boolean}
      */
     this.system = data.isSystem;
+
+    /**
+     * Message created timestamp
+     * @type {number}
+     */
+    this.createdTimestamp = new Date(data.date).getTime();
   }
 }
 
