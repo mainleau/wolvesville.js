@@ -12,10 +12,10 @@ class Achievement extends Base {
     super(client);
 
     /**
-     * Achievement category
-     * @type {string}
+     * Achievement role
+     * @type {Role}
      */
-    this.category = data.category;
+    this.role = new Role(client, { id: data.roleId });
 
     /**
      * Achievement level
@@ -36,10 +36,10 @@ class Achievement extends Base {
     this.requiredPoints = data.pointsNextLevel;
 
     /**
-     * Achievement role
-     * @type {Role}
+     * Achievement difficulty
+     * @type {string}
      */
-    this.role = new Role(client, { id: data.roleId });
+    this.difficulty = data.category;
   }
 }
 
