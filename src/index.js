@@ -73,6 +73,7 @@ exports.Lootbox = require('./structures/Lootbox');
 exports.MonthlyXPLeaderboard = require('./structures/MonthlyXPLeaderboard');
 exports.Offer = require('./structures/Offer');
 exports.Outfit = require('./structures/Outfit');
+exports.OwnedClanIcon = require('./structures/OwnedClanIcon');
 exports.Player = require('./structures/Player');
 exports.ProfileIcon = require('./structures/ProfileIcon');
 exports.QueriedClan = require('./structures/QueriedClan');

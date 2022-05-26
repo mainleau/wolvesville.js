@@ -1,10 +1,12 @@
 'use strict';
 
 const Base = require('./Base');
+const OwnedClanIcon = require('./OwnedClanIcon');
 
 /**
  * Represents a base clan.
  * @extends {Base}
+ * @abstract
  */
 class BaseClan extends Base {
   constructor(client, data) {
@@ -26,7 +28,7 @@ class BaseClan extends Base {
      * Clan tag
      * @type {?string}
      */
-    this.tag = data.clan.tag || null;
+    this.tag = data.clan.tag ?? null;
 
     /**
      * Clan created timestamp
@@ -36,9 +38,9 @@ class BaseClan extends Base {
 
     /**
      * Clan description
-     * @type {string}
+     * @type {?string}
      */
-    this.description = data.clan.description;
+    this.description = data.clan.description ?? null;
 
     /**
      * Clan xp
@@ -56,10 +58,10 @@ class BaseClan extends Base {
      * Clan icon
      * @type {string}
      */
-    this.icon = {
+    this.icon = new OwnedClanIcon(client, {
       name: data.clan.icon,
       color: data.clan.iconColor,
-    };
+    });
 
     /**
      * Clan join type
