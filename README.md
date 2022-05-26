@@ -5,7 +5,7 @@ wolvesville.js is a [Node.js](https://nodejs.org) module to interact with the [W
 
 **Latest version of Node.js required**
 ```sh-session
-npm install wolvesville.js
+npm install wolvesville.js@dev
 ```
 
 ## Example usage
