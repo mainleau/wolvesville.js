@@ -34,7 +34,16 @@ class ItemManager extends BaseManager {
 
   /**
    * Fetch items.
-   * @returns {Promise<Object>}
+   * @returns {Promise<{
+       avatarItems: Collection<string, AvatarItem>,
+       profileIcons: Collection<string, ProfileIcon>,
+       backgrounds: Collection<string, Background>,
+       loadingScreens: Collection<string, LoadingScreen>,
+       emojis: Collection<string, Emoji>,
+       talismans: Collection<string, Talisman>,
+       offers: Collection<string, Offer>,
+       rosePackages: Collection<string, RosePackage>
+     }>}
    */
   async fetch() {
     const response = await this.client.rest.get(Routes.ITEMS());
@@ -99,7 +108,7 @@ class ItemManager extends BaseManager {
 
   /**
    * Resolve an item.
-   * @param {Object|string} item Item object of id
+   * @param {Object|string} item Item object or id
    * @param {string} [type] Item type
    * @returns {?(AvatarItem|Background|LoadingScreen|ProfileIcon|Emoji|Talisman|RosePackage)}
    */
