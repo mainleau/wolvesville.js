@@ -1,9 +1,10 @@
 'use strict';
 
+const { Collection } = require('@discordjs/collection');
 const CacheManager = require('./CacheManager');
 const Clan = require('../structures/Clan');
-const ClanQuerier = require('../structures/ClanQuerier');
 const ClientClan = require('../structures/ClientClan');
+const QueriedClan = require('../structures/QueriedClan');
 const Routes = require('../util/Routes');
 const { isUUID } = require('../util/Util');
 
@@ -84,9 +85,9 @@ class ClanManager extends CacheManager {
   /**
    * Query clans.
    * @param {string} name Clan name to query
-   * @param {ClanQueryingOptions} options Query options
-   * @param {string} sorting Query order
-   * @returns {Promise<ClanQuerier>}
+   * @param {ClanQueryingOptions} [options] Query options
+   * @param {string} [sorting] Query order
+   * @returns {Promise<Collection<string, QueriedClan>>}
    */
   async query(name, options = {}, sorting) {
     var params = '';
@@ -249,7 +250,9 @@ class ClanManager extends CacheManager {
     }
 
     const response = await this.client.rest.get(Routes.QUERY_CLAN(), { query: params });
-    return new ClanQuerier(this.client, response);
+
+    const data = response.map(clan => new QueriedClan(this.client, { clan }));
+    return data.reduce((col, clan) => col.set(clan.id, this._add(clan)), new Collection());
   }
 }
 

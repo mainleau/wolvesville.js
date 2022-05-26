@@ -37,7 +37,6 @@ exports.ClanLedgerFieldPlayer = require('./structures/ClanLedgerFieldPlayer');
 exports.ClanLog = require('./structures/ClanLog');
 exports.ClanLogPlayer = require('./structures/ClanLogPlayer');
 exports.ClanMember = require('./structures/ClanMember');
-exports.ClanQuerier = require('./structures/ClanQuerier');
 exports.ClanQuest = require('./structures/ClanQuest');
 exports.ClanQuestParticipant = require('./structures/ClanQuestParticipant');
 exports.ClanQuestReward = require('./structures/ClanQuestReward');
