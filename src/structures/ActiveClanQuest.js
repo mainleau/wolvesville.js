@@ -45,21 +45,19 @@ class ActiveClanQuest extends ClanQuest {
      * Quest participants
      * @type {ClanQuestParticipant[]}
      */
-    Object.defineProperty(this, 'participants', {
-      value: data.participants.map(participant => new ClanQuestParticipant(client, participant)),
-    });
+    this.participants = data.participants.map(participant => new ClanQuestParticipant(client, participant));
 
     /**
      * Required xp per quest tier
      * @type {number}
      */
-    Object.defineProperty(this, 'requiredXp', { value: data.xpPerReward });
+    this.requiredXp = data.xpPerReward;
 
     /**
      * Whether quest duration extension is claimed
      * @type {boolean}
      */
-    Object.defineProperty(this, 'durationExtensionClaimed', { value: data.claimedTime });
+    this.durationExtensionClaimed = data.claimedTime;
   }
 
   /**
