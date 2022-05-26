@@ -40,7 +40,7 @@ class Emoji extends Base {
       this.event ??= null;
     }
 
-    if ('costInGems' in data) {
+    if ('costInGems' in data && data.costInGems !== -1) {
       /**
        * Emoji cost
        * @type {number}
