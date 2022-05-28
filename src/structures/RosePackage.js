@@ -33,7 +33,7 @@ class RosePackage extends Base {
      * Talisman cost
      * @type {number}
      */
-    Object.defineProperty(this, 'cost', { value: data.costInSilver });
+    this.cost = data.costInSilver;
   }
 }
 
