@@ -25,7 +25,7 @@ class Challenge extends Base {
 
     /**
      * Challenge target
-     * @type {string}
+     * @type {number}
      */
     this.target = data.challengeTarget;
 
@@ -37,7 +37,7 @@ class Challenge extends Base {
   }
 
   /**
-   * Wether challenge completed
+   * Whether challenge completed
    * @type {boolean}
    * @readonly
    */
