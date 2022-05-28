@@ -43,7 +43,7 @@ class RoleCard extends Base {
     this.perks = data.allAbilities.map(ability => new RoleCardPerk(client, ability));
 
     /**
-     * Wether card is equipped
+     * Whether card is equipped
      * @type {boolean}
      */
     this.equipped = data.equipped;
