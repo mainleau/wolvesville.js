@@ -1,10 +1,12 @@
 'use strict';
 
 const BasePlayer = require('./BasePlayer');
+const EquippedItems = require('./EquippedItems');
 
 /**
  * Represents a friend request player.
  * @extends {BasePlayer}
+ * @abstract
  */
 class FriendRequestPlayer extends BasePlayer {
   constructor(client, data) {
@@ -41,23 +43,21 @@ class FriendRequestPlayer extends BasePlayer {
     this.status = data.playerStatus;
 
     /**
-     * Player last online timestamp
-     * @type {number}
+     * Player equipped items
+     * @type {EquippedItems}
      */
-    Object.defineProperty(this, 'lastOnlineTimestamp', { value: new Date(data.lastOnline).getTime() });
+    this.equippedItems = new EquippedItems(client, {
+      profileIcon: {
+        id: data.profileIconId,
+        color: data.profileIconColor,
+      }
+    });
 
     /**
      * Player last online timestamp
      * @type {number}
      */
-    Object.defineProperty(this, 'equippedItems', {
-      value: {
-        icon: {
-          id: data.profileIconId || null,
-          color: data.profileIconColor || null,
-        },
-      },
-    });
+    this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
   }
 
   /**
@@ -70,7 +70,7 @@ class FriendRequestPlayer extends BasePlayer {
   }
 
   /**
-   * Wether the player is online
+   * Whether the player is online
    * @type {boolean}
    * @readonly
    */
