@@ -38,7 +38,7 @@ class FriendRequestPlayer extends BasePlayer {
      * Player status
      * @type {number}
      */
-    Object.defineProperty(this, 'status', { value: data.playersStatus });
+    this.status = data.playerStatus;
 
     /**
      * Player last online timestamp
