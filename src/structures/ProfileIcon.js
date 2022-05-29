@@ -66,7 +66,7 @@ class ProfileIcon extends Base {
     if ('isPurchasable' in data || 'showInInventory' in data) {
       /**
        * Whether profile icon is purchasable
-       * @type {string}
+       * @type {boolean}
        */
       this.purchasable = Boolean(data.isPurchasable & data.showInInventory);
     }
