@@ -38,7 +38,7 @@ class RankedLeaderboard extends Base {
     }
 
     /**
-     * Weather the player is unranked
+     * Whether the player is unranked
      * @type {boolean}
      */
     this.unranked = data.unranked;
