@@ -38,7 +38,7 @@ class Player extends BasePlayer {
      * Player personal message
      * @type {?string}
      */
-    this.personalMessage = data.personalMsg ?? null;
+    this.personalMessage = data.personalMsg || null;
 
     /**
      * Player level
