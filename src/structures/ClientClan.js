@@ -19,13 +19,13 @@ class ClientClan extends Clan {
 
     /**
      * Clan gold count
-     * @type {string}
+     * @type {number}
      */
     this.goldCount = data.clan.gold;
 
     /**
      * Clan gem count
-     * @type {string}
+     * @type {number}
      */
     this.gemCount = data.clan.gems;
   }
