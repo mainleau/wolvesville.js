@@ -11,14 +11,14 @@ class ProfileIcon extends Base {
   constructor(client, data) {
     super(client);
 
-      /**
-       * Profile icon id
-       * @type {string}
-       */
-      this.id = data.id;
+    /**
+     * Profile icon id
+     * @type {string}
+     */
+    this.id = data.id;
 
     this._patch(data);
-    }
+  }
 
   _patch(data) {
     if ('name' in data) {
@@ -47,6 +47,8 @@ class ProfileIcon extends Base {
        * @type {?string}
        */
       this.event = data.event;
+    } else {
+      this.event ??= null;
     }
 
     if (('costInSilver' in data && data.costInSilver !== -1) || ('costInRoses' in data && data.costInRoses !== -1)) {
@@ -65,6 +67,8 @@ class ProfileIcon extends Base {
        * @type {?boolean}
        */
       this.purchasable = Boolean(data.isPurchasable & data.showInInventory);
+    } else {
+      this.purchasable ??= null;
     }
   }
 }
