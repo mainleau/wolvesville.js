@@ -28,7 +28,7 @@ class Background extends Base {
     if ('name' in data) {
       /**
        * Background name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.name;
     } else {
@@ -38,7 +38,7 @@ class Background extends Base {
     if ('rarity' in data) {
       /**
        * Background rarity
-       * @type {string}
+       * @type {?string}
        */
       this.rarity = Rarities[data.rarity];
     } else {
@@ -48,7 +48,7 @@ class Background extends Base {
     if ('dayColor' in data) {
       /**
        * Background day color
-       * @type {string}
+       * @type {?string}
        */
       this.dayColor = data.dayColor;
     } else {
@@ -58,7 +58,7 @@ class Background extends Base {
     if ('nightColor' in data) {
       /**
        * Background night color
-       * @type {string}
+       * @type {?string}
        */
       this.nightColor = data.nightColor;
     } else {

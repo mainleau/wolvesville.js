@@ -23,7 +23,7 @@ class Emoji extends Base {
     if ('name' in data) {
       /**
        * Emoji name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.name;
     } else {
@@ -33,7 +33,7 @@ class Emoji extends Base {
     if ('event' in data) {
       /**
        * Emoji event
-       * @type {string}
+       * @type {?string}
        */
       this.event = data.event;
     } else {
@@ -43,7 +43,7 @@ class Emoji extends Base {
     if ('costInGems' in data && data.costInGems !== -1) {
       /**
        * Emoji cost
-       * @type {number}
+       * @type {?number}
        */
       this.cost = data.costInGems;
     } else {
@@ -53,7 +53,7 @@ class Emoji extends Base {
     if ('showInInventory' in data && 'isPurchasable' in data) {
       /**
        * Whether emoji is purchasable
-       * @type {boolean}
+       * @type {?boolean}
        */
       this.purchasable = Boolean(data.showInInventory & data.isPurchasable);
     } else {

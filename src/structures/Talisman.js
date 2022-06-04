@@ -23,7 +23,7 @@ class Talisman extends Base {
     if ('type' in data) {
       /**
        * Talisman name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.type;
     } else {
@@ -33,7 +33,7 @@ class Talisman extends Base {
     if ('costInSilver' in data) {
       /**
        * Talisman cost
-       * @type {number}
+       * @type {?number}
        */
       this.cost = data.costInSilver;
     } else {

@@ -17,7 +17,7 @@ class Offer extends Base {
     if ('type' in data) {
       /**
        * Offer name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.type;
     } else {
@@ -27,7 +27,7 @@ class Offer extends Base {
     if ('costInGems' in data) {
       /**
        * Offer cost
-       * @type {number}
+       * @type {?number}
        */
       this.cost = data.costInGems;
     } else {

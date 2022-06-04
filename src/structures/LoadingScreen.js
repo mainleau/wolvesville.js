@@ -28,7 +28,7 @@ class LoadingScreen extends Base {
     if ('name' in data) {
       /**
        * Loading screen name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.name;
     } else {
@@ -38,7 +38,7 @@ class LoadingScreen extends Base {
     if ('rarity' in data) {
       /**
        * Loading screen rarity
-       * @type {string}
+       * @type {?string}
        */
       this.rarity = Rarities[data.rarity];
     } else {
@@ -48,7 +48,7 @@ class LoadingScreen extends Base {
     if ('accentColor' in data) {
       /**
        * Loading screen accent color
-       * @type {string}
+       * @type {?string}
        */
       this.accentColor = data.accentColor;
     } else {

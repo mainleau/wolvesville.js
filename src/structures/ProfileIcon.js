@@ -28,7 +28,7 @@ class ProfileIcon extends Base {
     if ('name' in data) {
       /**
        * Profile icon name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data.name.split(':')[1];
     } else {
@@ -38,7 +38,7 @@ class ProfileIcon extends Base {
     if ('rarity' in data) {
       /**
        * Profile icon rarity
-       * @type {string}
+       * @type {?string}
        */
       this.rarity = Rarities[data.rarity];
     } else {
@@ -48,7 +48,7 @@ class ProfileIcon extends Base {
     if ('event' in data) {
       /**
        * Profile icon event
-       * @type {string}
+       * @type {?string}
        */
       this.event = data.event;
     }
@@ -56,7 +56,7 @@ class ProfileIcon extends Base {
     if (('costInSilver' in data && data.costInSilver !== -1) || ('costInRoses' in data && data.costInRoses !== -1)) {
       /**
        * Profile icon cost
-       * @type {number}
+       * @type {?number}
        */
       this.cost = data.costInSilver !== -1 ? data.costInSilver : data.costInRoses;
     } else {
@@ -66,7 +66,7 @@ class ProfileIcon extends Base {
     if ('isPurchasable' in data || 'showInInventory' in data) {
       /**
        * Whether profile icon is purchasable
-       * @type {boolean}
+       * @type {?boolean}
        */
       this.purchasable = Boolean(data.isPurchasable & data.showInInventory);
     }

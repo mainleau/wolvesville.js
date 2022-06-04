@@ -24,7 +24,7 @@ class AvatarItem extends Base {
     if (11 in data) {
       /**
        * Item name
-       * @type {string}
+       * @type {?string}
        */
       this.name = data[11];
     } else {
@@ -34,7 +34,7 @@ class AvatarItem extends Base {
     if (8 in data) {
       /**
        * Item type
-       * @type {string}
+       * @type {?string}
        */
       this.type =
         data[8] === 2
@@ -65,7 +65,7 @@ class AvatarItem extends Base {
     if (1 in data) {
       /**
        * Item rarity
-       * @type {string}
+       * @type {?string}
        */
       this.rarity =
         data[1] === 0
@@ -82,7 +82,7 @@ class AvatarItem extends Base {
     if ((2 in data && data[2] !== -1) || (3 in data && data[3] !== -1) || (4 in data && data[4] !== -1)) {
       /**
        * Item cost
-       * @type {number}
+       * @type {?number}
        */
       this.cost = data[2] !== -1 ? data[2] : data[3] !== -1 ? data[3] : data[4];
     } else {
@@ -92,7 +92,7 @@ class AvatarItem extends Base {
     if (5 in data && 6 in data) {
       /**
        * Whether item is purchasable
-       * @type {boolean}
+       * @type {?boolean}
        */
       this.purchasable = Boolean(data[5] & data[6]);
     } else {
@@ -102,7 +102,7 @@ class AvatarItem extends Base {
     if (10 in data && data[10] !== -1) {
       /**
        * Item required level
-       * @type {number}
+       * @type {?number}
        */
       this.requiredLevel = data[10];
     } else {
