@@ -38,13 +38,13 @@ class Inventory extends Base {
 
     /**
      * Avatar items
-     * @type {Array}
+     * @type {AvatarItem[]}
      */
     this.avatarItems = data.avatarItemIds.map(id => client.items.resolve(id, ItemTypes.AVATAR_ITEM));
 
     /**
      * Profile icons
-     * @type {Array}
+     * @type {ProfileIcon[]}
      */
     this.profileIcons = data.ownedProfileIcons.map(profileIcon =>
       client.items.resolve(profileIcon.profileIconId, ItemTypes.PROFILE_ICON),
@@ -52,31 +52,31 @@ class Inventory extends Base {
 
     /**
      * Backgrounds
-     * @type {Array}
+     * @type {Background[]}
      */
     this.backgrounds = data.ownedBackgroundIds.map(id => client.items.resolve(id, ItemTypes.BACKGROUND));
 
     /**
      * Loading screens
-     * @type {Array}
+     * @type {LoadingScreen[]}
      */
     this.loadingScreens = data.ownedLoadingScreenIds.map(id => client.items.resolve(id, ItemTypes.LOADING_SCREEN));
 
     /**
      * Emojis
-     * @type {Array}
+     * @type {Emoji[]}
      */
     this.emojis = data.ownedEmojis.map(emoji => client.items.resolve(emoji.emojiId, ItemTypes.EMOJI));
 
     /**
      * Taslismans
-     * @type {Array}
+     * @type {Talisman[]}
      */
     this.talismans = data.ownedTalismans.map(talisman => client.items.resolve(talisman.talismanId, ItemTypes.TALISMAN));
 
     /**
      * Lootboxes
-     * @type {Array}
+     * @type {Lootbox[]}
      */
     this.lootboxes = data.lootBoxes.map(lootbox => new Lootbox(client, lootbox));
   }
