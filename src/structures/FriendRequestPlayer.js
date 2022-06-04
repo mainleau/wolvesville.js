@@ -50,7 +50,7 @@ class FriendRequestPlayer extends BasePlayer {
       profileIcon: {
         id: data.profileIconId,
         color: data.profileIconColor,
-      }
+      },
     });
 
     /**

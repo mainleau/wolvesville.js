@@ -14,7 +14,6 @@ const Routes = require('../util/Routes');
  * @extends {BaseManager}
  */
 class LeaderboardManager extends BaseManager {
-
   /**
    * Fetch friends xp leaderboard.
    * @returns {FriendsXPLeaderboard}

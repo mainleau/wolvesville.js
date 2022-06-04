@@ -89,6 +89,20 @@ class BaseClan extends Base {
   }
 
   /**
+   * Whether you can join the clan
+   * @type {boolean}
+   * @readonly
+   */
+  get joinable() {
+    return (
+      this.client.player &&
+      ['PUBLIC', 'JOIN_BY_REQUEST'].includes(this.joinType) &&
+      this.memberCount < 50 &&
+      this.client.player.level >= this.requiredLevel
+    );
+  }
+
+  /**
    * Fetch the clan.
    * @returns {Clan}
    */
