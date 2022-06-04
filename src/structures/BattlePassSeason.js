@@ -100,7 +100,7 @@ class BattlePassSeason extends Base {
   }
 
   /**
-   * Weather battle pass completed
+   * Whether battle pass completed
    * @type {boolean}
    * @readonly
    */
