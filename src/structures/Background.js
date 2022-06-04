@@ -71,6 +71,7 @@ class Background extends Base {
    * @returns {string}
    */
   imageURL({ night = false, large = false, zoom } = {}) {
+    if (!this.name) throw new Error('ITEMS_NOT_FETCHED');
     if (typeof large !== 'boolean' || typeof night !== 'boolean') {
       throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
     }

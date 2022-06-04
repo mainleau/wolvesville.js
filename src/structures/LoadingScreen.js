@@ -61,6 +61,7 @@ class LoadingScreen extends Base {
    * @returns {string}
    */
   imageURL({ wide = false, zoom } = {}) {
+    if (!this.name) throw new Error('ITEMS_NOT_FETCHED');
     if (typeof wide !== 'boolean') throw new Error('OPTION_VALUE_MUST_BE_A_BOOLEAN');
     if (zoom && ![2, 3].includes(zoom)) throw new Error('INVALID_OPTION_VALUE');
 
