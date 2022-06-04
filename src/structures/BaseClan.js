@@ -90,7 +90,7 @@ class BaseClan extends Base {
 
   /**
    * Whether you can join the clan
-   * @type {boolean}
+   * @type {?boolean}
    * @readonly
    */
   get joinable() {
