@@ -107,7 +107,7 @@ class Player extends BasePlayer {
     this.fledGameCount = data.exitGameBySuicideCount;
 
     /**
-     * Number of hours spent in game by the player
+     * Number of minutes spent in game by the player
      * @type {number}
      */
     this.playTime = data.totalPlayTimeInMinutes;
