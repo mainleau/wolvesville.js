@@ -28,7 +28,7 @@ class ClanQuestReward extends Base {
        * Reward item id
        * @type {AvatarItem}
        */
-      this.item = client.items.avatarItems.cache.get(data.avatarItemId);
+      this.item = client.items.resolve(data.avatarItemId, ItemTypes.AVATAR_ITEM);
     }
   }
 }

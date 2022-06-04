@@ -35,8 +35,6 @@ class ClientClan extends Clan {
    * @returns {Promise<ActiveClanQuest>}
    */
   async fetchActiveQuest() {
-    if (!this.client.items.avatarItems.cache.size) await this.client.items.fetch();
-
     const response = await this.client.rest.get(Routes.ACTIVE_QUEST());
     if (response.code === 204) throw new Error('NO_ACTIVE_CLAN_QUEST');
 
