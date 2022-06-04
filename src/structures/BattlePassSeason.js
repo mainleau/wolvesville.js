@@ -24,7 +24,7 @@ class BattlePassSeason extends Base {
     this.xp = data.battlePass.xp;
 
     /**
-     * Wether battle pass claimed
+     * Whether battle pass is claimed
      * @type {boolean}
      */
     this.claimed = data.battlePass.claimed;
