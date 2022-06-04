@@ -11,20 +11,16 @@ class ProfileIcon extends Base {
   constructor(client, data) {
     super(client);
 
-    this._patch(data);
-  }
-
-  _patch(data) {
-    if ('id' in data) {
       /**
        * Profile icon id
        * @type {string}
        */
       this.id = data.id;
-    } else {
-      this.id ??= null;
+
+    this._patch(data);
     }
 
+  _patch(data) {
     if ('name' in data) {
       /**
        * Profile icon name

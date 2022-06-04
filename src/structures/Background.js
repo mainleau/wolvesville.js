@@ -11,20 +11,16 @@ class Background extends Base {
   constructor(client, data) {
     super(client);
 
+    /**
+     * Background id
+     * @type {string}
+     */
+    this.id = data.id;
+
     this._patch(data);
   }
 
   _patch(data) {
-    if ('id' in data) {
-      /**
-       * Background id
-       * @type {string}
-       */
-      this.id = data.id;
-    } else {
-      this.id ??= null;
-    }
-
     if ('name' in data) {
       /**
        * Background name
