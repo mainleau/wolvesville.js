@@ -6,6 +6,7 @@ const AvatarSlot = require('./AvatarSlot');
 const BasePlayer = require('./BasePlayer');
 const EquippedItems = require('./EquippedItems');
 const RoleCard = require('./RoleCard');
+const { ItemTypes } = require('../util/Constants');
 const Routes = require('../util/Routes');
 
 /**
@@ -200,7 +201,7 @@ class Player extends BasePlayer {
   async fetchBadges() {
     const response = await this.client.rest.get(Routes.BADGES(this.id));
 
-    const data = response.ids.map(badgeId => this.client.items.avatarItems.cache.get(badgeId));
+    const data = response.ids.map(badgeId => this.client.items.resolve(badgeId, ItemTypes.AVATAR_ITEM));
     return data.reduce((col, badge) => col.set(badge.id, badge), new Collection());
   }
 
