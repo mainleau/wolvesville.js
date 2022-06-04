@@ -88,7 +88,7 @@ class Calendar extends Base {
     this.endTimestamp = new Date(this.startTimestamp + this.duration * 24 * 60 * 60 * 1000).getTime();
 
     /**
-     * Wether calendar is claimed
+     * Whether calendar is claimed
      * @type {boolean}
      */
     this.claimed = data.owned;
