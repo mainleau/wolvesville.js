@@ -3,10 +3,11 @@
 const Base = require('./Base');
 
 /**
- * Represents a friend request.
+ * Represents a base friend request.
  * @extends {Base}
+ * @abstract
  */
-class FriendRequest extends Base {
+class BaseFriendRequest extends Base {
   constructor(client, data) {
     super(client);
 
@@ -24,4 +25,4 @@ class FriendRequest extends Base {
   }
 }
 
-module.exports = FriendRequest;
+module.exports = BaseFriendRequest;

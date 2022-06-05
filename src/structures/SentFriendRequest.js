@@ -1,13 +1,13 @@
 'use strict';
 
-const FriendRequest = require('./FriendRequest');
+const BaseFriendRequest = require('./BaseFriendRequest');
 const FriendRequestRecipient = require('./FriendRequestRecipient');
 
 /**
  * Represents a sent friend request.
- * @extends {FriendRequest}
+ * @extends {BaseFriendRequest}
  */
-class SentFriendRequest extends FriendRequest {
+class SentFriendRequest extends BaseFriendRequest {
   constructor(client, data) {
     super(client, data);
 
