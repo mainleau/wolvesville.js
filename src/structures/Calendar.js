@@ -52,9 +52,9 @@ class Calendar extends Base {
 
       /**
        * Calendar next reward day
-       * @type {number}
+       * @type {?number}
        */
-      this.nextRewardDay = data.nextRewardDay;
+      this.nextRewardDay = data.nextRewardTime ? data.nextRewardDay : null;
 
       /**
        * Calendar next reward claim timestamp
@@ -108,6 +108,15 @@ class Calendar extends Base {
         },
       },
     });
+  }
+
+  /**
+   * Whether calendar is completed
+   * @type {boolean}
+   * @readonly
+   */
+  get completed() {
+    return Boolean(this.claimed & !this.nextRewardDay);
   }
 
   /**
