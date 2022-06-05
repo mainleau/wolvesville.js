@@ -4,7 +4,7 @@ const BaseClan = require('./BaseClan');
 
 /**
  * Represents a queried clan.
- * @extends {Base}
+ * @extends {BaseClan}
  */
 class QueriedClan extends BaseClan {}
 
