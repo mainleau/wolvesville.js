@@ -1,6 +1,7 @@
 'use strict';
 
 const BasePlayer = require('./BasePlayer');
+const EquippedItems = require('./EquippedItems');
 
 /**
  * Represents a friend.
@@ -35,13 +36,15 @@ class Friend extends BasePlayer {
     this.lastOnlineTimestamp = new Date(data.lastOnline).getTime();
 
     /**
-     * Friend profile icon
-     * @type {Object}
+     * Friend equipped items
+     * @type {EquippedItems}
      */
-    this.profileIcon = {
-      id: data.profileIconId,
-      color: data.profileIconColor,
-    };
+    this.equippedItems = new EquippedItems(client, {
+      profileIcon: {
+        id: data.profileIconId,
+        color: data.profileIconColor,
+      },
+    });
 
     /**
      * Friend clan tag

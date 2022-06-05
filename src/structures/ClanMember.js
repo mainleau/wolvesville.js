@@ -1,6 +1,7 @@
 'use strict';
 
 const BasePlayer = require('./BasePlayer');
+const EquippedItems = require('./EquippedItems');
 const { ClanRanks } = require('../util/Constants');
 
 /**
@@ -36,13 +37,15 @@ class ClanMember extends BasePlayer {
     this.status = data.playerStatus;
 
     /**
-     * Member profile icon
-     * @type {Object}
+     * Member equipped items
+     * @type {EquippedItems}
      */
-    this.profileIcon = {
-      id: data.profileIconId,
-      color: data.profileIconColor,
-    };
+    this.equippedItems = new EquippedItems(client, {
+      profileIcon: {
+        id: data.profileIconId,
+        color: data.profileIconColor,
+      },
+    });
 
     /**
      * Xp the player brought to the clan
