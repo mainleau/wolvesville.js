@@ -58,9 +58,9 @@ class Calendar extends Base {
 
       /**
        * Calendar next reward claim timestamp
-       * @type {number}
+       * @type {?number}
        */
-      this.nextRewardClaimTimestamp = new Date(data.claimTime).getTime();
+      this.nextRewardClaimTimestamp = new Date(data.nextRewardTime).getTime() || null;
 
       /**
        * Calendar claimed timestamp
