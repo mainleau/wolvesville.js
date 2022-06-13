@@ -274,7 +274,7 @@ class Player extends BasePlayer {
   }
 
   /**
-   * Wether the player is online
+   * Whether the player is online
    * @type {boolean}
    * @readonly
    */
