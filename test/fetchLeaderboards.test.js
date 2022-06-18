@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client } = require('../src');
 
 new Client().login()
-  .then(async client => {
+  .then(client => {
     client.leaderboards.fetchFriendsXP().then(console.log).catch(() => {});
     client.leaderboards.fetchDailyXP().then(console.log);
     client.leaderboards.fetchWeeklyXP().then(console.log);

@@ -2,7 +2,7 @@ require('dotenv').config();
 const { Client } = require('../src');
 
 new Client().login()
-  .then(async client => {
+  .then(client => {
     client.clans.fetchOwn().then(console.log).catch(() => {});
     client.clans.fetchById('04c08a95-9452-408e-b7a5-7023bde1cc72').then(console.log);
     client.clans.query('La Banda').then(x => console.log(x.first()));

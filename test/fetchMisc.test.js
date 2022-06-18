@@ -3,7 +3,6 @@ const { Client } = require('../src');
 
 new Client().login()
   .then(async client => {
-    await client.items.fetch();
     const player = await client.fetchPlayer();
     player.fetchAvatarSlots().then(console.log);
     player.fetchAnnouncements().then(console.log);
