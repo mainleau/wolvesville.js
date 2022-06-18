@@ -33,7 +33,7 @@ class LimitedOffer extends Offer {
      * Whether offer is giftable
      * @type {boolean}
      */
-    this.giftable = data.canBeGifted;
+    this.giftable = Boolean(!!this.outfit & data.canBeGifted);
   }
 }
 
