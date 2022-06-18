@@ -19,9 +19,9 @@ class LimitedOffer extends Offer {
 
     /**
      * Offer outfit
-     * @type {Outfit}
+     * @type {?Outfit}
      */
-    this.outfit = new Outfit(client, data.itemSets[0]);
+    this.outfit = data.itemSets.length ? new Outfit(client, data.itemSets[0]) : null;
 
     /**
      * Offer expiration timestamp
